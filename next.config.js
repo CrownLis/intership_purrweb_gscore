@@ -1,11 +1,11 @@
+const path = require("path");
+const resolvePath = (p) => path.resolve(__dirname, p);
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  swcMinify: true,
-}
-
-module.exports = {
-  webpack(config) {
+  swcMinify: true, 
+   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/i,
       issuer: /\.[jt]sx?$/,
@@ -14,8 +14,11 @@ module.exports = {
 
     return config
   },
-  nextConfig,
   alias: {
     "@": resolvePath("src/"),
   },
 }
+
+
+
+module.exports = nextConfig
