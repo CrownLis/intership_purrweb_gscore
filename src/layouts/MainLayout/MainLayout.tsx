@@ -1,8 +1,9 @@
 import React, { PropsWithChildren } from 'react'
 import { NextPage } from "next";
 import styled from "styled-components";
-import Header from "../../components/Header";
-import Loader from "../../components/Loader";
+import Header from "@/components/Header";
+import Loader from "@/components/Loader";
+import Footer from '@/components/Footer';
 
 
 const MainLayout: NextPage<MainLayoutProps> = ({
@@ -19,6 +20,7 @@ const MainLayout: NextPage<MainLayoutProps> = ({
         ) : (
           <Main>{children}</Main>
         )}
+        <Footer/>
       </Root>
     );
   };
