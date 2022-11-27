@@ -28,7 +28,7 @@ export default Header
 const Root = styled.header`
 height:106px;
 width:100%;
-background-color:black;
+background-color:#181818;
 display:flex;
 align-items:center;
 `

@@ -32,11 +32,13 @@ const MainLayout: NextPage<MainLayoutProps> = ({
   }>;
 
   const Root = styled.div`
-    
+   background-color:#181818; 
   `
 
   const Main = styled.main`
-    padding: 24px 50px;
+  display:flex;
+  justify-content:center;
+  padding: 24px 50px;
   `;
   
   const LoaderContainer = styled.div`

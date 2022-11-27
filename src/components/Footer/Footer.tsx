@@ -6,6 +6,7 @@ import Title from '@/assets/images/title.svg'
 import Facebook from '@/assets/images/Facebook.svg'
 import Twitter from '@/assets/images/Twitter.svg'
 import LinkedIn from '@/assets/images/LinkedIn.svg'
+import A from "@/UIComponents/A"
 
 const Footer: FC = () => {
     return (
@@ -16,7 +17,6 @@ const Footer: FC = () => {
                         <Logo />
                         <Title />
                     </LogoContainer>
-
                     <StyledDescription>
                         Ut enim ad minim veniam quis<br /> nostrud exercitation  ea commodo
                     </StyledDescription>
@@ -24,7 +24,7 @@ const Footer: FC = () => {
 
                 <LinksContainer>
                     <StyledDescription>
-                        Copyright © 2022 GScore | All Rights Reserved | Cookies | Privacy Policy
+                        Copyright © 2022 GScore | All Rights Reserved |<A href={'Cookies'}> Cookies </A>| <A href={'Privacy'}>Privacy Policy</A>
                     </StyledDescription>
                     <SocialNavbar>
                         <Facebook />
@@ -52,6 +52,7 @@ const FooterContainer = styled.div`
 const DescriptionContainer = styled.div`
     display:flex;
     flex-direction:column;
+    gap:24px;
     height:246px;
     padding:60px 0;
     border-bottom:1px solid #393939;
