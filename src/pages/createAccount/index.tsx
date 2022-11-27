@@ -73,6 +73,7 @@ const StyledInput = styled(Input)`
 const StyledButton = styled(Button)`
     margin:24px 0;
     padding:20px 42.5px;
+    max-width:200px;
 `
 
 const LogInLink = styled.p`
