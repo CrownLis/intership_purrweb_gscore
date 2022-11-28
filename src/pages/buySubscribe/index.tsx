@@ -1,6 +1,6 @@
 import SubscribeCard from "@/components/SubscribeCard";
 import MainLayout from "@/layouts/MainLayout";
-import A from "@/UIComponents/A";
+import Link from "next/link";
 import { FC } from "react";
 import styled from "styled-components";
 
@@ -18,7 +18,7 @@ const BuySubscribe: FC = () => {
                     <ContactQuestion>
                         Have more than 10 sites?
                     </ContactQuestion>
-                    <StyledA href="contact">Contact us</StyledA>
+                    <StyledLink href="contact">Contact us</StyledLink>
                 </ContactContainer>
             </Container>
         </MainLayout>
@@ -66,6 +66,7 @@ line-height: 30px;
 color:white;
 `
 
-const StyledA = styled(A)`
+const StyledLink = styled(Link)`
+color:#FC5842;
 text-decoration:underline;
 `

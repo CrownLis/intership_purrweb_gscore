@@ -1,8 +1,8 @@
 import StatusLine from "@/components/StatusLine";
 import MainLayout from "@/layouts/MainLayout";
-import A from "@/UIComponents/A";
 import Button from "@/UIComponents/Button";
 import Input from "@/UIComponents/Input";
+import Link from "next/link";
 import { FC } from "react";
 import styled from "styled-components";
 
@@ -23,7 +23,7 @@ const CreateAccount:FC = () => {
 <StyledInput placeholder='Password'/>
 <StyledButton isUnusual>Send password</StyledButton>
 </FormContainer>
-<LogInLink>Have an account? <A href='login'>Go to the next step</A></LogInLink>
+<LogInLink>Have an account? <StyledLink href='login'>Go to the next step</StyledLink></LogInLink>
     </Container>
 </MainLayout>
     )
@@ -84,4 +84,8 @@ const LogInLink = styled.p`
     line-height: 18px;
     color:white;
     margin-top:24px;
+`
+
+const StyledLink = styled(Link)`
+    color:#FC5842;
 `

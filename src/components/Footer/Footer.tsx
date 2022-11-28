@@ -6,7 +6,7 @@ import Title from '@/assets/images/title.svg'
 import Facebook from '@/assets/images/Facebook.svg'
 import Twitter from '@/assets/images/Twitter.svg'
 import LinkedIn from '@/assets/images/LinkedIn.svg'
-import A from "@/UIComponents/A"
+import Link from "next/link"
 
 const Footer: FC = () => {
     return (
@@ -24,7 +24,7 @@ const Footer: FC = () => {
 
                 <LinksContainer>
                     <StyledDescription>
-                        Copyright © 2022 GScore | All Rights Reserved |<A href={'Cookies'}> Cookies </A>| <A href={'Privacy'}>Privacy Policy</A>
+                        Copyright © 2022 GScore | All Rights Reserved | <StyledLink href={'Cookies'}>Cookies</StyledLink> | <StyledLink href={'Privacy'}>Privacy Policy</StyledLink>
                     </StyledDescription>
                     <SocialNavbar>
                         <Facebook />
@@ -70,7 +70,10 @@ font-weight: 500;
 font-size: 18px;
 line-height: 30px;
 color:white;
-
+`
+const StyledLink = styled(Link)`
+    color:#C7C7C7;
+    border-bottom:1px solid #C7C7C7;
 `
 
 const LinksContainer = styled.div`
