@@ -1,0 +1,117 @@
+import Checkbox from "@/UIComponents/Checkbox/Checkbox";
+import Input from "@/UIComponents/Input";
+import { FC } from "react";
+import styled from "styled-components";
+
+const Domain: FC = () => {
+    return (
+        <Container>
+            <Checkbox name="domain"/>
+            <LicenseCodeContainer>
+                <TitleContainer>License code</TitleContainer>
+                <InputContainer />
+            </LicenseCodeContainer>
+            <DomainContainer>
+                <TitleContainer>Domain</TitleContainer>
+                <InputContainer />
+            </DomainContainer>
+            <StatusContainer>
+                <TitleContainer>Status</TitleContainer>
+                <Status>Hold</Status>
+            </StatusContainer>
+        </Container>
+    )
+}
+
+export default Domain
+
+const Container = styled.div`
+    display:flex;
+    background: #272727;
+    border:0;
+    border-radius: 12px;
+    align-items:center;
+    max-height:153px;
+`
+
+const StyledCheckbox = styled(Input)`
+position:absolute;
+cursor: pointer;
+opacity:0;
+width:28px;
+height:28px;
+margin:0 32px 0 32px;
+&:checked{
+    &+label::before{
+        content:'✓';
+        font-size:28px;
+        text-align:center;
+        color:white;
+        background-color:#FC5842;
+    }
+}
+`
+
+const CheckboxLabel = styled.label`
+    display:flex;
+    cursor: pointer;
+    margin:0 48px 0 32px;
+    &::before {
+        content:'';
+        background-color:#C7C7C7;
+        border:0;
+        border-radius:7px;
+        height:28px;
+        width:28px;
+    }
+`
+
+const LicenseCodeContainer = styled.div`
+    display:flex;
+    flex-direction:column;
+    margin:24px 0 31px;
+`
+
+const TitleContainer = styled.p`
+    font-family: 'THICCCBOI';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 18px;
+    color: #969696;
+    margin-bottom:12px;
+`
+
+const InputContainer = styled(Input)`
+    padding:25px 24px;
+    background: #393939;
+    border:0;
+    border-radius: 6px;
+    width:100%;
+    font-family: 'THICCCBOI';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 18px;
+`
+
+const DomainContainer = styled.div`
+    display:flex;
+    flex-direction:column;
+    width:100%;
+    max-width:620px;
+    margin:24px 56px 31px 28px;
+`
+
+const StatusContainer = styled.div`
+    display:flex;
+    flex-direction:column;
+`
+
+const Status = styled.span`
+    font-family: 'THICCCBOI';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 28px;
+`
