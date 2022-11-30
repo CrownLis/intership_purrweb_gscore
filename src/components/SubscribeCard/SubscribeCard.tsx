@@ -3,6 +3,7 @@ import { FC } from "react";
 import styled, { css } from "styled-components";
 
 import Check from './../../assets/images/Check.svg';
+import RedCheck from '@/assets/images/RedCheck.svg'
 
 type SubscribedCardProps = {
     price: number;
@@ -22,10 +23,10 @@ const SubscribeCard: FC<SubscribedCardProps> = ({ price, title, capability, isCe
                     <CardDescription>Get the advanced WordPress plugin that optimizes content with GSC keywords at one low annual price</CardDescription>
                 </TopContainerCard>
                 <BottomContainerCard>
-                    <CapabilityContainer><Check /><CardCapability>{capability}</CardCapability></CapabilityContainer>
-                    <CapabilityContainer><Check /><CardCapability>Special introductory pricing</CardCapability></CapabilityContainer>
-                    <CapabilityContainer><Check /><CardCapability>Unlimited Pages and Keywords</CardCapability></CapabilityContainer>
-                    <CapabilityContainer><Check /><CardCapability>Billed annually</CardCapability></CapabilityContainer>
+                    <CapabilityContainer>{isCenter?<RedCheck/> : <Check/>}<CardCapability>{capability}</CardCapability></CapabilityContainer>
+                    <CapabilityContainer>{isCenter?<RedCheck/> : <Check/>}<CardCapability>Special introductory pricing</CardCapability></CapabilityContainer>
+                    <CapabilityContainer>{isCenter?<RedCheck/> : <Check/>}<CardCapability>Unlimited Pages and Keywords</CardCapability></CapabilityContainer>
+                    <CapabilityContainer>{isCenter?<RedCheck/> : <Check/>}<CardCapability>Billed annually</CardCapability></CapabilityContainer>
                 </BottomContainerCard>
                 <StyledButton isPrimary={isCenter? true : false}>Get Gscore</StyledButton>
             </ContainerCard>
