@@ -6,26 +6,26 @@ import Link from "next/link";
 import { FC } from "react";
 import styled from "styled-components";
 
-const CreateAccount:FC = () => {
+const CreateAccount: FC = () => {
     return (
-<MainLayout>
-    <Container>
-<StatusContainer>
-    <StatusLine text="Create account" isActive/>
-    <StatusLine text="Log in"/>
-    <StatusLine text="Checkout"/>
-    </StatusContainer>
-<FormContainer>
-<FormTitle>Create account</FormTitle>
-<FormInfo>You need to enter your name and email. We will send you a temporary password by email</FormInfo>
-<StyledInput placeholder='Username'/>
-<StyledInput placeholder='Email'/>
-<StyledInput placeholder='Password'/>
-<StyledButton isUnusual>Send password</StyledButton>
-</FormContainer>
-<LogInLink>Have an account? <StyledLink href='login'>Go to the next step</StyledLink></LogInLink>
-    </Container>
-</MainLayout>
+        <MainLayout>
+            <Container>
+                <StatusContainer>
+                    <StatusLine text="Create account" isActive />
+                    <StatusLine text="Log in" />
+                    <StatusLine text="Checkout" />
+                </StatusContainer>
+                <FormContainer>
+                    <FormTitle>Create account</FormTitle>
+                    <FormInfo>You need to enter your name and email. We will send you a temporary password by email</FormInfo>
+                    <StyledInput placeholder='Username' />
+                    <StyledInput placeholder='Email' />
+                    <StyledInput placeholder='Password' />
+                    <StyledButton isUnusual>Send password</StyledButton>
+                </FormContainer>
+                <LogInLink>Have an account? <StyledLink href='login'>Go to the next step</StyledLink></LogInLink>
+            </Container>
+        </MainLayout>
     )
 }
 
@@ -47,7 +47,7 @@ const FormContainer = styled.form`
     flex-direction:column;
     color:white;
 `
-const FormTitle = styled.h1`
+const FormTitle = styled.h2`
     font-family: 'THICCCBOI';
     font-style: normal;
     font-weight: 700;
