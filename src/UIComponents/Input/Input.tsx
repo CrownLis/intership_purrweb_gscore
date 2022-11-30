@@ -1,14 +1,11 @@
-import { FC, InputHTMLAttributes, PropsWithChildren } from "react";
+import { FC, InputHTMLAttributes } from "react";
 import styled from "styled-components";
 
-type InputProps = PropsWithChildren<{
-
-} & InputHTMLAttributes<HTMLInputElement>>;
+type InputProps = InputHTMLAttributes<HTMLInputElement>;
 
 const Input: FC<InputProps> = ({ children, ...props }) => {
     return (
         <StyledInput {...props}>
-            {children}
         </StyledInput>
     )
 }
