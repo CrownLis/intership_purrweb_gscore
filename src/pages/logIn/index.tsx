@@ -45,7 +45,7 @@ const FormContainer = styled.form`
     color:white;
 `
 
-const FormTitle = styled.h1`
+const FormTitle = styled.h2`
     font-family: 'THICCCBOI';
     font-style: normal;
     font-weight: 700;

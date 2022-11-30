@@ -34,7 +34,7 @@ const Container = styled.div`
     align-items:center;
 `
 
-const StyledTitle = styled.h1`
+const StyledTitle = styled.h2`
 font-family: 'THICCCBOI';
 font-style: normal;
 font-weight: 700;
@@ -55,6 +55,7 @@ const ContactContainer = styled.div`
     flex-direction:column;
     align-items:center;
     margin-top:32px;
+    margin-bottom:42px;
 `
 
 const ContactQuestion = styled.p`
