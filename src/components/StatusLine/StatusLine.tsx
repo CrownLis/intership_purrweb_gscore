@@ -28,7 +28,7 @@ const Status = styled.div`
 `
 
 const StatusText = styled.span`
-    font-family: 'THICCCBOI';
+    font-family: ${sv.font.main};
     font-style: normal;
     font-weight: 600;
     font-size: 20px;
@@ -40,7 +40,7 @@ const StatusText = styled.span`
 const Line = styled.div<{ $isActive?: boolean }>`
 height:8px;
 width:100%;
-background-color:${props => props.$isActive? '#FC5842' : '#393939'};
+background-color:${props => props.$isActive? `${sv.color.primary}` : `${sv.color.color700}`};
 border:0;
 border-radius:8px;
 `

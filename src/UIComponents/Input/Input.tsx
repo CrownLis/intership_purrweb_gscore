@@ -18,7 +18,7 @@ const StyledInput = styled.input`
     border-radius:6px;
     outline:none;
     padding:25px 23px;
-    font-family: 'THICCCBOI';
+    font-family: ${sv.font.main};
     font-style: normal;
     font-weight: 500;
     font-size: 16px;

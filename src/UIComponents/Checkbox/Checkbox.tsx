@@ -35,7 +35,7 @@ margin:0 48px 0 32px;
         font-size:28px;
         text-align:center;
         color:white;
-        background-color:#FC5842;
+        background-color:${sv.color.primary};
     }
 }
 `
@@ -46,7 +46,7 @@ const CheckboxLabel = styled.label`
     margin:0 48px 0 32px;
     &::before {
         content:'';
-        background-color:#C7C7C7;
+        background-color:${sv.color.color400};
         border:0;
         border-radius:7px;
         height:28px;

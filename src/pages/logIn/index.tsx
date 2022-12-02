@@ -46,7 +46,7 @@ const FormContainer = styled.form`
 `
 
 const FormTitle = styled.h2`
-    font-family: 'THICCCBOI';
+    font-family: ${sv.font.main};
     font-style: normal;
     font-weight: 700;
     font-size: 44px;

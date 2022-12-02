@@ -47,7 +47,7 @@ const Root = styled.div<{ $isCenter?: boolean }>`
             css`
             position:relative;
             top:-50px;
-            background-color:#FC5842;
+            background-color:${sv.color.primary};
 ` :
             css`
             background-color:#272727
@@ -65,12 +65,12 @@ const TopContainerCard = styled.div`
     flex-direction:column;
     align-items:center;
     padding-bottom:40px;
-    border-bottom:1px solid #969696;
+    border-bottom:1px solid ${sv.color.color700};
     margin-bottom:38px;
 `
 
 const CardPrice = styled.h3`
-font-family: 'DM Sans';
+font-family: ${sv.font.unusual};
 font-style: normal;
 font-weight: 700;
 font-size: 54px;
@@ -79,7 +79,7 @@ margin-bottom:4px;
 `
 
 const CardTitle = styled.p`
-font-family: 'THICCCBOI';
+font-family: ${sv.font.main};
 font-style: normal;
 font-weight: 700;
 font-size: 24px;
@@ -88,12 +88,12 @@ margin-bottom:8px;
 `
 
 const CardDescription = styled.p`
-font-family: 'THICCCBOI';
+font-family: ${sv.font.main};
 font-style: normal;
 font-weight: 500;
 font-size: 18px;
 line-height: 30px;
-color:#C7C7C7;
+color:${sv.color.color400};
 text-align:center;
 `
 
@@ -109,7 +109,7 @@ const CapabilityContainer = styled.div`
 `
 
 const CardCapability = styled.p`
-font-family: 'THICCCBOI';
+font-family: ${sv.font.main};
 font-style: normal;
 font-weight: 500;
 font-size: 18px;
