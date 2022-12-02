@@ -35,7 +35,7 @@ const Container = styled.div`
 `
 
 const StyledTitle = styled.h2`
-font-family: 'THICCCBOI';
+font-family: ${sv.font.main};
 font-style: normal;
 font-weight: 700;
 font-size: 44px;
@@ -59,7 +59,7 @@ const ContactContainer = styled.div`
 `
 
 const ContactQuestion = styled.p`
-font-family: 'THICCCBOI';
+font-family: ${sv.font.main};
 font-style: normal;
 font-weight: 400;
 font-size: 18px;
@@ -68,6 +68,6 @@ color:white;
 `
 
 const StyledLink = styled(Link)`
-color:#FC5842;
+color:${sv.color.primary};
 text-decoration:underline;
 `

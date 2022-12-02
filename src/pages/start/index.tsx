@@ -41,7 +41,7 @@ const Container = styled.div`
 `
 
 const StyledTitle = styled.h3`
-    font-family: 'THICCCBOI';
+    font-family: ${sv.font.main};
     font-style: normal;
     font-weight: 700;
     font-size: 44px;
@@ -50,7 +50,7 @@ const StyledTitle = styled.h3`
 `
 
 const StyledDescription = styled.p`
-    font-family: 'THICCCBOI';
+    font-family: ${sv.font.main};
     font-style: normal;
     font-weight: 500;
     font-size: 14px;
@@ -81,7 +81,7 @@ const CartProductsContainer = styled.div`
 `
 
 const CartTitle = styled.h3`
-    font-family: 'THICCCBOI';
+    font-family: ${sv.font.main};
     font-style: normal;
     font-weight: 700;
     font-size: 24px;
@@ -90,7 +90,7 @@ const CartTitle = styled.h3`
 `
 
 const ProductsTitle = styled.span`
-    font-family: 'THICCCBOI';
+    font-family: ${sv.font.main};
     font-style: normal;
     font-weight: 400;
     font-size: 24px;

@@ -47,23 +47,9 @@ margin:0 32px 0 32px;
         font-size:28px;
         text-align:center;
         color:white;
-        background-color:#FC5842;
+        background-color:${sv.color.primary};
     }
 }
-`
-
-const CheckboxLabel = styled.label`
-    display:flex;
-    cursor: pointer;
-    margin:0 48px 0 32px;
-    &::before {
-        content:'';
-        background-color:#C7C7C7;
-        border:0;
-        border-radius:7px;
-        height:28px;
-        width:28px;
-    }
 `
 
 const LicenseCodeContainer = styled.div`
@@ -73,22 +59,22 @@ const LicenseCodeContainer = styled.div`
 `
 
 const TitleContainer = styled.p`
-    font-family: 'THICCCBOI';
+    font-family: ${sv.font.main};
     font-style: normal;
     font-weight: 700;
     font-size: 16px;
     line-height: 18px;
-    color: #969696;
+    color: ${sv.color.color500};
     margin-bottom:12px;
 `
 
 const InputContainer = styled(Input)`
     padding:25px 24px;
-    background: #393939;
+    background: ${sv.color.color700};
     border:0;
     border-radius: 6px;
     width:100%;
-    font-family: 'THICCCBOI';
+    font-family:${sv.font.main};
     font-style: normal;
     font-weight: 400;
     font-size: 16px;
@@ -109,7 +95,7 @@ const StatusContainer = styled.div`
 `
 
 const Status = styled.span`
-    font-family: 'THICCCBOI';
+    font-family: ${sv.font.main};
     font-style: normal;
     font-weight: 700;
     font-size: 22px;
