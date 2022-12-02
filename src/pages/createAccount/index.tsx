@@ -48,7 +48,7 @@ const FormContainer = styled.form`
     color:white;
 `
 const FormTitle = styled.h2`
-    font-family: 'THICCCBOI';
+    font-family: ${sv.font.main};
     font-style: normal;
     font-weight: 700;
     font-size: 44px;
@@ -58,7 +58,7 @@ const FormTitle = styled.h2`
 `
 
 const FormInfo = styled.p`
-    font-family: 'THICCCBOI';
+    font-family: ${sv.font.main};
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
@@ -77,7 +77,7 @@ const StyledButton = styled(Button)`
 `
 
 const LogInLink = styled.p`
-    font-family: 'THICCCBOI';
+    font-family: ${sv.font.main};
     font-style: normal;
     font-weight: 400;
     font-size: 16px;
@@ -87,5 +87,5 @@ const LogInLink = styled.p`
 `
 
 const StyledLink = styled(Link)`
-    color:#FC5842;
+    color:${sv.color.primary};
 `

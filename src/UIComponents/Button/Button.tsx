@@ -1,6 +1,7 @@
 import { ButtonHTMLAttributes, FC, PropsWithChildren } from "react";
 import styled, { css } from "styled-components";
 
+
 type ButtonProps = PropsWithChildren<{
     isDefault?: boolean;
     isPrimary?: boolean;
@@ -24,7 +25,7 @@ type ButtonType = {
 }
 
 const StyledButton = styled.button<ButtonType>`
-font-family: 'THICCCBOI';
+font-family: ${sv.font.main};
 font-style: normal;
 font-weight: 700;
 font-size: 18px;
@@ -44,14 +45,14 @@ ${({ $isDefault }) =>
 ${({ $isPrimary }) =>
         $isPrimary ? css`
     background-color:white;
-    color:#FC5842;
+    color:${sv.color.primary};
     ` :
             css`
 `
     };
 ${({ $isUnusual }) =>
         $isUnusual ? css`
-    background-color:#FC5842;
+    color:${sv.color.primary};
     color:white;
     ` :
             css`

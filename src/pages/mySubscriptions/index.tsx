@@ -51,7 +51,7 @@ const TitleContainer = styled.div`
 `
 
 const StyledTitle = styled.h3`
-    font-family: 'THICCCBOI';
+    font-family: ${sv.font.main};
     font-style: normal;
     font-weight: 700;
     font-size: 54px;
@@ -83,7 +83,7 @@ const ConfirmContainer = styled.div`
 `
 
 const ConfirmDescription = styled.p`
-    font-family: 'THICCCBOI';
+    font-family: ${sv.font.main};
     font-style: normal;
     font-weight: 700;
     font-size: 20px;

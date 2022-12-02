@@ -42,7 +42,7 @@ export default Footer
 const Root = styled.footer`
 height:362px;
 background-color:#181818;
-border-top:1px solid #393939;
+border-top:1px solid ${sv.color.color700};
 `
 const FooterContainer = styled.div`
     height:100%;
@@ -64,7 +64,7 @@ const LogoContainer = styled.div`
 `
 
 const StyledDescription = styled.p`
-font-family: 'Inter';
+font-family: ${sv.font.subMain};
 font-style: normal;
 font-weight: 500;
 font-size: 18px;
@@ -73,7 +73,7 @@ color:white;
 `
 const StyledLink = styled(Link)`
     color:#C7C7C7;
-    border-bottom:1px solid #C7C7C7;
+    border-bottom:1px solid ${sv.color.color400};
 `
 
 const LinksContainer = styled.div`

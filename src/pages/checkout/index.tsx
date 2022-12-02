@@ -58,7 +58,7 @@ const StatusContainer = styled.div`
 `;
 
 const StyledTitle = styled.h2`
-    font-family: 'THICCCBOI';
+    font-family: ${sv.font.main};
     font-style: normal;
     font-weight: 700;
     font-size: 44px;
@@ -89,7 +89,7 @@ const CartProductsContainer = styled.div`
 `
 
 const CartTitle = styled.h3`
-    font-family: 'THICCCBOI';
+    font-family: ${sv.font.main};
     font-style: normal;
     font-weight: 700;
     font-size: 24px;
@@ -98,7 +98,7 @@ const CartTitle = styled.h3`
 `
 
 const ProductsTitle = styled.span`
-    font-family: 'THICCCBOI';
+    font-family: ${sv.font.main};
     font-style: normal;
     font-weight: 400;
     font-size: 24px;
@@ -118,7 +118,7 @@ margin:24px 0 48px;
 `
 
 const StyledPrice = styled.h3`
-    font-family: 'THICCCBOI';
+    font-family: ${sv.font.main};
     font-style: normal;
     font-weight: 700;
     font-size: 28px;

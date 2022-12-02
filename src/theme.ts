@@ -2,6 +2,7 @@ export default {
     font:{
         main:'THICCCBOI',
         subMain:'Inter',
+        unusual:'DM Sans'
     },
     color: {
         primary:'#FC5842',
