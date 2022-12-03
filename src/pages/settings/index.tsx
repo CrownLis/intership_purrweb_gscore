@@ -14,7 +14,7 @@ const Settings: FC = () => {
                         <FormTitle>Personal Info</FormTitle>
                         <StyledInput placeholder="Username" />
                         <StyledInput placeholder="Email" />
-                        <StyledButton isUnusual>Save all changes</StyledButton>
+                        <StyledButton variant="primary">Save</StyledButton>
                     </FormInfo>
                     <FormPassword>
                         <FormTitle>Change password</FormTitle>
@@ -73,8 +73,8 @@ const StyledInput = styled(Input)`
 `
 
 const StyledButton = styled(Button)`
-    max-width:228px;
-    padding:26px 42px;
+    max-width:160px;
+    padding:20px 24px;
     margin-top:24px;
     margin-bottom:444px;
 `

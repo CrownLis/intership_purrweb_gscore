@@ -11,7 +11,7 @@ const MySubscription: FC = () => {
             <Container>
                 <TitleContainer>
                     <StyledTitle>My subscriptions</StyledTitle>
-                    <StyledButton isUnusual>Upgrade</StyledButton>
+                    <StyledButton variant="primary">Upgrade</StyledButton>
                 </TitleContainer>
                 <SliderContainer>
                     <LicenseCard />
@@ -25,7 +25,7 @@ const MySubscription: FC = () => {
                 </DomainsContainer>
                 <ConfirmContainer>
                     <ConfirmDescription>Select the domains you want to keep</ConfirmDescription>
-                    <ConfirmButton isUnusual>Confirm</ConfirmButton>
+                    <ConfirmButton variant="primary">Confirm</ConfirmButton>
                 </ConfirmContainer>
             </Container>
         </MainLayout>
@@ -91,6 +91,6 @@ const ConfirmDescription = styled.p`
 `
 
 const ConfirmButton = styled(Button)`
-    max-width:148px;
+    max-width:152px;
     padding:26px 38px;
 `

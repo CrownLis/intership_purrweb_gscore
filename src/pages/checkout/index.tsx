@@ -37,7 +37,7 @@ const Checkout: FC = () => {
                         $77
                     </StyledPrice>
                 </PriceContainer>
-                <StyledButton isUnusual>Purchase</StyledButton>
+                <StyledButton variant="primary">Purchase</StyledButton>
             </Container>
         </MainLayout>
     )

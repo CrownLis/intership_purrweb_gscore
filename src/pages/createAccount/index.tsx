@@ -21,7 +21,7 @@ const CreateAccount: FC = () => {
                     <StyledInput placeholder='Username' />
                     <StyledInput placeholder='Email' />
                     <StyledInput placeholder='Password' />
-                    <StyledButton isUnusual>Send password</StyledButton>
+                    <StyledButton variant="primary">Send password</StyledButton>
                 </FormContainer>
                 <LogInLink>Have an account? <StyledLink href='login'>Go to the next step</StyledLink></LogInLink>
             </Container>
@@ -72,7 +72,7 @@ const StyledInput = styled(Input)`
 
 const StyledButton = styled(Button)`
     margin:24px 0;
-    padding:20px 42.5px;
+    padding:20px 24px;
     max-width:200px;
 `
 
