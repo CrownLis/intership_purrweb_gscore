@@ -28,7 +28,7 @@ const SubscribeCard: FC<SubscribedCardProps> = ({ price, title, capability, isCe
                     <CapabilityContainer>{isCenter?<RedCheck/> : <Check/>}<CardCapability>Unlimited Pages and Keywords</CardCapability></CapabilityContainer>
                     <CapabilityContainer>{isCenter?<RedCheck/> : <Check/>}<CardCapability>Billed annually</CardCapability></CapabilityContainer>
                 </BottomContainerCard>
-                <StyledButton isPrimary={isCenter? true : false}>Get Gscore</StyledButton>
+                <StyledButton $isCenter={isCenter} variant="secondary">Get Gscore</StyledButton>
             </ContainerCard>
         </Root>
     )
@@ -60,12 +60,13 @@ display:flex;
 flex-direction:column;
 margin: 42px 48px;
 `
-const TopContainerCard = styled.div`
+const TopContainerCard = styled.div<{$isCenter?:boolean}>`
     display:flex;
     flex-direction:column;
     align-items:center;
     padding-bottom:40px;
-    border-bottom:1px solid ${sv.color.color700};
+    border-bottom:${props => props.$isCenter? `1px solid ${sv.color.color100}`: `1px solid ${sv.color.color500}`};
+    opacity:${props => props.$isCenter? '0,7' : '1'};
     margin-bottom:38px;
 `
 
@@ -116,7 +117,8 @@ font-size: 18px;
 line-height: 20px;
 `
 
-const StyledButton = styled(Button)`
+const StyledButton = styled(Button)<{$isCenter?:boolean}>`
 padding:24px 106px;
 margin-top:32px;
+color: ${props => props.$isCenter? sv.color.primary: sv.color.color800}
 `

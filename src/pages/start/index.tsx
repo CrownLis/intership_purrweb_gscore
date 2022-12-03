@@ -25,7 +25,7 @@ const Start: FC = () => {
                         </CartPriceContainer>
                     </CartProductsContainer>
                 </CartContainer>
-                <StyledButton isUnusual>Go to my subscriptions</StyledButton>
+                <StyledButton variant="primary" isLoading>Go to my subscriptions</StyledButton>
             </Container>
         </MainLayout>
     )
@@ -105,6 +105,4 @@ const CartPriceContainer = styled.div`
 
 const StyledButton = styled(Button)`
     max-width:620px;
-    text-align:center;
-    padding:20px 0;
 `

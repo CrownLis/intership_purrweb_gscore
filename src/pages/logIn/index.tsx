@@ -18,7 +18,7 @@ const LogIn: FC = () => {
                     <FormTitle>Log in</FormTitle>
                     <StyledInput placeholder='Email' />
                     <StyledInput placeholder='Password' />
-                    <StyledButton isUnusual>LogIn</StyledButton>
+                    <StyledButton variant="primary">LogIn</StyledButton>
                 </FormContainer>
             </Container>
         </MainLayout>
@@ -61,6 +61,6 @@ const StyledInput = styled(Input)`
 
 const StyledButton = styled(Button)`
     margin:24px 0;
-    padding:20px 42.5px;
+    padding:20px 24px;
     max-width:200px;
 `
