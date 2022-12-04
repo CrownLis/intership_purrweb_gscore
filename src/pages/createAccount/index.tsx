@@ -2,11 +2,26 @@ import StatusLine from "@/components/StatusLine";
 import MainLayout from "@/layouts/MainLayout";
 import Button from "@/UIComponents/Button";
 import Input from "@/UIComponents/Input";
+import { validateEmail } from "@/utils/validation";
 import Link from "next/link";
 import { FC } from "react";
+import { useForm } from "react-hook-form";
 import styled from "styled-components";
 
 const CreateAccount: FC = () => {
+
+    const { register, handleSubmit, reset, getFieldState, formState } = useForm({
+        mode: 'onChange',
+    });
+
+    const { error:userNameError,isDirty:userNameDirty } = getFieldState('username',formState)
+    const { error:emailError,isDirty:emailDirty } = getFieldState('email', formState)
+    const { error:passwordError,isDirty:passwordDirty} = getFieldState('password', formState)
+
+const onSubmit = (data:any) => {
+    reset();
+}
+
     return (
         <MainLayout>
             <Container>
@@ -15,12 +30,40 @@ const CreateAccount: FC = () => {
                     <StatusLine text="Log in" />
                     <StatusLine text="Checkout" />
                 </StatusContainer>
-                <FormContainer>
+                <FormContainer onSubmit={handleSubmit(onSubmit)}>
                     <FormTitle>Create account</FormTitle>
                     <FormInfo>You need to enter your name and email. We will send you a temporary password by email</FormInfo>
-                    <StyledInput placeholder='Username' />
-                    <StyledInput placeholder='Email' />
-                    <StyledInput placeholder='Password' />
+                    <StyledInput placeholder='Username' isError={Boolean(userNameError)} isDirty={userNameDirty} {...register('username',
+                        {
+                            required: 'Please enter the user name',
+                            minLength: {
+                                value: 3,
+                                message: 'User name must be more than 3 symbols'
+                            },
+                        }
+                    )
+                    } />
+                    <StyledInput  placeholder='Email' isError={Boolean(emailError)} isDirty={emailDirty} type='email' {...register('email',
+                        {
+                            required: 'Please enter the email',
+                            validate:validateEmail,
+                            minLength: {
+                                value: 3,
+                                message: 'Please enter the correct email'
+                            },
+                        }
+                    )
+                    }/>
+                    <StyledInput placeholder='Password' isError={Boolean(passwordError)} isDirty={passwordDirty} type='password' {...register('password',
+                        {
+                            required: 'Please enter the password',
+                            minLength: {
+                                value: 8,
+                                message: 'Password must be more than 8 symbols'
+                            },
+                        }
+                    )
+                    }/>
                     <StyledButton variant="primary">Send password</StyledButton>
                 </FormContainer>
                 <LogInLink>Have an account? <StyledLink href='login'>Go to the next step</StyledLink></LogInLink>

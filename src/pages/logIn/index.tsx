@@ -2,22 +2,60 @@ import StatusLine from "@/components/StatusLine";
 import MainLayout from "@/layouts/MainLayout";
 import Button from "@/UIComponents/Button";
 import Input from "@/UIComponents/Input";
+import { validateEmail } from "@/utils/validation";
 import { FC } from "react";
+import { useForm } from "react-hook-form";
 import styled from "styled-components";
 
 const LogIn: FC = () => {
+
+
+    
+    const { register, handleSubmit, reset, getFieldState, formState } = useForm({
+        mode: 'onChange',
+    });
+
+    const { error:emailError,isDirty:emailDirty } = getFieldState('email', formState)
+    const { error:passwordError,isDirty:passwordDirty} = getFieldState('password', formState)
+
+const onSubmit = (data:any) => {
+    console.log(data)
+    reset()
+}
+
     return (
         <MainLayout>
             <Container>
                 <StatusContainer>
                     <StatusLine text="Create account" isActive />
-                    <StatusLine text="Log in" isActive/>
+                    <StatusLine text="Log in" isActive />
                     <StatusLine text="Checkout" />
                 </StatusContainer>
-                <FormContainer>
+                <FormContainer onSubmit={handleSubmit(onSubmit)}>
                     <FormTitle>Log in</FormTitle>
-                    <StyledInput placeholder='Email' />
-                    <StyledInput placeholder='Password' />
+                    <StyledInput isError={Boolean(emailError)} isDirty={emailDirty} type='email' placeholder='Email' {...register('email',
+                        {
+                            validate:{
+                                email: validateEmail
+                            },
+                            required: 'Please enter the card name',
+                            minLength: {
+                                value: 5,
+                                message: 'Please enter the card name'
+                            },
+                        }
+                    )
+                    } />
+                    <StyledInput isError={Boolean(passwordError)} isDirty={passwordDirty} placeholder='Password' type='password' {...register('password',
+                        {
+                            required: 'Please enter the card name',
+                            minLength: {
+                                value: 2,
+                                message: 'Please enter the card name'
+                            },
+                        }
+                    )
+                    }/>
                     <StyledButton variant="primary">LogIn</StyledButton>
                 </FormContainer>
             </Container>
