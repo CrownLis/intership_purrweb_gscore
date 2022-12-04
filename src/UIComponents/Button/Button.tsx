@@ -1,7 +1,7 @@
 import { ButtonHTMLAttributes, FC, PropsWithChildren } from "react";
 import styled, { css } from "styled-components";
 
-import { hex2rgba } from "@/utils";
+import hex2rgba  from "@/utils/hex2rgba";
 import Loader from "@/components/Loader";
 
 type ButtonProps = PropsWithChildren<{
