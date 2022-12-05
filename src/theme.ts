@@ -1,4 +1,4 @@
-export default {
+const mainTheme = {
     font:{
         main:'THICCCBOI',
         subMain:'Inter',
@@ -21,6 +21,8 @@ export default {
         red300:'#FF5A65',
         red200:'#FFBEC2',
         red100:'#FFEFF0',
-        orange300:'#FF9E2C',
+        orange300:'#FF9E2C'
     }
-} as const
+  };
+
+  export default mainTheme;

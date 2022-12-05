@@ -10,14 +10,7 @@ module.exports = {
       test: /\.svg$/i,
       issuer: /\.[jt]sx?$/,
       use: ['@svgr/webpack'],
-    }),
-    config.plugins.push(new webpack.ProvidePlugin({
-      React:'react',
-      sv:[
-        path.resolve(__dirname,'./src/theme.ts'),
-        'default'
-      ]
-    }))
+    })
     return config
   },
  
