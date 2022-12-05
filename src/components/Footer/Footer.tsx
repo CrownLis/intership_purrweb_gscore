@@ -42,7 +42,7 @@ export default Footer
 const Root = styled.footer`
 height:362px;
 background-color:#181818;
-border-top:1px solid ${sv.color.color700};
+border-top:1px solid ${props => props.theme.color.color700};
 `
 const FooterContainer = styled.div`
     height:100%;
@@ -55,7 +55,7 @@ const DescriptionContainer = styled.div`
     gap:24px;
     height:246px;
     padding:60px 0;
-    border-bottom:1px solid #393939;
+    border-bottom:1px solid ${props => props.theme.color.color700};
 `
 const LogoContainer = styled.div`
     display:flex;
@@ -64,7 +64,7 @@ const LogoContainer = styled.div`
 `
 
 const StyledDescription = styled.p`
-font-family: ${sv.font.subMain};
+font-family: ${props => props.theme.font.subMain};
 font-style: normal;
 font-weight: 500;
 font-size: 18px;
@@ -72,8 +72,8 @@ line-height: 30px;
 color:white;
 `
 const StyledLink = styled(Link)`
-    color:#C7C7C7;
-    border-bottom:1px solid ${sv.color.color400};
+    color:${props => props.theme.color.color400};
+    border-bottom:1px solid ${props => props.theme.color.color400};
 `
 
 const LinksContainer = styled.div`

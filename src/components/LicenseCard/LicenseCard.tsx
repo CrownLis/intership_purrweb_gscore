@@ -32,12 +32,12 @@ const Container = styled.div`
 const StatusContainer = styled.div`
     display:flex;
     justify-content:space-between;
-    border-bottom:1px solid ${sv.color.color500};
+    border-bottom:1px solid ${props => props.theme.color.color500};
     padding:48px 64px 48px 32px;
 `
 
 const StatusTitle = styled.span`
-    font-family: ${sv.font.main};
+    font-family: ${props => props.theme.font.main};
     font-style: normal;
     font-weight: 700;
     font-size: 22px;
@@ -51,7 +51,7 @@ const LicenseDescription = styled.div`
 `
 
 const DescriptionText = styled.p`
-    font-family: ${sv.font.main};
+    font-family: ${props => props.theme.font.main};
     font-style: normal;
     font-weight: 500;
     font-size: 24px;
@@ -60,13 +60,13 @@ const DescriptionText = styled.p`
 `
 
 const DescriptionDate = styled.p`
-    font-family: ${sv.font.main};
+    font-family: ${props => props.theme.font.main};
     font-style: normal;
     font-weight: 500;
     font-size: 16px;
     line-height: 18px;
     margin-top:12px;
-    color: #969696;
+    color: ${props => props.theme.color.color500};
 `
 
 const StyledButton = styled(Button)`

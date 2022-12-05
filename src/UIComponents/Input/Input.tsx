@@ -1,4 +1,4 @@
-import React, { FC, ForwardRefRenderFunction, InputHTMLAttributes, PropsWithChildren } from "react";
+import React, { forwardRef, ForwardRefRenderFunction, InputHTMLAttributes, PropsWithChildren } from "react";
 import styled from "styled-components";
 
 import Close from '@/assets/images/Close.svg'
@@ -19,7 +19,7 @@ const Input:ForwardRefRenderFunction<HTMLInputElement,InputProps> = ({isError,is
     )
 }
 
-export default Input
+export default forwardRef<HTMLInputElement,InputProps>(Input);
 
 const InputContainer = styled.div`
     position:relative;
@@ -27,23 +27,23 @@ const InputContainer = styled.div`
 
 const StyledInput = styled.input<{$isError?:boolean,$isDirty?:boolean}>`
     width:100%;
-    background-color:${sv.color.color100};
+    background-color:${props => props.theme.color.color100};
     border-radius:6px;
     outline:none;
     padding:25px 23px;
-    font-family: ${sv.font.main};
+    font-family: ${props => props.theme.font.main};
     font-style: normal;
     font-weight: 400;
     font-size: 16px;
     line-height: 18px;
-    border:${props => props.$isError? `1px solid ${sv.color.red300}` : `1px solid ${sv.color.green300}`};
-    ${props => props.$isDirty? null : `border-color:${sv.color.color100}`};
-     color:${sv.color.color600};
+    border:${props => props.$isError? `1px solid ${props.theme.color.red300}` : `1px solid ${props.theme.color.green300}`};
+    ${props => props.$isDirty? null : `border-color:${props.theme.color.color100}`};
+     color:${props => props.theme.color.color600};
     &::placeholder{
-        color:${sv.color.color500};
+        color:${props => props.theme.color.color500};
     };
     &:disabled {
-        background-color:${sv.color.color300}
+        background-color:${props => props.theme.color.color300}
     };
 `
 
