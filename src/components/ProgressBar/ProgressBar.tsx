@@ -1,12 +1,12 @@
 import { FC } from "react";
 import styled from "styled-components";
-import StatusLine from "./StatusLine";
+import StatusLine from "./Progress";
 
-type StatusProps = {
+type ProgressBarProps = {
     someArray:[{text:string,isActive:boolean}],
 }
 
-const Status:FC<StatusProps> = ({someArray}) => {
+const ProgressBar:FC<ProgressBarProps> = ({someArray}) => {
     return (
         <Root>
             {someArray.map((item,index) => <StatusLine key={index} text={item.text} isActive={item.isActive} />)}
@@ -14,8 +14,9 @@ const Status:FC<StatusProps> = ({someArray}) => {
     )
 }
 
+export default ProgressBar;
+
 const Root = styled.div`
     display:flex;
+    gap:16px;
 `
-
-export default Status;

@@ -1,12 +1,12 @@
 import { FC } from "react";
 import styled from "styled-components";
 
-type StatusLineProps = {
+type ProgressProps = {
     text: string;
     isActive?: boolean;
 }
 
-const StatusLine: FC<StatusLineProps> = ({ isActive, text }) => {
+const Progress: FC<ProgressProps> = ({ isActive, text }) => {
     return (
         <Status>
             <StatusText>
@@ -18,7 +18,7 @@ const StatusLine: FC<StatusLineProps> = ({ isActive, text }) => {
     )
 }
 
-export default StatusLine;
+export default Progress;
 
 const Status = styled.div`
     display:flex;

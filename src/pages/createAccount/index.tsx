@@ -1,4 +1,4 @@
-import StatusLine from "@/components/Status/StatusLine";
+import StatusLine from "@/components/ProgressBar/Progress";
 import MainLayout from "@/layouts/MainLayout";
 import Button from "@/UIComponents/Button";
 import Input from "@/UIComponents/Input";
