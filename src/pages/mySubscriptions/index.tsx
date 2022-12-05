@@ -3,9 +3,15 @@ import LicenseCard from "@/components/LicenseCard/LicenseCard";
 import MainLayout from "@/layouts/MainLayout";
 import Button from "@/UIComponents/Button";
 import { FC } from "react";
+import { useForm } from "react-hook-form";
 import styled from "styled-components";
 
 const MySubscription: FC = () => {
+
+    const { register, handleSubmit, reset, getFieldState, formState } = useForm({
+        mode: 'onChange',
+    });
+
     return (
         <MainLayout>
             <Container>
@@ -19,9 +25,9 @@ const MySubscription: FC = () => {
                     <LicenseCard />
                 </SliderContainer>
                 <DomainsContainer>
-                    <Domain />
-                    <Domain />
-                    <Domain />
+                    <Domain name='1'/>
+                    <Domain name='2'/>
+                    <Domain name='3'/>
                 </DomainsContainer>
                 <ConfirmContainer>
                     <ConfirmDescription>Select the domains you want to keep</ConfirmDescription>
@@ -68,7 +74,7 @@ const SliderContainer = styled.div`
     overflow:hidden;
 `
 
-const DomainsContainer = styled.div`
+const DomainsContainer = styled.form`
     display:flex;
     flex-direction:column;
     gap:32px;

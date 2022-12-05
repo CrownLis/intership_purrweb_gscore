@@ -1,19 +1,24 @@
 import Checkbox from "@/UIComponents/Checkbox/Checkbox";
 import Input from "@/UIComponents/Input";
 import { FC } from "react";
+import { useForm } from "react-hook-form";
 import styled from "styled-components";
 
-const Domain: FC = () => {
+type DomainProps = {
+    name:string;
+}
+
+const Domain: FC<DomainProps> = ({name}) => {
     return (
         <Container>
-            <Checkbox name="domain"/>
+            <Checkbox name={name}/>
             <LicenseCodeContainer>
                 <TitleContainer>License code</TitleContainer>
-                <InputContainer />
+                <InputContainer readOnly />
             </LicenseCodeContainer>
             <DomainContainer>
                 <TitleContainer>Domain</TitleContainer>
-                <InputContainer />
+                <InputContainer readOnly/>
             </DomainContainer>
             <StatusContainer>
                 <TitleContainer>Status</TitleContainer>
