@@ -80,11 +80,11 @@ const StatusContainer = styled.div`
 const FormContainer = styled.form`
     display:flex;
     flex-direction:column;
-    color:white;
+    color:${props => props.theme.color.color100};
 `
 
 const FormTitle = styled.h2`
-    font-family: ${sv.font.main};
+    font-family: ${props => props.theme.font.main};
     font-style: normal;
     font-weight: 700;
     font-size: 44px;

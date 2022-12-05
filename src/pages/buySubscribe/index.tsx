@@ -35,12 +35,12 @@ const Container = styled.div`
 `
 
 const StyledTitle = styled.h2`
-font-family: ${sv.font.main};
+font-family: ${props => props.theme.font.main};
 font-style: normal;
 font-weight: 700;
 font-size: 44px;
 line-height: 54px;
-color:white;
+color:${props => props.theme.color.color100};
 margin-bottom:108px;
 `
 
@@ -59,15 +59,15 @@ const ContactContainer = styled.div`
 `
 
 const ContactQuestion = styled.p`
-font-family: ${sv.font.main};
+font-family: ${props => props.theme.font.main};
 font-style: normal;
 font-weight: 400;
 font-size: 18px;
 line-height: 30px;
-color:white;
+color:${props => props.theme.color.color100};
 `
 
 const StyledLink = styled(Link)`
-color:${sv.color.primary};
+color:${props => props.theme.color.primary};
 text-decoration:underline;
 `

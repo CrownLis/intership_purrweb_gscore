@@ -49,7 +49,7 @@ const Container = styled.div`
     display:flex;
     flex-direction:column;
     margin:0 410px 290px;
-    color:white;
+    color:${props => props.theme.color.color100};
 `;
 
 const StatusContainer = styled.div`
@@ -58,7 +58,7 @@ const StatusContainer = styled.div`
 `;
 
 const StyledTitle = styled.h2`
-    font-family: ${sv.font.main};
+    font-family: ${props => props.theme.font.main};
     font-style: normal;
     font-weight: 700;
     font-size: 44px;
@@ -79,7 +79,7 @@ const CartTitleContainer = styled.div`
     display:flex;
     justify-content:space-between;
     padding:48px 72px 32px 32px;
-    border-bottom: 1px solid #969696;
+    border-bottom: 1px solid ${props => props.theme.color.color500};
 `
 
 const CartProductsContainer = styled.div`
@@ -89,16 +89,16 @@ const CartProductsContainer = styled.div`
 `
 
 const CartTitle = styled.h3`
-    font-family: ${sv.font.main};
+    font-family: ${props => props.theme.font.main};
     font-style: normal;
     font-weight: 700;
     font-size: 24px;
     line-height: 34px;
-    color:white;
+    color:${props => props.theme.color.color100};
 `
 
 const ProductsTitle = styled.span`
-    font-family: ${sv.font.main};
+    font-family: ${props => props.theme.font.main};
     font-style: normal;
     font-weight: 400;
     font-size: 24px;
@@ -118,7 +118,7 @@ margin:24px 0 48px;
 `
 
 const StyledPrice = styled.h3`
-    font-family: ${sv.font.main};
+    font-family: ${props => props.theme.font.main};
     font-style: normal;
     font-weight: 700;
     font-size: 28px;

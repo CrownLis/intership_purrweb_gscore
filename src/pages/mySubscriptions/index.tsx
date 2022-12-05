@@ -43,7 +43,7 @@ export default MySubscription;
 const Container = styled.div`
     display:flex;
     flex-direction:column;
-    color:white;
+    color:${props => props.theme.color.color100};
     width:100%;
     margin:0 86px;
     padding-bottom:120px;
@@ -57,7 +57,7 @@ const TitleContainer = styled.div`
 `
 
 const StyledTitle = styled.h3`
-    font-family: ${sv.font.main};
+    font-family: ${props => props.theme.font.main};
     font-style: normal;
     font-weight: 700;
     font-size: 54px;
@@ -89,7 +89,7 @@ const ConfirmContainer = styled.div`
 `
 
 const ConfirmDescription = styled.p`
-    font-family: ${sv.font.main};
+    font-family: ${props => props.theme.font.main};
     font-style: normal;
     font-weight: 700;
     font-size: 20px;

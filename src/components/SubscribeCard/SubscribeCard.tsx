@@ -23,10 +23,10 @@ const SubscribeCard: FC<SubscribedCardProps> = ({ price, title, capability, isCe
                     <CardDescription>Get the advanced WordPress plugin that optimizes content with GSC keywords at one low annual price</CardDescription>
                 </TopContainerCard>
                 <BottomContainerCard>
-                    <CapabilityContainer>{isCenter?<RedCheck/> : <Check/>}<CardCapability>{capability}</CardCapability></CapabilityContainer>
-                    <CapabilityContainer>{isCenter?<RedCheck/> : <Check/>}<CardCapability>Special introductory pricing</CardCapability></CapabilityContainer>
-                    <CapabilityContainer>{isCenter?<RedCheck/> : <Check/>}<CardCapability>Unlimited Pages and Keywords</CardCapability></CapabilityContainer>
-                    <CapabilityContainer>{isCenter?<RedCheck/> : <Check/>}<CardCapability>Billed annually</CardCapability></CapabilityContainer>
+                    <CapabilityContainer>{isCenter ? <RedCheck /> : <Check />}<CardCapability>{capability}</CardCapability></CapabilityContainer>
+                    <CapabilityContainer>{isCenter ? <RedCheck /> : <Check />}<CardCapability>Special introductory pricing</CardCapability></CapabilityContainer>
+                    <CapabilityContainer>{isCenter ? <RedCheck /> : <Check />}<CardCapability>Unlimited Pages and Keywords</CardCapability></CapabilityContainer>
+                    <CapabilityContainer>{isCenter ? <RedCheck /> : <Check />}<CardCapability>Billed annually</CardCapability></CapabilityContainer>
                 </BottomContainerCard>
                 <StyledButton $isCenter={isCenter} variant="secondary">Get Gscore</StyledButton>
             </ContainerCard>
@@ -47,7 +47,7 @@ const Root = styled.div<{ $isCenter?: boolean }>`
             css`
             position:relative;
             top:-50px;
-            background-color:${sv.color.primary};
+            background-color:${props => props.theme.color.primary};
 ` :
             css`
             background-color:#272727
@@ -60,18 +60,18 @@ display:flex;
 flex-direction:column;
 margin: 42px 48px;
 `
-const TopContainerCard = styled.div<{$isCenter?:boolean}>`
+const TopContainerCard = styled.div<{ $isCenter?: boolean }>`
     display:flex;
     flex-direction:column;
     align-items:center;
     padding-bottom:40px;
-    border-bottom:${props => props.$isCenter? `1px solid ${sv.color.color100}`: `1px solid ${sv.color.color500}`};
-    opacity:${props => props.$isCenter? '0,7' : '1'};
+    border-bottom:${props => props.$isCenter ? `1px solid ${props.theme.color.color100}` : `1px solid ${props.theme.color.color500}`};
+    opacity:${props => props.$isCenter ? '0,7' : '1'};
     margin-bottom:38px;
 `
 
 const CardPrice = styled.h3`
-font-family: ${sv.font.unusual};
+font-family: ${props => props.theme.font.unusual};
 font-style: normal;
 font-weight: 700;
 font-size: 54px;
@@ -80,7 +80,7 @@ margin-bottom:4px;
 `
 
 const CardTitle = styled.p`
-font-family: ${sv.font.main};
+font-family: ${props => props.theme.font.main};
 font-style: normal;
 font-weight: 700;
 font-size: 24px;
@@ -89,12 +89,12 @@ margin-bottom:8px;
 `
 
 const CardDescription = styled.p`
-font-family: ${sv.font.main};
+font-family: ${props => props.theme.font.main};
 font-style: normal;
 font-weight: 500;
 font-size: 18px;
 line-height: 30px;
-color:${sv.color.color400};
+color:${props => props.theme.color.color400};
 text-align:center;
 `
 
@@ -110,15 +110,15 @@ const CapabilityContainer = styled.div`
 `
 
 const CardCapability = styled.p`
-font-family: ${sv.font.main};
+font-family: ${props => props.theme.font.main};
 font-style: normal;
 font-weight: 500;
 font-size: 18px;
 line-height: 20px;
 `
 
-const StyledButton = styled(Button)<{$isCenter?:boolean}>`
+const StyledButton = styled(Button) <{ $isCenter?: boolean }>`
 padding:24px 106px;
 margin-top:32px;
-color: ${props => props.$isCenter? sv.color.primary: sv.color.color800}
+color: ${props => props.$isCenter ? props.theme.color.primary : props.theme.color.color800}
 `

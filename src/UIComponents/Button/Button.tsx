@@ -28,14 +28,14 @@ const getStylesButton = (variant:string) => {
     switch (variant) {
         case 'primary': {
             return css`
-                background-color:${sv.color.primary};
-                color:${sv.color.color100};
+                background-color:${props => props.theme.color.primary};
+                color:${props => props.theme.color.color100};
 
                 &:hover {
-                    background-color:${sv.color.red400};
+                    background-color:${props => props.theme.color.red400};
                 }
                 &:focus {
-                    border:4px solid ${hex2rgba(sv.color.primary, 0.3)};  
+                    border:${props => `4px solid ${hex2rgba(props.theme.color.primary, 0.3)}`};  
                 }
                 &:disabled {
                     opacity:0.6;
@@ -44,13 +44,13 @@ const getStylesButton = (variant:string) => {
         }
         case 'secondary': {
             return css`
-                background-color:${sv.color.color100};
-                color:${sv.color.primary};
+                background-color:${props => props.theme.color.color100};
+                color:${props => props.theme.color.primary};
                 &:hover {
-                    color:${sv.color.red400};
+                    color:${props => props.theme.color.red400};
                 }
                 &:focus {
-                 border:4px solid ${hex2rgba(sv.color.color100, 0.3)};
+                 border:${props => `4px solid ${hex2rgba(props.theme.color.color100, 0.3)}`};
                 }
                 &:disabled {
                     opacity:0.6;
@@ -60,9 +60,9 @@ const getStylesButton = (variant:string) => {
         case 'text': {
             return css`
                 background-color:transparent;
-                color:${sv.color.primary};
+                color:${props => props.theme.color.primary};
                 &:hover {
-                    color:${sv.color.red400}
+                    color:${props => props.theme.color.red400}
                 }
                 &:focus {
                     color:transparent;
@@ -83,7 +83,7 @@ const StyledButton = styled.button<ButtonType>`
 display:flex;
 justify-content:center;
 align-items:center;
-font-family: ${sv.font.main};
+font-family: ${props => props.theme.font.main};
 font-style: normal;
 font-weight: 700;
 font-size: 16px;

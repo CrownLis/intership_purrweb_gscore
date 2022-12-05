@@ -53,7 +53,7 @@ const LinkContainer = styled.div`
 `
 
 const StyledSpan = styled.span`
-    font-family:${sv.font.subMain};
+    font-family:${props => props.theme.font.subMain};
     font-weight:500;
-    color:white
+    color:${props => props.theme.color.color100}
 `

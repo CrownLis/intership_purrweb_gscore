@@ -88,10 +88,10 @@ const StatusContainer = styled.div`
 const FormContainer = styled.form`
     display:flex;
     flex-direction:column;
-    color:white;
+    color:${props => props.theme.color.color100};
 `
 const FormTitle = styled.h2`
-    font-family: ${sv.font.main};
+    font-family: ${props => props.theme.font.main};
     font-style: normal;
     font-weight: 700;
     font-size: 44px;
@@ -101,7 +101,7 @@ const FormTitle = styled.h2`
 `
 
 const FormInfo = styled.p`
-    font-family: ${sv.font.main};
+    font-family: ${props => props.theme.font.main};
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
@@ -120,15 +120,15 @@ const StyledButton = styled(Button)`
 `
 
 const LogInLink = styled.p`
-    font-family: ${sv.font.main};
+    font-family: ${props => props.theme.font.main};
     font-style: normal;
     font-weight: 400;
     font-size: 16px;
     line-height: 18px;
-    color:white;
+    color:${props => props.theme.color.color100};
     margin-top:24px;
 `
 
 const StyledLink = styled(Link)`
-    color:${sv.color.primary};
+    color:${props => props.theme.color.primary};
 `

@@ -35,11 +35,11 @@ const Container = styled.div`
     flex-direction:column;
     width:100%;
     margin:0px 86px;
-    color:white;
+    color:${props => props.theme.color.color100};
 `
 
 const StyledTitle = styled.h3`
-    font-family: ${sv.font.main};
+    font-family: ${props => props.theme.font.main};
     font-style: normal;
     font-weight: 700;
     font-size: 54px;
@@ -61,7 +61,7 @@ const FormInfo = styled.div`
 `
 
 const FormTitle = styled.h3`
-    font-family: ${sv.font.main};
+    font-family: ${props => props.theme.font.main};
     font-style: normal;
     font-weight: 700;
     font-size: 28px;
