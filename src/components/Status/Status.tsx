@@ -1,21 +1,59 @@
 import { FC } from "react";
-import styled from "styled-components";
-import StatusLine from "./StatusLine";
+import styled, { css } from "styled-components";
 
-type StatusProps = {
-    someArray:[{text:string,isActive:boolean}],
+type StatusType = {
+    status: 'active' | 'hold' | 'inactive';
 }
 
-const Status:FC<StatusProps> = ({someArray}) => {
+
+const Status: FC<StatusType> = ({ status }) => {
+
+    const getStatusTitle = () => {
+        if (status === 'active') {
+            return 'Active'
+        }
+        if (status === 'hold') {
+            return 'Hold'
+        }
+        if (status === 'inactive') {
+            return 'Inactive'
+        }
+        return 'Active'
+    }
+
+
     return (
-        <Root>
-            {someArray.map((item,index) => <StatusLine key={index} text={item.text} isActive={item.isActive} />)}
-        </Root>
+        <Title $status={status}>{getStatusTitle()}</Title>
     )
 }
 
-const Root = styled.div`
-    display:flex;
-`
-
 export default Status;
+
+const getStylesStatus = (status: string) => {
+    switch (status) {
+        case 'active': {
+            return css`
+            color:${props => props.theme.color.green300};
+            `
+        }
+        case 'hold': {
+            return css`
+            color:${props => props.theme.color.orange300};
+            `
+        }
+        case 'text': {
+            return css`
+            color:${props => props.theme.color.red300};
+            `
+        }
+    }
+}
+
+const Title = styled.span<{ $status: string }>`
+    font-family:${props => props.theme.fonts.main};
+    font-style: normal;
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 28px;
+    ${({ $status }) => getStylesStatus($status)};
+`
