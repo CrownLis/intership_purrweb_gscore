@@ -1,25 +1,23 @@
-import React, { FC, InputHTMLAttributes, PropsWithChildren } from "react";
+import React, { FC, ForwardRefRenderFunction, InputHTMLAttributes, PropsWithChildren } from "react";
 import styled from "styled-components";
 
 import Close from '@/assets/images/Close.svg'
 import Accept from '@/assets/images/Accept.svg'
 
 type InputProps = PropsWithChildren<{
-    isError:boolean;
-    isDirty:boolean;
+    isError?:boolean;
+    isDirty?:boolean;
 }> & InputHTMLAttributes<HTMLInputElement>;
 
-const Input: FC<InputProps> = React.forwardRef<any,InputProps> (function Input({isError,isDirty, children, ...props },ref) {
+const Input:ForwardRefRenderFunction<HTMLInputElement,InputProps> = ({isError,isDirty, children, ...props },ref) => {
    const statusIcon = isError? <StyledClose/> : <StyledAccept/> 
     return (
         <InputContainer>
         <StyledInput $isError={isError} $isDirty={isDirty} {...props} ref={ref}/>
         {isDirty? statusIcon : null}
         </InputContainer>
-        
     )
 }
-)
 
 export default Input
 
@@ -27,7 +25,7 @@ const InputContainer = styled.div`
     position:relative;
 `
 
-const StyledInput = styled.input<{$isError:boolean,$isDirty:boolean}>`
+const StyledInput = styled.input<{$isError?:boolean,$isDirty?:boolean}>`
     width:100%;
     background-color:${sv.color.color100};
     border-radius:6px;
