@@ -1,4 +1,4 @@
-import StatusLine from "@/components/StatusLine";
+import StatusLine from "@/components/Status/StatusLine";
 import MainLayout from "@/layouts/MainLayout";
 import { FC } from "react";
 import styled from "styled-components";
