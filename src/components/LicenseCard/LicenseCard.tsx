@@ -1,19 +1,20 @@
 import Button from "@/UIComponents/Button";
 import { FC } from "react";
 import styled from "styled-components";
+import Status from "../Status";
 
 const LicenseCard: FC = () => {
     return (
         <Container>
             <StatusContainer>
                 <StatusTitle>Gscore</StatusTitle>
-                <StatusTitle>Active</StatusTitle>
+                <Status status="active"/>
             </StatusContainer>
             <LicenseDescription>
                 <DescriptionText>Single site license</DescriptionText>
                 <DescriptionDate>valid until 21.10.2022</DescriptionDate>
             </LicenseDescription>
-            <StyledButton isPrimary>View</StyledButton>
+            <StyledButton variant="secondary">View</StyledButton>
         </Container>
     )
 }
@@ -25,15 +26,17 @@ const Container = styled.div`
     border-radius: 12px;
     background-color:#272727;
     color:white; 
-    width:100%;  
+    width:100%;
     max-width:620px;
+    height:100%;
+    max-height:334px;
 `
 
 const StatusContainer = styled.div`
     display:flex;
     justify-content:space-between;
     border-bottom:1px solid ${props => props.theme.color.color500};
-    padding:48px 64px 48px 32px;
+    padding:48px 64px 32px 32px;
 `
 
 const StatusTitle = styled.span`
@@ -47,7 +50,7 @@ const StatusTitle = styled.span`
 const LicenseDescription = styled.div`
     display:flex;
     flex-direction:column;
-    padding:32px 81px 32px 32px;
+    padding:32px 81px 0px 32px;
 `
 
 const DescriptionText = styled.p`
@@ -56,7 +59,6 @@ const DescriptionText = styled.p`
     font-weight: 500;
     font-size: 24px;
     line-height: 26px;
-    margin-top:32px;
 `
 
 const DescriptionDate = styled.p`
