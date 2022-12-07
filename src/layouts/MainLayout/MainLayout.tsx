@@ -38,6 +38,7 @@ const MainLayout: NextPage<MainLayoutProps> = ({
   const Main = styled.main`
     display:flex;
     justify-content:center;
+    margin:0 86px;
   `;
   
   const LoaderContainer = styled.div`
