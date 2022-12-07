@@ -50,7 +50,7 @@ const getStylesStatus = (status: string) => {
 }
 
 const Title = styled.span<{ $status: string }>`
-    font-family:${props => props.theme.fonts.main};
+    font-family:${props => props.theme.font.main};
     font-style: normal;
     font-weight: 700;
     font-size: 22px;

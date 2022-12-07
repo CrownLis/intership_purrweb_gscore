@@ -3,15 +3,14 @@ import LicenseCard from "@/components/LicenseCard/LicenseCard";
 import MainLayout from "@/layouts/MainLayout";
 import Button from "@/UIComponents/Button";
 import { FC } from "react";
-import { useForm } from "react-hook-form";
 import styled from "styled-components";
+import { Navigation, Pagination } from "swiper";
+import { Swiper, SwiperSlide } from "swiper/react";
+
+import 'swiper/css/navigation'
+import 'swiper/css/pagination'
 
 const MySubscription: FC = () => {
-
-    const { register, handleSubmit, reset, getFieldState, formState } = useForm({
-        mode: 'onChange',
-    });
-
     return (
         <MainLayout>
             <Container>
@@ -20,14 +19,35 @@ const MySubscription: FC = () => {
                     <StyledButton variant="primary">Upgrade</StyledButton>
                 </TitleContainer>
                 <SliderContainer>
-                    <LicenseCard />
-                    <LicenseCard />
-                    <LicenseCard />
+                    <StyledSwiper
+                        modules={[Navigation, Pagination]}
+                        spaceBetween={29}
+                        slidesPerView={2}
+                        navigation={{
+                            nextEl: '.swiper-button-next',
+                            prevEl: '.swiper-button-prev',
+                        }}
+                        pagination={{
+                            el: '.mySwiper-pagination',
+                            type: 'fraction',
+                        }}
+                    >
+                        <SwiperSlide><LicenseCard /></SwiperSlide>
+                        <SwiperSlide><LicenseCard /></SwiperSlide>
+                        <SwiperSlide><LicenseCard /></SwiperSlide>
+                        <SwiperSlide><LicenseCard /></SwiperSlide>
+                        <PaginationContainer>
+                            <StyledPrevButton className='swiper-button-prev'></StyledPrevButton>
+                            <StyledPagination className="mySwiper-pagination"></StyledPagination>
+                            <StyledNextButton className="swiper-button-next"></StyledNextButton>
+                        </PaginationContainer>
+
+                    </StyledSwiper>
                 </SliderContainer>
                 <DomainsContainer>
-                    <Domain name='1'/>
-                    <Domain name='2'/>
-                    <Domain name='3'/>
+                    <Domain isActive name='1' />
+                    <Domain name='2' />
+                    <Domain name='3' />
                 </DomainsContainer>
                 <ConfirmContainer>
                     <ConfirmDescription>Select the domains you want to keep</ConfirmDescription>
@@ -39,6 +59,74 @@ const MySubscription: FC = () => {
 }
 
 export default MySubscription;
+
+
+
+const PaginationContainer = styled.div`
+    position:relative;
+    display:flex;
+    gap:15px;
+    align-items:center;
+    height:44px;
+`
+
+const StyledPagination = styled.div`
+    position:relative;
+    display:flex;
+    justify-content:bottom;
+    font-family:${props => props.theme.font.main};
+    font-style:'normal';
+    font-weight:700px;
+    font-size:22px;
+    line-height:28px;
+    max-width:min-content;
+`
+
+const StyledPrevButton = styled.div`
+    position:relative;
+    top:0;
+    left:0;
+    z-index:400;
+    width:44px;
+    height:44px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid ${props => props.theme.color.color500};
+    border-radius: 12px;
+    background-size:24px;
+    background-position:center;
+    background-repeat:no-repeat;
+        background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11.4609 3.53918L3.00001 12.0001L11.4609 20.4609' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M3.00009 12L21 12' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E%0A");
+    &:after {
+        content:'';
+       }
+`
+
+const StyledNextButton = styled.div`
+    position:relative;
+    top:0;
+    left:0;
+    z-index:100;
+    width:44px;
+    height:44px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid ${props => props.theme.color.color500};
+    border-radius: 12px;
+    background-size:24px;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12.5391 3.53918L21 12.0001L12.5391 20.4609' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M20.9999 12L3 12' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E%0A");
+    &:after {
+        content:'';
+       }
+`
 
 const Container = styled.div`
     display:flex;
@@ -66,6 +154,13 @@ const StyledTitle = styled.h3`
 
 const StyledButton = styled(Button)`
     padding:26px 38px;
+`
+
+const StyledSwiper = styled(Swiper)`
+    height:450px;
+    .swiper-wrapper {
+        max-height:380px;
+    }
 `
 
 const SliderContainer = styled.div`
