@@ -1,2 +1,3 @@
-import SubscribeCard from "./SubscribeCard";
-export default SubscribeCard
+import SubscribeCard from './SubscribeCard';
+
+export default SubscribeCard;

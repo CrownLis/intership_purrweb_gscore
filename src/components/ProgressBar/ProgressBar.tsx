@@ -1,22 +1,22 @@
-import { FC } from "react";
-import styled from "styled-components";
-import StatusLine from "./Progress";
+import { FC } from 'react';
+import styled from 'styled-components';
+import StatusLine from './Progress';
 
 type ProgressBarProps = {
-    someArray:[{text:string,isActive:boolean}],
-}
+  someArray: [{ text: string; isActive: boolean }];
+};
 
-const ProgressBar:FC<ProgressBarProps> = ({someArray}) => {
-    return (
-        <Root>
-            {someArray.map((item,index) => <StatusLine key={index} text={item.text} isActive={item.isActive} />)}
-        </Root>
-    )
-}
+const ProgressBar: FC<ProgressBarProps> = ({ someArray }) => (
+  <Root>
+    {someArray.map((item, index) => (
+      <StatusLine key={index} text={item.text} isActive={item.isActive} />
+    ))}
+  </Root>
+);
 
 export default ProgressBar;
 
 const Root = styled.div`
-    display:flex;
-    gap:16px;
-`
+  display: flex;
+  gap: 16px;
+`;

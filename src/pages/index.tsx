@@ -1,16 +1,12 @@
-import { NextPage } from 'next'
+import { NextPage } from 'next';
 import styled from 'styled-components';
 import MainLayout from '../layouts/MainLayout';
 
-const Home: NextPage = () => {
-  return (
-    <MainLayout>
-      <Container>
-        HOME PAGE
-      </Container>
-    </MainLayout>
-  );
-};
+const Home: NextPage = () => (
+  <MainLayout>
+    <Container>HOME PAGE</Container>
+  </MainLayout>
+);
 
 export default Home;
 
