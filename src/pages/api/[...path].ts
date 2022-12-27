@@ -23,7 +23,7 @@ export default function api(req: NextApiRequest, res: NextApiResponse) {
 
     req.headers.cookie = '';
     if (authToken) {
-      req.headers['auth-token'] = authToken.toString();
+      req.headers.authorization = `Bearer ${authToken.toString()}`;
     }
 
     if (isAuthPath) {
