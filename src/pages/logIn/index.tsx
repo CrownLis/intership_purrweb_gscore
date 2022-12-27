@@ -6,8 +6,15 @@ import MainLayout from '@/layouts/MainLayout';
 import Button from '@/UIComponents/Button';
 import Input from '@/UIComponents/Input';
 import { validateEmail } from '@/utils/validation';
+import { useAppDispatch } from '@/store/hooks';
+import { loginUser } from '@/store/ducks/user/asyncAction';
+import { useRouter } from 'next/router';
 
 const LogIn: FC = () => {
+  const dispatch = useAppDispatch();
+
+  const router = useRouter();
+
   const { register, handleSubmit, reset, getFieldState, formState } = useForm({
     mode: 'onChange',
   });
@@ -16,7 +23,8 @@ const LogIn: FC = () => {
   const { error: passwordError, isDirty: passwordDirty } = getFieldState('password', formState);
 
   const onSubmit = (data: any) => {
-    console.log(data);
+    dispatch(loginUser(data));
+    router.push('checkout');
     reset();
   };
 

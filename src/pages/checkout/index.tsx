@@ -23,7 +23,7 @@ const Checkout: FC = () => (
         <CartProductsContainer>
           <ProductsTitle>Single site license</ProductsTitle>
           <CartPriceContainer>
-            <ProductsTitle>$77</ProductsTitle>
+            <ProductsTitle>77$</ProductsTitle>
             <Cart />
           </CartPriceContainer>
         </CartProductsContainer>

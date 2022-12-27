@@ -4,11 +4,14 @@ import { ThemeProvider } from 'styled-components';
 import mainTheme from '@/theme';
 import '../../styles/core.css';
 import 'swiper/css';
+import { wrapper } from '@/store/store';
 
-export default function App({ Component, pageProps }: AppProps) {
+const MyApp = ({ Component, pageProps: { session, ...pageProps } }: AppProps) => {
   return (
     <ThemeProvider theme={mainTheme}>
       <Component {...pageProps} />
     </ThemeProvider>
   );
-}
+};
+
+export default wrapper.withRedux(MyApp);

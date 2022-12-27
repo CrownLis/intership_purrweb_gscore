@@ -7,8 +7,15 @@ import MainLayout from '@/layouts/MainLayout';
 import Button from '@/UIComponents/Button';
 import Input from '@/UIComponents/Input';
 import { validateEmail } from '@/utils/validation';
+import { registerUser } from '@/store/ducks/user/asyncAction';
+import { useAppDispatch } from '@/store/hooks';
+import { useRouter } from 'next/router';
 
 const CreateAccount: FC = () => {
+  const dispatch = useAppDispatch();
+
+  const router = useRouter();
+
   const { register, handleSubmit, reset, getFieldState, formState } = useForm({
     mode: 'onChange',
   });
@@ -18,6 +25,8 @@ const CreateAccount: FC = () => {
   const { error: passwordError, isDirty: passwordDirty } = getFieldState('password', formState);
 
   const onSubmit = (data: any) => {
+    dispatch(registerUser(data));
+    router.push('logIn');
     reset();
   };
 
@@ -74,7 +83,7 @@ const CreateAccount: FC = () => {
           <StyledButton variant="primary">Send password</StyledButton>
         </FormContainer>
         <LogInLink>
-          Have an account? <StyledLink href="login">Go to the next step</StyledLink>
+          Have an account? <StyledLink href="logIn">Go to the next step</StyledLink>
         </LogInLink>
       </Container>
     </MainLayout>

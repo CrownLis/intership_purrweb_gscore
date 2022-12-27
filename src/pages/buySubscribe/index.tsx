@@ -3,23 +3,42 @@ import { FC } from 'react';
 import styled from 'styled-components';
 import MainLayout from '@/layouts/MainLayout';
 import SubscribeCard from '@/components/SubscribeCard';
+import { getProducts } from '@/store/ducks/products/asyncAction';
+import { wrapper } from '@/store/store';
+import { ProductType } from '@/types';
 
-const BuySubscribe: FC = () => (
-  <MainLayout>
-    <Container>
-      <StyledTitle>Get started with Gscore today!</StyledTitle>
-      <CardContainer>
-        <SubscribeCard price={77} title="Single site license" capability="Single site license" />
-        <SubscribeCard price={117} title="3 Site license" capability="All features for 3 sites" isCenter />
-        <SubscribeCard price={167} title="10 Site license" capability="All features for 10 sites" />
-      </CardContainer>
-      <ContactContainer>
-        <ContactQuestion>Have more than 10 sites?</ContactQuestion>
-        <StyledLink href="contact">Contact us</StyledLink>
-      </ContactContainer>
-    </Container>
-  </MainLayout>
-);
+type ComponentProps = {
+  products: ProductType[];
+};
+
+const BuySubscribe: FC<ComponentProps> = ({ products }) => {
+  return (
+    <MainLayout>
+      <Container>
+        <StyledTitle>Get started with Gscore today!</StyledTitle>
+        <CardContainer>
+          {products.map((card) => (
+            <SubscribeCard price={card.prices.price} title={card.name} capability={card.name} key={card.id} />
+          ))}
+        </CardContainer>
+        <ContactContainer>
+          <ContactQuestion>Have more than 10 sites?</ContactQuestion>
+          <StyledLink href="contact">Contact us</StyledLink>
+        </ContactContainer>
+      </Container>
+    </MainLayout>
+  );
+};
+
+export const getStaticProps = wrapper.getStaticProps((store) => async () => {
+  await store.dispatch(getProducts());
+  const products = store.getState();
+  return {
+    props: {
+      products: products.products.list,
+    },
+  };
+});
 
 export default BuySubscribe;
 

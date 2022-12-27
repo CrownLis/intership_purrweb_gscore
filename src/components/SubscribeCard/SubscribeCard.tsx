@@ -6,7 +6,7 @@ import RedCheck from '@/assets/images/RedCheck.svg';
 import Check from '../../assets/images/Check.svg';
 
 type SubscribedCardProps = {
-  price: number;
+  price: string;
   title: string;
   capability: string;
   isCenter?: boolean;
