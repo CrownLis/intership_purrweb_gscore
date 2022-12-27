@@ -1,11 +1,15 @@
-import React, { PropsWithChildren } from 'react';
-import { NextPage } from 'next';
+import React, { FC, PropsWithChildren } from 'react';
 import styled from 'styled-components';
+
 import Header from '@/components/Header';
 import Loader from '@/components/Loader';
 import Footer from '@/components/Footer';
 
-const MainLayout: NextPage<MainLayoutProps> = ({ children, isLoading = false }) => (
+type MainLayoutProps = PropsWithChildren<{
+  isLoading?: boolean;
+}>;
+
+const MainLayout: FC<MainLayoutProps> = ({ children, isLoading = false }) => (
   <Root>
     <Header />
     {isLoading ? (
@@ -21,17 +25,17 @@ const MainLayout: NextPage<MainLayoutProps> = ({ children, isLoading = false }) 
 
 export default MainLayout;
 
-type MainLayoutProps = PropsWithChildren<{
-  isLoading?: boolean;
-}>;
-
 const Root = styled.div`
-  background-color: #181818;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background-color: ${(props) => props.theme.color.neutral800};
 `;
 
 const Main = styled.main`
   display: flex;
   justify-content: center;
+  flex-grow: 1;
   margin: 0 86px;
 `;
 

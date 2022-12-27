@@ -20,14 +20,14 @@ const LicenseCard: FC = () => (
 export default LicenseCard;
 
 const Container = styled.div`
+  width: 100%;
+  height: 100%;
+  max-width: 620px;
+  max-height: 334px;
   border: 0;
   border-radius: 12px;
-  background-color: #272727;
-  color: white;
-  width: 100%;
-  max-width: 620px;
-  height: 100%;
-  max-height: 334px;
+  color: ${(props) => props.theme.color.color100};
+  background-color: ${(props) => props.theme.color.neutral700};
 `;
 
 const StatusContainer = styled.div`

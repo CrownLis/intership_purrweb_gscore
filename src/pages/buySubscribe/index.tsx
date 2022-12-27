@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { FC } from 'react';
 import styled from 'styled-components';
+
 import MainLayout from '@/layouts/MainLayout';
 import SubscribeCard from '@/components/SubscribeCard';
 import { getProducts } from '@/store/ducks/products/asyncAction';

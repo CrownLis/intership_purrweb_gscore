@@ -48,12 +48,12 @@ export default Domain;
 
 const Container = styled.div`
   display: flex;
-  background: #272727;
-  border: 0;
-  border-radius: 12px;
   align-items: center;
+  border-radius: 12px;
   max-height: 153px;
   max-width: 1268px;
+  border: 0;
+  background-color: ${(props) => props.theme.color.neutral700};
 `;
 
 const LicenseCodeContainer = styled.div`

@@ -1,6 +1,8 @@
 import { FC } from 'react';
 import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
+import { useRouter } from 'next/router';
+
 import StatusLine from '@/components/ProgressBar/Progress';
 import MainLayout from '@/layouts/MainLayout';
 import Button from '@/UIComponents/Button';
@@ -8,7 +10,6 @@ import Input from '@/UIComponents/Input';
 import { validateEmail } from '@/utils/validation';
 import { useAppDispatch } from '@/store/hooks';
 import { loginUser } from '@/store/ducks/user/asyncAction';
-import { useRouter } from 'next/router';
 
 const LogIn: FC = () => {
   const dispatch = useAppDispatch();
@@ -22,10 +23,10 @@ const LogIn: FC = () => {
   const { error: emailError, isDirty: emailDirty } = getFieldState('email', formState);
   const { error: passwordError, isDirty: passwordDirty } = getFieldState('password', formState);
 
-  const onSubmit = (data: any) => {
-    dispatch(loginUser(data));
-    router.push('checkout');
+  const onSubmit = async (data: any) => {
+    await dispatch(loginUser(data)).unwrap();
     reset();
+    router.push('checkout');
   };
 
   return (

@@ -2,13 +2,11 @@ import { FC } from 'react';
 import styled from 'styled-components';
 import { Navigation, Pagination } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
+
 import Domain from '@/components/Domain';
 import LicenseCard from '@/components/LicenseCard/LicenseCard';
 import MainLayout from '@/layouts/MainLayout';
 import Button from '@/UIComponents/Button';
-
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
 
 const MySubscription: FC = () => (
   <MainLayout>

@@ -1,4 +1,4 @@
-import { fetchProducts } from '@/API';
+import { fetchProducts } from '@/api';
 import { ProductType } from '@/types';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 

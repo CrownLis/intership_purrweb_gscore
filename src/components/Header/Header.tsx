@@ -22,31 +22,31 @@ const Header = () => (
 export default Header;
 
 const Root = styled.header`
-  height: 106px;
-  width: 100%;
-  background-color: #181818;
   display: flex;
   align-items: center;
+  width: 100%;
+  padding: 32px 0;
+  background-color: ${(props) => props.theme.color.neutral800};
 `;
 
 const HeaderContainer = styled.div`
   display: flex;
+  justify-content: space-between;
   width: 100%;
   height: 100%;
-  justify-content: space-between;
   margin: 0 90px;
 `;
 
 const LogoContainer = styled.div`
   display: flex;
-  gap: 10px;
   align-items: center;
+  gap: 10px;
 `;
 
 const LinkContainer = styled.div`
   display: flex;
-  gap: 32px;
   align-items: center;
+  gap: 32px;
 `;
 
 const StyledSpan = styled.span`

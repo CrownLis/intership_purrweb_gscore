@@ -1,19 +1,19 @@
-import { signIn, signUp } from '@/API';
+import { signIn, signUp } from '@/api';
 import { RegisterResponse, LoginResponse } from '@/types';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-type registerAttributes = {
+type RegisterAttributes = {
   email: string;
   username: string;
   password: string;
 };
 
-type loginAttributes = {
+type LoginAttributes = {
   email: string;
   password: string;
 };
 
-export const registerUser = createAsyncThunk<RegisterResponse, registerAttributes>(
+export const registerUser = createAsyncThunk<RegisterResponse, RegisterAttributes>(
   'user/registerUser',
   async ({ email, password, username }) => {
     const response = await signUp({ email, username, password });
@@ -22,7 +22,7 @@ export const registerUser = createAsyncThunk<RegisterResponse, registerAttribute
   },
 );
 
-export const loginUser = createAsyncThunk<LoginResponse, loginAttributes>(
+export const loginUser = createAsyncThunk<LoginResponse, LoginAttributes>(
   'user/loginUser',
   async ({ email, password }) => {
     const response = await signIn({ email, password });

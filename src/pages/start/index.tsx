@@ -59,7 +59,7 @@ const CartContainer = styled.div`
   display: flex;
   flex-direction: column;
   max-width: 620px;
-  background-color: #272727;
+  background-color: ${(props) => props.theme.color.neutral700};
   border: 0;
   border-radius: 12px;
   margin: 48px 0;

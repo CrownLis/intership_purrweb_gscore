@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import styled from 'styled-components';
-
 import Link from 'next/link';
+
 import Logo from '@/assets/images/logo.svg';
 import Title from '@/assets/images/title.svg';
 import Facebook from '@/assets/images/Facebook.svg';
@@ -24,8 +24,8 @@ const Footer: FC = () => (
 
       <LinksContainer>
         <StyledDescription>
-          Copyright © 2022 GScore | All Rights Reserved | <StyledLink href="Cookies">Cookies</StyledLink> |{' '}
-          <StyledLink href="Privacy">Privacy Policy</StyledLink>
+          Copyright © 2022 GScore | All Rights Reserved | <StyledLink href="cookies">Cookies</StyledLink> |{' '}
+          <StyledLink href="privacy">Privacy Policy</StyledLink>
         </StyledDescription>
         <SocialNavbar>
           <Facebook />
@@ -40,8 +40,7 @@ const Footer: FC = () => (
 export default Footer;
 
 const Root = styled.footer`
-  height: 362px;
-  background-color: #181818;
+  background-color: ${(props) => props.theme.color.neutral800};
   border-top: 1px solid ${(props) => props.theme.color.color700};
 `;
 const FooterContainer = styled.div`
@@ -53,7 +52,6 @@ const DescriptionContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 24px;
-  height: 246px;
   padding: 60px 0;
   border-bottom: 1px solid ${(props) => props.theme.color.color700};
 `;
@@ -69,7 +67,7 @@ const StyledDescription = styled.p`
   font-weight: 500;
   font-size: 18px;
   line-height: 30px;
-  color: white;
+  color: ${(props) => props.theme.color.color100};
 `;
 const StyledLink = styled(Link)`
   color: ${(props) => props.theme.color.color400};
@@ -80,8 +78,8 @@ const LinksContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 116px;
   width: 100%;
+  padding: 42px 0px;
 `;
 
 const SocialNavbar = styled.div`

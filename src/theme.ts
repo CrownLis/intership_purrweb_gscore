@@ -22,6 +22,8 @@ const mainTheme = {
     red200: '#FFBEC2',
     red100: '#FFEFF0',
     orange300: '#FF9E2C',
+    neutral700: '#272727',
+    neutral800: '#181818',
   },
 };
 

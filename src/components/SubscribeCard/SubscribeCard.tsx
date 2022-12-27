@@ -52,7 +52,7 @@ export default SubscribeCard;
 const Root = styled.div<{ $isCenter?: boolean }>`
   width: 404px;
   height: 612px;
-  color: white;
+  color: ${(props) => props.theme.color.color100};
   border: 0;
   border-radius: 12px;
   ${({ $isCenter }) =>
@@ -63,14 +63,16 @@ const Root = styled.div<{ $isCenter?: boolean }>`
           background-color: ${(props) => props.theme.color.primary};
         `
       : css`
-          background-color: #272727;
+          background-color: ${(props) => props.theme.color.neutral700};
         `}
 `;
+
 const ContainerCard = styled.div`
   display: flex;
   flex-direction: column;
   margin: 42px 48px;
 `;
+
 const TopContainerCard = styled.div<{ $isCenter?: boolean }>`
   display: flex;
   flex-direction: column;

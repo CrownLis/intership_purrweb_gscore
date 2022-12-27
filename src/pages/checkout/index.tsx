@@ -1,10 +1,11 @@
 import { FC } from 'react';
 import styled from 'styled-components';
+
 import StatusLine from '@/components/ProgressBar/Progress';
 import MainLayout from '@/layouts/MainLayout';
+import Button from '@/UIComponents/Button';
 
 import Cart from '@/assets/images/Cart.svg';
-import Button from '@/UIComponents/Button';
 
 const Checkout: FC = () => (
   <MainLayout>
@@ -63,7 +64,7 @@ const StyledTitle = styled.h2`
 const CartContainer = styled.div`
   display: flex;
   flex-direction: column;
-  background-color: #272727;
+  background-color: ${(props) => props.theme.color.neutral700};
   border: 0;
   border-radius: 12px;
   margin: 32px 0 24px;
