@@ -7,9 +7,9 @@ import { getCookie } from 'cookies-next';
 import mainTheme from '@/theme';
 import { axiosInstance } from '@/api';
 import { wrapper } from '@/store/store';
-import { getProducts } from '@/store/ducks/products/asyncAction';
 
 import '@/assets/styles/core.css';
+import { authMe } from '@/store/ducks/user/asyncAction';
 
 const MyApp = ({ Component, ...rest }: AppProps) => {
   const { store, props } = wrapper.useWrappedStore(rest);
@@ -30,7 +30,29 @@ MyApp.getInitialProps = wrapper.getInitialAppProps<AppInitialProps>((store) => a
   });
 
   axiosInstance.defaults.headers.common.authorization = token ? `Bearer ${token}` : null;
-  await store.dispatch(getProducts()).unwrap();
+
+  let isError = false;
+  const { user } = store.getState();
+  try {
+    if (token && user.user === null) {
+      await store.dispatch(authMe()).unwrap();
+    }
+  } catch (e) {
+    isError = true;
+  }
+
+  if (isError) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: '/logIn',
+      },
+      pageProps: {
+        ...(await App.getInitialProps(context)).pageProps,
+        pathname: context.ctx.pathname,
+      },
+    };
+  }
 
   return {
     pageProps: {

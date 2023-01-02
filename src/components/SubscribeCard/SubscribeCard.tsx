@@ -3,49 +3,65 @@ import styled, { css } from 'styled-components';
 import Button from '@/UIComponents/Button';
 
 import RedCheck from '@/assets/images/RedCheck.svg';
+import { useAppDispatch } from '@/store/hooks';
+import { buyProduct } from '@/store/ducks/user/asyncAction';
+import { useRouter } from 'next/router';
 import Check from '../../assets/images/Check.svg';
 
 type SubscribedCardProps = {
   price: string;
   title: string;
-  capability: string;
+  capability: number;
+  priceId: number;
   isCenter?: boolean;
 };
 
-const SubscribeCard: FC<SubscribedCardProps> = ({ price, title, capability, isCenter }) => (
-  <Root $isCenter={isCenter}>
-    <ContainerCard>
-      <TopContainerCard>
-        <CardPrice>${price}</CardPrice>
-        <CardTitle>{title}</CardTitle>
-        <CardDescription>
-          Get the advanced WordPress plugin that optimizes content with GSC keywords at one low annual price
-        </CardDescription>
-      </TopContainerCard>
-      <BottomContainerCard>
-        <CapabilityContainer>
-          {isCenter ? <RedCheck /> : <Check />}
-          <CardCapability>{capability}</CardCapability>
-        </CapabilityContainer>
-        <CapabilityContainer>
-          {isCenter ? <RedCheck /> : <Check />}
-          <CardCapability>Special introductory pricing</CardCapability>
-        </CapabilityContainer>
-        <CapabilityContainer>
-          {isCenter ? <RedCheck /> : <Check />}
-          <CardCapability>Unlimited Pages and Keywords</CardCapability>
-        </CapabilityContainer>
-        <CapabilityContainer>
-          {isCenter ? <RedCheck /> : <Check />}
-          <CardCapability>Billed annually</CardCapability>
-        </CapabilityContainer>
-      </BottomContainerCard>
-      <StyledButton $isCenter={isCenter} variant="secondary">
-        Get Gscore
-      </StyledButton>
-    </ContainerCard>
-  </Root>
-);
+const SubscribeCard: FC<SubscribedCardProps> = ({ price, title, capability, isCenter, priceId }) => {
+  const dispatch = useAppDispatch();
+  const router = useRouter();
+
+  const buySubscribe = async () => {
+    await dispatch(buyProduct({ priceId })).unwrap();
+    router.push(`checkout/${priceId}`);
+  };
+
+  return (
+    <Root $isCenter={isCenter}>
+      <ContainerCard>
+        <TopContainerCard>
+          <CardPrice>${price}</CardPrice>
+          <CardTitle>{title} license</CardTitle>
+          <CardDescription>
+            Get the advanced WordPress plugin that optimizes content with GSC keywords at one low annual price
+          </CardDescription>
+        </TopContainerCard>
+        <BottomContainerCard>
+          <CapabilityContainer>
+            {isCenter ? <RedCheck /> : <Check />}
+            <CardCapability>
+              {capability === 1 ? 'Single site license' : `All features for ${capability} sites`}
+            </CardCapability>
+          </CapabilityContainer>
+          <CapabilityContainer>
+            {isCenter ? <RedCheck /> : <Check />}
+            <CardCapability>Special introductory pricing</CardCapability>
+          </CapabilityContainer>
+          <CapabilityContainer>
+            {isCenter ? <RedCheck /> : <Check />}
+            <CardCapability>Unlimited Pages and Keywords</CardCapability>
+          </CapabilityContainer>
+          <CapabilityContainer>
+            {isCenter ? <RedCheck /> : <Check />}
+            <CardCapability>Billed annually</CardCapability>
+          </CapabilityContainer>
+        </BottomContainerCard>
+        <StyledButton $isCenter={isCenter} variant="secondary" onClick={() => buySubscribe()}>
+          Get Gscore
+        </StyledButton>
+      </ContainerCard>
+    </Root>
+  );
+};
 
 export default SubscribeCard;
 
