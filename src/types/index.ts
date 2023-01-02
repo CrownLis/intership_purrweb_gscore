@@ -2,14 +2,27 @@ export type UserType = {
   id: number;
   email: string;
   username: string;
-  subscribes: SubscribeType[];
+  subscribes: PaymentType[];
   codes: CodeType[];
+};
+
+export type PaymentType = {
+  id: number;
+  userId: number;
+  productId: number;
+  currentPeriodStart: number;
+  currentPeriodEnd: number;
+  status: string;
 };
 
 export type RegisterResponse = {
   email: string;
   username: string;
   token: string;
+};
+
+export type PaymentResponse = {
+  subscribe: PaymentType;
 };
 
 export type LoginResponse = {
@@ -37,10 +50,10 @@ export type ProductType = {
   id: number;
   sitesCount: number;
   name: string;
-  prices: PriceProductType;
+  prices: PriceType[];
 };
 
-export type PriceProductType = {
+export type PriceType = {
   id: number;
   isActive: boolean;
   productId: number;

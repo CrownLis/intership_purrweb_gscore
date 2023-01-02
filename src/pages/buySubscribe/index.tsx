@@ -3,23 +3,30 @@ import { FC } from 'react';
 import styled from 'styled-components';
 
 import MainLayout from '@/layouts/MainLayout';
-import SubscribeCard from '@/components/SubscribeCard';
 import { getProducts } from '@/store/ducks/products/asyncAction';
 import { wrapper } from '@/store/store';
 import { ProductType } from '@/types';
+import SubscribeCard from '@/components/SubscribeCard';
 
-type ComponentProps = {
+type PageProps = {
   products: ProductType[];
 };
 
-const BuySubscribe: FC<ComponentProps> = ({ products }) => {
+const BuySubscribe: FC<PageProps> = ({ products }) => {
   return (
     <MainLayout>
       <Container>
         <StyledTitle>Get started with Gscore today!</StyledTitle>
         <CardContainer>
-          {products.map((card) => (
-            <SubscribeCard price={card.prices.price} title={card.name} capability={card.name} key={card.id} />
+          {products.map((card, index) => (
+            <SubscribeCard
+              price={card.prices[0].price}
+              isCenter={index === 1}
+              title={card.name}
+              capability={card.sitesCount}
+              priceId={card.prices[0].id}
+              key={card.id}
+            />
           ))}
         </CardContainer>
         <ContactContainer>
@@ -31,12 +38,28 @@ const BuySubscribe: FC<ComponentProps> = ({ products }) => {
   );
 };
 
-export const getStaticProps = wrapper.getStaticProps((store) => async () => {
-  await store.dispatch(getProducts());
-  const products = store.getState();
+export const getServerSideProps = wrapper.getServerSideProps((store) => async () => {
+  let isError = false;
+  try {
+    await store.dispatch(getProducts()).unwrap();
+  } catch (e) {
+    isError = true;
+  }
+  const products = store.getState().products.list?.filter((product, index) => index < 3);
+  if (isError) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: '/logIn',
+      },
+      props: {
+        products,
+      },
+    };
+  }
   return {
     props: {
-      products: products.products.list,
+      products,
     },
   };
 });
