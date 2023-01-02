@@ -7,12 +7,21 @@ import Button from '@/UIComponents/Button';
 
 import Cart from '@/assets/images/Cart.svg';
 import { useRouter } from 'next/router';
-import { useAppSelector } from '@/store/hooks';
+import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { selectProducts } from '@/store/ducks/products/selectors';
+import { buyProduct } from '@/store/ducks/user/asyncAction';
 
 const Checkout: FC = () => {
-  const { query } = useRouter();
+  const router = useRouter();
+  const { query } = router;
   const buyingCard = useAppSelector(selectProducts)?.find((product) => product.prices[0].id === Number(query.id));
+  const dispatch = useAppDispatch();
+
+  const confirmPurchase = async (priceId: number) => {
+    router.push(`/start/${query.id}`);
+    await dispatch(buyProduct({ priceId })).unwrap();
+  };
+
   return (
     <MainLayout>
       <Container>
@@ -39,7 +48,12 @@ const Checkout: FC = () => {
           <StyledPrice>Total:</StyledPrice>
           <StyledPrice>{buyingCard?.prices[0].price}$</StyledPrice>
         </PriceContainer>
-        <StyledButton variant="primary">Purchase</StyledButton>
+        <StyledButton
+          variant="primary"
+          onClick={buyingCard ? () => confirmPurchase(buyingCard?.prices[0].id) : () => {}}
+        >
+          Purchase
+        </StyledButton>
       </Container>
     </MainLayout>
   );

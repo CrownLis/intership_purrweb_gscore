@@ -3,8 +3,6 @@ import styled, { css } from 'styled-components';
 import Button from '@/UIComponents/Button';
 
 import RedCheck from '@/assets/images/RedCheck.svg';
-import { useAppDispatch } from '@/store/hooks';
-import { buyProduct } from '@/store/ducks/user/asyncAction';
 import { useRouter } from 'next/router';
 import Check from '../../assets/images/Check.svg';
 
@@ -17,11 +15,9 @@ type SubscribedCardProps = {
 };
 
 const SubscribeCard: FC<SubscribedCardProps> = ({ price, title, capability, isCenter, priceId }) => {
-  const dispatch = useAppDispatch();
   const router = useRouter();
 
   const buySubscribe = async () => {
-    await dispatch(buyProduct({ priceId })).unwrap();
     router.push(`checkout/${priceId}`);
   };
 

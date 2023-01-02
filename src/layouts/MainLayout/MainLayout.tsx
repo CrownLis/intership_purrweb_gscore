@@ -1,15 +1,16 @@
-import React, { FC, PropsWithChildren } from 'react';
+import React, { PropsWithChildren } from 'react';
 import styled from 'styled-components';
 
 import Header from '@/components/Header';
 import Loader from '@/components/Loader';
 import Footer from '@/components/Footer';
+import { NextPage } from 'next';
 
 type MainLayoutProps = PropsWithChildren<{
   isLoading?: boolean;
 }>;
 
-const MainLayout: FC<MainLayoutProps> = ({ children, isLoading = false }) => (
+const MainLayout: NextPage<MainLayoutProps> = ({ children, isLoading = false }) => (
   <Root>
     <Header />
     {isLoading ? (

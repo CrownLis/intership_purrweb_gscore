@@ -2,32 +2,41 @@ import { FC } from 'react';
 import styled from 'styled-components';
 import MainLayout from '@/layouts/MainLayout';
 import Button from '@/UIComponents/Button';
+import { useRouter } from 'next/router';
+import { useAppSelector } from '@/store/hooks';
+import { selectProducts } from '@/store/ducks/products/selectors';
 
-const Start: FC = () => (
-  <MainLayout>
-    <Container>
-      <StyledTitle>Start your subscription</StyledTitle>
-      <StyledDescription>
-        We have sent you a payment receipt by e-mail and a link to download the plugin with a license key.
-      </StyledDescription>
-      <CartContainer>
-        <CartTitleContainer>
-          <CartTitle>Package name</CartTitle>
-          <CartTitle>Price</CartTitle>
-        </CartTitleContainer>
-        <CartProductsContainer>
-          <ProductsTitle>Single site license</ProductsTitle>
-          <CartPriceContainer>
-            <ProductsTitle>$77</ProductsTitle>
-          </CartPriceContainer>
-        </CartProductsContainer>
-      </CartContainer>
-      <StyledButton variant="primary" isLoading>
-        Go to my subscriptions
-      </StyledButton>
-    </Container>
-  </MainLayout>
-);
+const Start: FC = () => {
+  const router = useRouter();
+  const { query } = router;
+  const buyingCard = useAppSelector(selectProducts)?.find((product) => product.prices[0].id === Number(query.id));
+
+  return (
+    <MainLayout>
+      <Container>
+        <StyledTitle>Start your subscription</StyledTitle>
+        <StyledDescription>
+          We have sent you a payment receipt by e-mail and a link to download the plugin with a license key.
+        </StyledDescription>
+        <CartContainer>
+          <CartTitleContainer>
+            <CartTitle>Package name</CartTitle>
+            <CartTitle>Price</CartTitle>
+          </CartTitleContainer>
+          <CartProductsContainer>
+            <ProductsTitle>{buyingCard?.name} license</ProductsTitle>
+            <CartPriceContainer>
+              <ProductsTitle>${buyingCard?.prices[0].price}</ProductsTitle>
+            </CartPriceContainer>
+          </CartProductsContainer>
+        </CartContainer>
+        <StyledButton onClick={() => router.push(`/mySubscriptions`)} variant="primary">
+          Go to my subscriptions
+        </StyledButton>
+      </Container>
+    </MainLayout>
+  );
+};
 
 export default Start;
 
