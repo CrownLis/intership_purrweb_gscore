@@ -26,7 +26,7 @@ const LogIn: FC = () => {
   const onSubmit = async (data: any) => {
     await dispatch(loginUser(data)).unwrap();
     reset();
-    router.push('checkout');
+    router.push('buySubscribe');
   };
 
   return (

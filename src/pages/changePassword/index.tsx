@@ -1,31 +1,33 @@
 import { FC } from 'react';
 import styled from 'styled-components';
 import MainLayout from '@/layouts/MainLayout';
-import Button from '@/UIComponents/Button';
 import Input from '@/UIComponents/Input';
+import PageTitle from '@/components/PageTitle/PageTitle';
+import Button from '@/UIComponents/Button';
 
-const Settings: FC = () => (
+const ChangePassword: FC = () => (
   <MainLayout>
     <Container>
       <StyledTitle>Settings</StyledTitle>
+      <PageTitle
+        titleArray={[
+          { text: 'Personal info', reference: 'personalInfo' },
+          { text: 'Change password', reference: 'changePassword', isActive: true },
+        ]}
+      />
       <FormContainer>
-        <FormInfo>
-          <FormTitle>Personal Info</FormTitle>
-          <StyledInput placeholder="Username" />
-          <StyledInput placeholder="Email" />
-          <StyledButton variant="primary">Save</StyledButton>
-        </FormInfo>
         <FormPassword>
           <FormTitle>Change password</FormTitle>
           <StyledInput placeholder="Current Password" />
           <StyledInput placeholder="New Password" />
+          <StyledButton variant="primary">Save</StyledButton>
         </FormPassword>
       </FormContainer>
     </Container>
   </MainLayout>
 );
 
-export default Settings;
+export default ChangePassword;
 
 const Container = styled.div`
   display: flex;
@@ -41,20 +43,11 @@ const StyledTitle = styled.h3`
   font-weight: 700;
   font-size: 54px;
   line-height: 64px;
-  margin: 48px 0;
 `;
 
 const FormContainer = styled.form`
   display: flex;
   gap: 60px;
-`;
-
-const FormInfo = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-  width: 100%;
-  max-width: 512px;
 `;
 
 const FormTitle = styled.h3`
@@ -69,16 +62,16 @@ const StyledInput = styled(Input)`
   max-width: 512px;
 `;
 
-const StyledButton = styled(Button)`
-  max-width: 160px;
-  padding: 20px 24px;
-  margin-top: 24px;
-  margin-bottom: 444px;
-`;
-
 const FormPassword = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
   gap: 24px;
+`;
+
+const StyledButton = styled(Button)`
+  max-width: 160px;
+  padding: 20px 24px;
+  margin-top: 24px;
+  margin-bottom: 444px;
 `;
