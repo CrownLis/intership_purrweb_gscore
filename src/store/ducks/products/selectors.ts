@@ -1,3 +1,3 @@
-import { RootState } from '../../store';
+import { AppState } from '../../store';
 
-export const selectProducts = (state: RootState) => state.products.list;
+export const selectProducts = (state: AppState) => state.products.list;

@@ -1,6 +1,8 @@
+import { AppState } from '@/store/store';
 import { UserType } from '@/types';
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { loginUser, registerUser } from './asyncAction';
+import { createAction, createSlice } from '@reduxjs/toolkit';
+import { HYDRATE } from 'next-redux-wrapper';
+import { authMe, buyProduct, loginUser, logOut, registerUser } from './asyncAction';
 
 type UserSliceType = {
   user: UserType | null;
@@ -15,16 +17,15 @@ const initialState: UserSliceType = {
   loading: false,
   error: null,
 };
-
+const APP_HYDRATE = createAction<AppState>(HYDRATE);
 const userSlice = createSlice({
   name: 'userSlice',
   initialState,
-  reducers: {
-    setUser(state, action: PayloadAction<UserType>) {
-      state.user = action.payload;
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
+    builder.addCase(APP_HYDRATE, (state, action) => {
+      return { ...state, ...action.payload.user };
+    });
     builder.addCase(registerUser.pending, (state) => {
       state.loading = true;
       state.error = null;
@@ -49,6 +50,45 @@ const userSlice = createSlice({
       state.user = action.payload.user;
       state.loading = false;
       state.error = null;
+    });
+    builder.addCase(authMe.pending, (state) => {
+      state.loading = true;
+      state.error = null;
+    });
+    builder.addCase(authMe.rejected, (state) => {
+      state.loading = false;
+      state.error = 'error';
+    });
+    builder.addCase(authMe.fulfilled, (state, action) => {
+      state.user = action.payload;
+      state.loading = false;
+      state.error = null;
+    });
+    builder.addCase(buyProduct.pending, (state) => {
+      state.loading = true;
+      state.error = null;
+    });
+    builder.addCase(buyProduct.rejected, (state) => {
+      state.loading = false;
+      state.error = 'error';
+    });
+    builder.addCase(buyProduct.fulfilled, (state, action) => {
+      state.loading = false;
+      if (state && state.user && state.user.subscribes) {
+        state.user.subscribes.push(action.payload);
+      }
+    });
+    builder.addCase(logOut.pending, (state) => {
+      state.loading = true;
+      state.error = null;
+    });
+    builder.addCase(logOut.rejected, (state) => {
+      state.loading = false;
+      state.error = 'error';
+    });
+    builder.addCase(logOut.fulfilled, (state) => {
+      state.loading = false;
+      state.user = null;
     });
   },
 });
