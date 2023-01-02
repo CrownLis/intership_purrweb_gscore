@@ -28,9 +28,9 @@ const Footer: FC = () => (
           <StyledLink href="privacy">Privacy Policy</StyledLink>
         </StyledDescription>
         <SocialNavbar>
-          <Facebook />
-          <Twitter />
-          <LinkedIn />
+          <FacebookIcon />
+          <TwitterIcon />
+          <LinkedInIcon />
         </SocialNavbar>
       </LinksContainer>
     </FooterContainer>
@@ -86,4 +86,16 @@ const SocialNavbar = styled.div`
   display: flex;
   align-items: center;
   gap: 30px;
+`;
+
+const FacebookIcon = styled(Facebook)`
+  cursor:pointer;
+`;
+
+const TwitterIcon = styled(Twitter)`
+  cursor:pointer;
+`;
+
+const LinkedInIcon = styled(LinkedIn)`
+  cursor: pointer;
 `;
