@@ -1,11 +1,12 @@
 import { FC, useState } from 'react';
 import styled from 'styled-components';
 import { useClipboard } from 'use-clipboard-copy';
+
 import Checkbox from '@/UIComponents/Checkbox/Checkbox';
+import Button from '@/UIComponents/Button';
+import Status from '@/components/Status';
 
 import Copy from '@/assets/images/Copy.svg';
-import Button from '@/UIComponents/Button';
-import Status from '../Status';
 
 type DomainProps = {
   name: string;
@@ -23,8 +24,8 @@ const Domain: FC<DomainProps> = ({ name, isActive }) => {
         <TitleContainer>License code</TitleContainer>
         <InputContainer1
           ref={clipboard.target}
-          onBlur={() => setRead(true)}
           readOnly={read}
+          onBlur={() => setRead(true)}
           onClick={() => setRead(false)}
         />
         <CopyIcon onClick={clipboard.copy} />

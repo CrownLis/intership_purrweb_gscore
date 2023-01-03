@@ -2,39 +2,36 @@ import Link from 'next/link';
 import { FC } from 'react';
 import styled from 'styled-components';
 
-import MainLayout from '@/layouts/MainLayout';
+import { selectProducts } from '@/store/ducks/products/selectors';
 import { getProducts } from '@/store/ducks/products/asyncAction';
 import { wrapper } from '@/store/store';
-import { ProductType } from '@/types';
+import { useAppSelector } from '@/store/hooks';
 import SubscribeCard from '@/components/SubscribeCard';
+import Container from '@/components/Container';
 
-type PageProps = {
-  products: ProductType[];
-};
+const BuySubscribe: FC = () => {
+  const products = useAppSelector(selectProducts);
 
-const BuySubscribe: FC<PageProps> = ({ products }) => {
   return (
-    <MainLayout>
-      <Container>
-        <StyledTitle>Get started with Gscore today!</StyledTitle>
-        <CardContainer>
-          {products.map((card, index) => (
-            <SubscribeCard
-              price={card.prices[0].price}
-              isCenter={index === 1}
-              title={card.name}
-              capability={card.sitesCount}
-              priceId={card.prices[0].id}
-              key={card.id}
-            />
-          ))}
-        </CardContainer>
-        <ContactContainer>
-          <ContactQuestion>Have more than 10 sites?</ContactQuestion>
-          <StyledLink href="contact">Contact us</StyledLink>
-        </ContactContainer>
-      </Container>
-    </MainLayout>
+    <PageContainer>
+      <StyledTitle>Get started with Gscore today!</StyledTitle>
+      <CardContainer>
+        {products?.slice(0, 3).map((card, index) => (
+          <SubscribeCard
+            price={card.prices[0].price}
+            isCenter={index === 1}
+            title={card.name}
+            capability={card.sitesCount}
+            priceId={card.prices[0].id}
+            key={card.id}
+          />
+        ))}
+      </CardContainer>
+      <ContactContainer>
+        <ContactQuestion>Have more than 10 sites?</ContactQuestion>
+        <StyledLink href="contact">Contact us</StyledLink>
+      </ContactContainer>
+    </PageContainer>
   );
 };
 
@@ -45,28 +42,23 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async ()
   } catch (e) {
     isError = true;
   }
-  const products = store.getState().products.list?.filter((product, index) => index < 3);
   if (isError) {
     return {
       redirect: {
         permanent: false,
         destination: '/logIn',
       },
-      props: {
-        products,
-      },
+      props: {},
     };
   }
   return {
-    props: {
-      products,
-    },
+    props: {},
   };
 });
 
 export default BuySubscribe;
 
-const Container = styled.div`
+const PageContainer = styled(Container)`
   display: flex;
   flex-direction: column;
   align-items: center;

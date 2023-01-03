@@ -15,26 +15,6 @@ export type PaymentType = {
   status: string;
 };
 
-export type RegisterResponse = {
-  email: string;
-  username: string;
-  token: string;
-};
-
-export type PaymentResponse = {
-  subscribe: PaymentType;
-};
-
-export type LoginResponse = {
-  token: string;
-  user: UserType;
-};
-
-export type SubscribeType = {
-  productId: number;
-  subscribeId: number;
-};
-
 export type CodeType = {
   id: number;
   code: string;

@@ -1,40 +1,36 @@
 import { FC } from 'react';
 import styled from 'styled-components';
-import MainLayout from '@/layouts/MainLayout';
+
 import Button from '@/UIComponents/Button';
 import Input from '@/UIComponents/Input';
-import PageTitle from '@/components/PageTitle/PageTitle';
+import PageNavigation from '@/components/PageNavigation';
+import Container from '@/components/Container';
 
 const PersonalInfo: FC = () => (
-  <MainLayout>
-    <Container>
-      <StyledTitle>Settings</StyledTitle>
-      <PageTitle
-        titleArray={[
-          { text: 'Personal info', reference: 'personalInfo', isActive: true },
-          { text: 'Change password', reference: 'changePassword' },
-        ]}
-      />
-      <FormContainer>
-        <FormInfo>
-          <FormTitle>Personal Info</FormTitle>
-          <StyledInput placeholder="Username" />
-          <StyledInput placeholder="Email" />
-          <StyledButton variant="primary">Save</StyledButton>
-        </FormInfo>
-      </FormContainer>
-    </Container>
-  </MainLayout>
+  <PageContainer>
+    <StyledTitle>Settings</StyledTitle>
+    <PageNavigation
+      items={[
+        { key: 0, text: 'Personal info', reference: 'personalInfo', isActive: true },
+        { key: 1, text: 'Change password', reference: 'changePassword' },
+      ]}
+    />
+    <FormContainer>
+      <FormInfo>
+        <FormTitle>Personal Info</FormTitle>
+        <StyledInput placeholder="Username" />
+        <StyledInput placeholder="Email" />
+        <StyledButton variant="primary">Save</StyledButton>
+      </FormInfo>
+    </FormContainer>
+  </PageContainer>
 );
 
 export default PersonalInfo;
 
-const Container = styled.div`
+const PageContainer = styled(Container)`
   display: flex;
   flex-direction: column;
-  width: 100%;
-  margin: 0px 86px;
-  color: ${(props) => props.theme.color.color100};
 `;
 
 const StyledTitle = styled.h3`
@@ -74,5 +70,4 @@ const StyledButton = styled(Button)`
   max-width: 160px;
   padding: 20px 24px;
   margin-top: 24px;
-  margin-bottom: 444px;
 `;

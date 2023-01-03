@@ -3,13 +3,13 @@ import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
 import { useRouter } from 'next/router';
 
-import StatusLine from '@/components/ProgressBar/Progress';
-import MainLayout from '@/layouts/MainLayout';
+import StatusLine from '@/components/Progress';
 import Button from '@/UIComponents/Button';
 import Input from '@/UIComponents/Input';
 import { validateEmail } from '@/utils/validation';
 import { useAppDispatch } from '@/store/hooks';
 import { loginUser } from '@/store/ducks/user/asyncAction';
+import Container from '@/components/Container';
 
 const LogIn: FC = () => {
   const dispatch = useAppDispatch();
@@ -30,57 +30,54 @@ const LogIn: FC = () => {
   };
 
   return (
-    <MainLayout>
-      <Container>
-        <StatusContainer>
-          <StatusLine text="Create account" isActive />
-          <StatusLine text="Log in" isActive />
-          <StatusLine text="Checkout" />
-        </StatusContainer>
-        <FormContainer onSubmit={handleSubmit(onSubmit)}>
-          <FormTitle>Log in</FormTitle>
-          <StyledInput
-            isError={Boolean(emailError)}
-            isDirty={emailDirty}
-            type="email"
-            placeholder="Email"
-            {...register('email', {
-              validate: {
-                email: validateEmail,
-              },
-              required: 'Please enter the card name',
-              minLength: {
-                value: 5,
-                message: 'Please enter the card name',
-              },
-            })}
-          />
-          <StyledInput
-            isError={Boolean(passwordError)}
-            isDirty={passwordDirty}
-            placeholder="Password"
-            type="password"
-            {...register('password', {
-              required: 'Please enter the card name',
-              minLength: {
-                value: 2,
-                message: 'Please enter the card name',
-              },
-            })}
-          />
-          <StyledButton variant="primary">LogIn</StyledButton>
-        </FormContainer>
-      </Container>
-    </MainLayout>
+    <PageContainer variant="small">
+      <StatusContainer>
+        <StatusLine text="Create account" isActive />
+        <StatusLine text="Log in" isActive />
+        <StatusLine text="Checkout" />
+      </StatusContainer>
+      <FormContainer onSubmit={handleSubmit(onSubmit)}>
+        <FormTitle>Log in</FormTitle>
+        <StyledInput
+          isError={Boolean(emailError)}
+          isDirty={emailDirty}
+          type="email"
+          placeholder="Email"
+          {...register('email', {
+            validate: {
+              email: validateEmail,
+            },
+            required: 'Please enter the card name',
+            minLength: {
+              value: 5,
+              message: 'Please enter the card name',
+            },
+          })}
+        />
+        <StyledInput
+          isError={Boolean(passwordError)}
+          isDirty={passwordDirty}
+          placeholder="Password"
+          type="password"
+          {...register('password', {
+            required: 'Please enter the card name',
+            minLength: {
+              value: 2,
+              message: 'Please enter the card name',
+            },
+          })}
+        />
+        <StyledButton variant="primary">Log in</StyledButton>
+      </FormContainer>
+    </PageContainer>
   );
 };
 
 export default LogIn;
 
-const Container = styled.div`
+const PageContainer = styled(Container)`
   display: flex;
   flex-direction: column;
-  padding-bottom: 426px;
 `;
 
 const StatusContainer = styled.div`

@@ -5,63 +5,66 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 
 import Domain from '@/components/Domain';
 import LicenseCard from '@/components/LicenseCard/LicenseCard';
-import MainLayout from '@/layouts/MainLayout';
+import Container from '@/components/Container';
 import Button from '@/UIComponents/Button';
 
 const MySubscription: FC = () => (
-  <MainLayout>
-    <Container>
-      <TitleContainer>
-        <StyledTitle>My subscriptions</StyledTitle>
-        <StyledButton variant="primary">Upgrade</StyledButton>
-      </TitleContainer>
-      <SliderContainer>
-        <StyledSwiper
-          modules={[Navigation, Pagination]}
-          spaceBetween={29}
-          slidesPerView={2}
-          navigation={{
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-          }}
-          pagination={{
-            el: '.mySwiper-pagination',
-            type: 'fraction',
-          }}
-        >
-          <SwiperSlide>
-            <LicenseCard />
-          </SwiperSlide>
-          <SwiperSlide>
-            <LicenseCard />
-          </SwiperSlide>
-          <SwiperSlide>
-            <LicenseCard />
-          </SwiperSlide>
-          <SwiperSlide>
-            <LicenseCard />
-          </SwiperSlide>
-          <PaginationContainer>
-            <StyledPrevButton className="swiper-button-prev" />
-            <StyledPagination className="mySwiper-pagination" />
-            <StyledNextButton className="swiper-button-next" />
-          </PaginationContainer>
-        </StyledSwiper>
-      </SliderContainer>
-      <DomainsContainer>
-        <Domain isActive name="1" />
-        <Domain name="2" />
-        <Domain name="3" />
-      </DomainsContainer>
-      <ConfirmContainer>
-        <ConfirmDescription>Select the domains you want to keep</ConfirmDescription>
-        <ConfirmButton variant="primary">Confirm</ConfirmButton>
-      </ConfirmContainer>
-    </Container>
-  </MainLayout>
+  <PageContainer>
+    <TitleContainer>
+      <StyledTitle>My subscriptions</StyledTitle>
+      <StyledButton variant="primary">Upgrade</StyledButton>
+    </TitleContainer>
+    <SliderContainer>
+      <StyledSwiper
+        modules={[Navigation, Pagination]}
+        spaceBetween={29}
+        slidesPerView={2}
+        navigation={{
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        }}
+        pagination={{
+          el: '.mySwiper-pagination',
+          type: 'fraction',
+        }}
+      >
+        <SwiperSlide>
+          <LicenseCard />
+        </SwiperSlide>
+        <SwiperSlide>
+          <LicenseCard />
+        </SwiperSlide>
+        <SwiperSlide>
+          <LicenseCard />
+        </SwiperSlide>
+        <SwiperSlide>
+          <LicenseCard />
+        </SwiperSlide>
+        <PaginationContainer>
+          <StyledPrevButton className="swiper-button-prev" />
+          <StyledPagination className="mySwiper-pagination" />
+          <StyledNextButton className="swiper-button-next" />
+        </PaginationContainer>
+      </StyledSwiper>
+    </SliderContainer>
+    <DomainsContainer>
+      <Domain isActive name="1" />
+      <Domain name="2" />
+      <Domain name="3" />
+    </DomainsContainer>
+    <ConfirmContainer>
+      <ConfirmDescription>Select the domains you want to keep</ConfirmDescription>
+      <ConfirmButton variant="primary">Confirm</ConfirmButton>
+    </ConfirmContainer>
+  </PageContainer>
 );
 
 export default MySubscription;
+
+const PageContainer = styled(Container)`
+  display: flex;
+  flex-direction: column;
+`;
 
 const PaginationContainer = styled.div`
   position: relative;
@@ -127,15 +130,6 @@ const StyledNextButton = styled.div`
   &:after {
     content: '';
   }
-`;
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  color: ${(props) => props.theme.color.color100};
-  width: 100%;
-  margin: 0 86px;
-  padding-bottom: 120px;
 `;
 
 const TitleContainer = styled.div`

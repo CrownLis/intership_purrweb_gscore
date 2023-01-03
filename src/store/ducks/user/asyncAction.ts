@@ -1,5 +1,5 @@
 import { getMe, logOutRequest, payForProduct, signIn, signUp } from '@/api';
-import { RegisterResponse, LoginResponse, UserType, PaymentType } from '@/types';
+import { PaymentType, UserType } from '@/types/data';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 type RegisterAttributes = {
@@ -17,23 +17,20 @@ type LoginAttributes = {
   password: string;
 };
 
-export const registerUser = createAsyncThunk<RegisterResponse, RegisterAttributes>(
+export const registerUser = createAsyncThunk<void, RegisterAttributes>(
   'user/registerUser',
   async ({ email, password, username }) => {
-    const response = await signUp({ email, username, password });
-    const { data } = response;
-    return data;
+    await signUp({ email, username, password });
   },
 );
 
-export const loginUser = createAsyncThunk<LoginResponse, LoginAttributes>(
-  'user/loginUser',
-  async ({ email, password }) => {
-    const response = await signIn({ email, password });
-    const { data } = response;
-    return data;
-  },
-);
+export const loginUser = createAsyncThunk<UserType, LoginAttributes>('user/loginUser', async ({ email, password }) => {
+  const response = await signIn({ email, password });
+  const {
+    data: { user },
+  } = response;
+  return user;
+});
 
 export const logOut = createAsyncThunk<void, void>('user/logOut', async () => {
   await logOutRequest();
@@ -49,7 +46,9 @@ export const buyProduct = createAsyncThunk<PaymentType, PaymentAttributes>(
   'product/buyProduct',
   async ({ priceId }) => {
     const response = await payForProduct({ priceId });
-    const { data } = response;
-    return data.subscribe;
+    const {
+      data: { subscribe },
+    } = response;
+    return subscribe;
   },
 );

@@ -25,6 +25,20 @@ const mainTheme = {
     neutral700: '#272727',
     neutral800: '#181818',
   },
+  breakpoints: {
+    xsMax: '(max-width: 479px)',
+    xs: '(min-width: 480px)',
+    smMax: '(max-width: 575px)',
+    sm: '(min-width: 576px)',
+    mdMax: '(max-width: 767px)',
+    md: '(min-width: 768px)',
+    lgMax: '(max-width: 991px)',
+    lg: '(min-width: 992px)',
+    xlMax: '(max-width: 1199px)',
+    xl: '(min-width: 1200px)',
+    xxlMax: '(max-width: 1399px)',
+    xxl: '(min-width: 1400px)',
+  },
 };
 
 export default mainTheme;

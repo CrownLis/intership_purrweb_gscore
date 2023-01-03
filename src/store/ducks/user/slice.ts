@@ -1,23 +1,24 @@
-import { AppState } from '@/store/store';
-import { UserType } from '@/types';
 import { createAction, createSlice } from '@reduxjs/toolkit';
 import { HYDRATE } from 'next-redux-wrapper';
+
+import { AppState } from '@/store/store';
+import { UserType } from '@/types/data';
 import { authMe, buyProduct, loginUser, logOut, registerUser } from './asyncAction';
 
 type UserSliceType = {
   user: UserType | null;
-  token: string | null;
   loading: boolean;
   error: string | null;
 };
 
 const initialState: UserSliceType = {
   user: null,
-  token: null,
   loading: false,
   error: null,
 };
+
 const APP_HYDRATE = createAction<AppState>(HYDRATE);
+
 const userSlice = createSlice({
   name: 'userSlice',
   initialState,
@@ -47,7 +48,7 @@ const userSlice = createSlice({
       state.error = 'error';
     });
     builder.addCase(loginUser.fulfilled, (state, action) => {
-      state.user = action.payload.user;
+      state.user = action.payload;
       state.loading = false;
       state.error = null;
     });

@@ -7,9 +7,10 @@ import { getCookie } from 'cookies-next';
 import mainTheme from '@/theme';
 import { axiosInstance } from '@/api';
 import { wrapper } from '@/store/store';
+import { authMe } from '@/store/ducks/user/asyncAction';
+import MainLayout from '@/layouts/MainLayout';
 
 import '@/assets/styles/core.css';
-import { authMe } from '@/store/ducks/user/asyncAction';
 
 const MyApp = ({ Component, ...rest }: AppProps) => {
   const { store, props } = wrapper.useWrappedStore(rest);
@@ -18,7 +19,9 @@ const MyApp = ({ Component, ...rest }: AppProps) => {
   return (
     <Provider store={store}>
       <ThemeProvider theme={mainTheme}>
-        <Component {...pageProps} />
+        <MainLayout>
+          <Component {...pageProps} />
+        </MainLayout>
       </ThemeProvider>
     </Provider>
   );

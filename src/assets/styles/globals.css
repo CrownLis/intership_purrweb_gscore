@@ -6,11 +6,13 @@ body {
     Helvetica Neue, sans-serif;
 }
 
-html,body {
+html,
+body {
   height: 100%;
 }
 
-body, #__next {
+body,
+#__next {
   display: flex;
   flex-direction: column;
   flex-grow: 1;

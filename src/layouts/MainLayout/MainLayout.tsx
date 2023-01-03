@@ -1,10 +1,10 @@
+import { NextPage } from 'next';
 import React, { PropsWithChildren } from 'react';
 import styled from 'styled-components';
 
 import Header from '@/components/Header';
-import Loader from '@/components/Loader';
 import Footer from '@/components/Footer';
-import { NextPage } from 'next';
+import Loader from '@/UIComponents/Loader';
 
 type MainLayoutProps = PropsWithChildren<{
   isLoading?: boolean;
@@ -37,14 +37,18 @@ const Main = styled.main`
   display: flex;
   justify-content: center;
   flex-grow: 1;
-  margin: 0 86px;
+  color: ${(props) => props.theme.color.color100};
+  margin-top: 32px;
+  margin-bottom: 60px;
 `;
 
 const LoaderContainer = styled.div`
   position: absolute;
-  display: flex;
   width: 100%;
   height: 100vh;
+  display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 1;
+  background-color: ${(props) => props.theme.color.neutral800};
 `;

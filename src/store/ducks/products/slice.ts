@@ -1,6 +1,8 @@
-import { ProductType } from '@/types';
-import { createSlice } from '@reduxjs/toolkit';
+import { createAction, createSlice } from '@reduxjs/toolkit';
 import { HYDRATE } from 'next-redux-wrapper';
+
+import { AppState } from '@/store/store';
+import { ProductType } from '@/types/data';
 import { getProducts } from './asyncAction';
 
 type ProductSliceType = {
@@ -15,12 +17,14 @@ const initialState: ProductSliceType = {
   error: null,
 };
 
+const APP_HYDRATE = createAction<AppState>(HYDRATE);
+
 const productsSlice = createSlice({
   name: 'productsSlice',
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(HYDRATE, (state, action: any) => {
+    builder.addCase(APP_HYDRATE, (state, action) => {
       return { ...state, ...action.payload.products };
     });
     builder.addCase(getProducts.pending, (state) => {

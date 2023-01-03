@@ -1,71 +1,74 @@
-import { FC } from 'react';
+import { FC, useMemo } from 'react';
 import styled from 'styled-components';
-
-import StatusLine from '@/components/ProgressBar/Progress';
-import MainLayout from '@/layouts/MainLayout';
-import Button from '@/UIComponents/Button';
-
-import Cart from '@/assets/images/Cart.svg';
 import { useRouter } from 'next/router';
+
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { selectProducts } from '@/store/ducks/products/selectors';
 import { buyProduct } from '@/store/ducks/user/asyncAction';
+import StatusLine from '@/components/Progress';
+import Container from '@/components/Container';
+import Button from '@/UIComponents/Button';
+
+import Cart from '@/assets/images/Cart.svg';
 
 const Checkout: FC = () => {
+  const dispatch = useAppDispatch();
+
   const router = useRouter();
   const { query } = router;
-  const buyingCard = useAppSelector(selectProducts)?.find((product) => product.prices[0].id === Number(query.id));
-  const dispatch = useAppDispatch();
+
+  const products = useAppSelector(selectProducts);
+
+  const selectedProduct = useMemo(() => {
+    return products?.find((product) => product.prices[0].id === Number(query.id));
+  }, [products, query.id]);
 
   const confirmPurchase = async (priceId: number) => {
     router.push(`/start/${query.id}`);
     await dispatch(buyProduct({ priceId })).unwrap();
   };
 
+  if (!selectedProduct) {
+    return null;
+  }
+
   return (
-    <MainLayout>
-      <Container>
-        <StatusContainer>
-          <StatusLine text="Create account" isActive />
-          <StatusLine text="Log in" isActive />
-          <StatusLine text="Checkout" isActive />
-        </StatusContainer>
-        <StyledTitle>Checkout</StyledTitle>
-        <CartContainer>
-          <CartTitleContainer>
-            <CartTitle>Package name</CartTitle>
-            <CartTitle>Price</CartTitle>
-          </CartTitleContainer>
-          <CartProductsContainer>
-            <ProductsTitle>{buyingCard?.name} license</ProductsTitle>
-            <CartPriceContainer>
-              <ProductsTitle>{buyingCard?.prices[0].price}$</ProductsTitle>
-              <Cart />
-            </CartPriceContainer>
-          </CartProductsContainer>
-        </CartContainer>
-        <PriceContainer>
-          <StyledPrice>Total:</StyledPrice>
-          <StyledPrice>{buyingCard?.prices[0].price}$</StyledPrice>
-        </PriceContainer>
-        <StyledButton
-          variant="primary"
-          onClick={buyingCard ? () => confirmPurchase(buyingCard?.prices[0].id) : () => {}}
-        >
-          Purchase
-        </StyledButton>
-      </Container>
-    </MainLayout>
+    <PageContainer variant="small">
+      <StatusContainer>
+        <StatusLine text="Create account" isActive />
+        <StatusLine text="Log in" isActive />
+        <StatusLine text="Checkout" isActive />
+      </StatusContainer>
+      <StyledTitle>Checkout</StyledTitle>
+      <CartContainer>
+        <CartTitleContainer>
+          <CartTitle>Package name</CartTitle>
+          <CartTitle>Price</CartTitle>
+        </CartTitleContainer>
+        <CartProductsContainer>
+          <ProductsTitle>{selectedProduct.name} license</ProductsTitle>
+          <CartPriceContainer>
+            <ProductsTitle>{selectedProduct.prices[0].price}$</ProductsTitle>
+            <Cart />
+          </CartPriceContainer>
+        </CartProductsContainer>
+      </CartContainer>
+      <PriceContainer>
+        <StyledPrice>Total:</StyledPrice>
+        <StyledPrice>{selectedProduct.prices[0].price}$</StyledPrice>
+      </PriceContainer>
+      <StyledButton variant="primary" onClick={() => confirmPurchase(selectedProduct.prices[0].id)}>
+        Purchase
+      </StyledButton>
+    </PageContainer>
   );
 };
 
 export default Checkout;
 
-const Container = styled.div`
+const PageContainer = styled(Container)`
   display: flex;
   flex-direction: column;
-  margin: 0 410px 290px;
-  color: ${(props) => props.theme.color.color100};
 `;
 
 const StatusContainer = styled.div`

@@ -1,12 +1,14 @@
 import { ButtonHTMLAttributes, FC, PropsWithChildren } from 'react';
 import styled, { css } from 'styled-components';
 
+import Loader from '@/UIComponents/Loader';
 import hex2rgba from '@/utils/hex2rgba';
-import Loader from '@/components/Loader';
+
+type ButtonVariant = 'primary' | 'secondary' | 'text';
 
 type ButtonProps = PropsWithChildren<
   {
-    variant: string;
+    variant: ButtonVariant;
     isLoading?: boolean;
   } & ButtonHTMLAttributes<HTMLButtonElement>
 >;
@@ -20,11 +22,11 @@ const Button: FC<ButtonProps> = ({ children, variant, isLoading, ...props }) => 
 export default Button;
 
 type ButtonType = {
-  $variant: string;
+  $variant: ButtonVariant;
   $isLoading?: boolean;
 };
 
-const getStylesButton = (variant: string) => {
+const getStylesButton = (variant: ButtonVariant) => {
   switch (variant) {
     case 'primary': {
       return css`

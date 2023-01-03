@@ -1,10 +1,11 @@
 import { FC } from 'react';
 import styled, { css } from 'styled-components';
+import { useRouter } from 'next/router';
+
 import Button from '@/UIComponents/Button';
 
+import Check from '@/assets/images/Check.svg';
 import RedCheck from '@/assets/images/RedCheck.svg';
-import { useRouter } from 'next/router';
-import Check from '../../assets/images/Check.svg';
 
 type SubscribedCardProps = {
   price: string;
