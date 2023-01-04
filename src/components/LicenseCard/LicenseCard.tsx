@@ -13,7 +13,9 @@ const LicenseCard: FC = () => (
       <DescriptionText>Single site license</DescriptionText>
       <DescriptionDate>valid until 21.10.2022</DescriptionDate>
     </LicenseDescription>
-    <StyledButton variant="secondary">View</StyledButton>
+    <StyledButton variant="secondary" size="small">
+      View
+    </StyledButton>
   </Container>
 );
 
@@ -70,6 +72,5 @@ const DescriptionDate = styled.p`
 `;
 
 const StyledButton = styled(Button)`
-  padding: 20px 42px;
   margin: 32px 0 48px 32px;
 `;

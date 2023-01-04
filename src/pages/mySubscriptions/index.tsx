@@ -1,18 +1,23 @@
-import { FC } from 'react';
+import { NextPage } from 'next';
 import styled from 'styled-components';
 import { Navigation, Pagination } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
+import { wrapper } from '@/store/store';
+import { getSubscribes } from '@/store/ducks/subscribes/asyncAction';
+import { getCodes } from '@/store/ducks/codes/asyncAction';
 import Domain from '@/components/Domain';
 import LicenseCard from '@/components/LicenseCard/LicenseCard';
 import Container from '@/components/Container';
 import Button from '@/UIComponents/Button';
 
-const MySubscription: FC = () => (
+const MySubscriptions: NextPage = () => (
   <PageContainer>
     <TitleContainer>
       <StyledTitle>My subscriptions</StyledTitle>
-      <StyledButton variant="primary">Upgrade</StyledButton>
+      <Button variant="primary" size="large">
+        Upgrade
+      </Button>
     </TitleContainer>
     <SliderContainer>
       <StyledSwiper
@@ -54,12 +59,23 @@ const MySubscription: FC = () => (
     </DomainsContainer>
     <ConfirmContainer>
       <ConfirmDescription>Select the domains you want to keep</ConfirmDescription>
-      <ConfirmButton variant="primary">Confirm</ConfirmButton>
+      <Button variant="primary" size="large">
+        Confirm
+      </Button>
     </ConfirmContainer>
   </PageContainer>
 );
 
-export default MySubscription;
+export const getServerSideProps = wrapper.getServerSideProps((store) => async (context) => {
+  await store.dispatch(getSubscribes()).unwrap();
+  await store.dispatch(getCodes()).unwrap();
+
+  return {
+    props: {},
+  };
+});
+
+export default MySubscriptions;
 
 const PageContainer = styled(Container)`
   display: flex;
@@ -147,10 +163,6 @@ const StyledTitle = styled.h3`
   line-height: 64px;
 `;
 
-const StyledButton = styled(Button)`
-  padding: 26px 38px;
-`;
-
 const StyledSwiper = styled(Swiper)`
   height: 450px;
   .swiper-wrapper {
@@ -184,9 +196,4 @@ const ConfirmDescription = styled.p`
   font-weight: 700;
   font-size: 20px;
   line-height: 22px;
-`;
-
-const ConfirmButton = styled(Button)`
-  max-width: 152px;
-  padding: 26px 38px;
 `;

@@ -35,13 +35,15 @@ MyApp.getInitialProps = wrapper.getInitialAppProps<AppInitialProps>((store) => a
   axiosInstance.defaults.headers.common.authorization = token ? `Bearer ${token}` : null;
 
   let isError = false;
-  const { user } = store.getState();
-  try {
-    if (token && user.user === null) {
+  const { user: userState } = store.getState();
+  const isAuth = !!token && !!userState.user;
+
+  if (!isAuth) {
+    try {
       await store.dispatch(authMe()).unwrap();
+    } catch (e) {
+      isError = true;
     }
-  } catch (e) {
-    isError = true;
   }
 
   if (isError) {

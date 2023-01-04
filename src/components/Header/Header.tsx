@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { selectUser } from '@/store/ducks/user/selectors';
-import { logOut } from '@/store/ducks/user/asyncAction';
+import { logOutUser } from '@/store/ducks/user/asyncAction';
 import Dropdown from '@/UIComponents/Dropdown';
 import Container from '@/components/Container';
 
@@ -15,8 +15,8 @@ const Header = () => {
   const dispatch = useAppDispatch();
   const user = useAppSelector(selectUser);
 
-  const logOutUser = () => {
-    dispatch(logOut());
+  const logOut = async () => {
+    await dispatch(logOutUser()).unwrap();
   };
 
   return (
@@ -27,7 +27,7 @@ const Header = () => {
         </LogoLink>
         {user ? (
           <LinkContainer>
-            <StyledLink href="mySubscriptions">My subscription</StyledLink>
+            <StyledLink href="/mySubscriptions">My subscriptions</StyledLink>
             <Dropdown
               items={[
                 {
@@ -44,7 +44,7 @@ const Header = () => {
                   label: (
                     <>
                       <Logout />
-                      <DropdownLink href="/logIn" onClick={logOutUser}>
+                      <DropdownLink href="/" onClick={logOut}>
                         Logout
                       </DropdownLink>
                     </>
@@ -52,7 +52,7 @@ const Header = () => {
                 },
               ]}
             >
-              <StyledSpan>Anton</StyledSpan>
+              <StyledSpan>{user.username}</StyledSpan>
             </Dropdown>
           </LinkContainer>
         ) : null}

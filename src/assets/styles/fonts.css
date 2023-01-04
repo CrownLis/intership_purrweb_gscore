@@ -1,41 +1,76 @@
 @font-face {
   font-family: 'THICCCBOI';
-  src: url('../fonts/THICCCBOI-Bold.ttf');
+  src: url('../fonts/THICCCBOI/THICCCBOI-Bold.ttf');
   font-weight: 700;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'THICCCBOI';
-  src: url('../fonts/THICCCBOI-SemiBold.ttf');
+  src: url('../fonts/THICCCBOI/THICCCBOI-SemiBold.ttf');
   font-weight: 600;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'THICCCBOI';
-  src: url('../fonts/THICCCBOI-Medium.ttf');
+  src: url('../fonts/THICCCBOI/THICCCBOI-Medium.ttf');
   font-weight: 500;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'THICCCBOI';
-  src: url('../fonts/THICCCBOI-Regular.ttf');
+  src: url('../fonts/THICCCBOI/THICCCBOI-Regular.ttf');
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'DM-Sans';
-  src: url('../fonts/DMSans-Bold.ttf');
+  src: url('../fonts/DMSans/DMSans-Bold.ttf');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'DM-Sans';
+  src: url('../fonts/DMSans/DMSans-Medium.ttf');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'DM-Sans';
+  src: url('../fonts/DMSans/DMSans-Regular.ttf');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('../fonts/Inter/Inter-Bold.ttf');
   font-weight: 700;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Inter';
-  src: url('../fonts/Inter-Medium.ttf');
-  font-weight: 700;
+  src: url('../fonts/Inter/Inter-SemiBold.ttf');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('../fonts/Inter/Inter-Medium.ttf');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('../fonts/Inter/Inter-Regular.ttf');
+  font-weight: 400;
   font-style: normal;
 }

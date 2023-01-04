@@ -1,20 +1,21 @@
-import { FC, useMemo } from 'react';
+import { NextPage } from 'next';
+import { useMemo } from 'react';
 import styled from 'styled-components';
 import { useRouter } from 'next/router';
 
-import Button from '@/UIComponents/Button';
 import { useAppSelector } from '@/store/hooks';
 import { selectProducts } from '@/store/ducks/products/selectors';
+import Button from '@/UIComponents/Button';
 import Container from '@/components/Container';
 
-const Start: FC = () => {
+const CheckoutSuccess: NextPage = () => {
   const router = useRouter();
   const { query } = router;
   const products = useAppSelector(selectProducts);
 
   const selectedProduct = useMemo(() => {
-    return products?.find((product) => product.prices[0].id === Number(query.id));
-  }, [products]);
+    return products?.find((product) => product.id === Number(query.id));
+  }, [products, query.id]);
 
   if (!selectedProduct) {
     return null;
@@ -38,14 +39,14 @@ const Start: FC = () => {
           </CartPriceContainer>
         </CartProductsContainer>
       </CartContainer>
-      <StyledButton onClick={() => router.push(`/mySubscriptions`)} variant="primary">
+      <StyledButton onClick={() => router.push(`/mySubscriptions`)} size="small" variant="primary">
         Go to my subscriptions
       </StyledButton>
     </PageContainer>
   );
 };
 
-export default Start;
+export default CheckoutSuccess;
 
 const PageContainer = styled(Container)`
   display: flex;
@@ -115,6 +116,4 @@ const CartPriceContainer = styled.div`
   gap: 10px;
 `;
 
-const StyledButton = styled(Button)`
-  max-width: 620px;
-`;
+const StyledButton = styled(Button)``;

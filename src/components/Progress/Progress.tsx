@@ -7,22 +7,23 @@ type ProgressProps = {
 };
 
 const Progress: FC<ProgressProps> = ({ isActive, text }) => (
-  <Status>
-    <StatusText>{text}</StatusText>
+  <Root>
+    <Text>{text}</Text>
     <Line $isActive={isActive} />
-  </Status>
+  </Root>
 );
 
 export default Progress;
 
-const Status = styled.div`
+const Root = styled.div`
   display: flex;
   flex-direction: column;
-  height: 42px;
-  width: 195px;
+  justify-content: space-between;
+  max-width: 195px;
+  width: 100%;
 `;
 
-const StatusText = styled.span`
+const Text = styled.span`
   font-family: ${(props) => props.theme.font.main};
   font-style: normal;
   font-weight: 600;

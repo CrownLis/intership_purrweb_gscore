@@ -52,7 +52,6 @@ const Container = styled.div`
   align-items: center;
   border-radius: 12px;
   max-height: 153px;
-  max-width: 1268px;
   border: 0;
   background-color: ${(props) => props.theme.color.neutral700};
 `;

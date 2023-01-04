@@ -9,6 +9,16 @@ export type SignInPayload = {
   password: string;
 };
 
+export type UpdatePasswordPayload = {
+  currentPassword: string;
+  newPassword: string;
+};
+
+export type UpdatePersonalDataPayload = {
+  email: string;
+  username: string;
+};
+
 export type PayForProductPayload = {
   priceId: number;
 };

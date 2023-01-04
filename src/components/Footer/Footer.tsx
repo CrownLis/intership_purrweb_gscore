@@ -13,7 +13,7 @@ const Footer: FC = () => (
   <Root>
     <FooterContainer>
       <DescriptionContainer>
-        <LogoLink href="#">
+        <LogoLink href="/">
           <Logo />
         </LogoLink>
         <StyledParagraph>
@@ -24,8 +24,8 @@ const Footer: FC = () => (
 
       <LinksContainer>
         <Copyright>
-          Copyright © 2022 GScore | All Rights Reserved | <StyledLink href="cookies">Cookies</StyledLink> |{' '}
-          <StyledLink href="privacy">Privacy Policy</StyledLink>
+          Copyright © 2022 GScore | All Rights Reserved | <StyledLink href="/cookies">Cookies</StyledLink> |{' '}
+          <StyledLink href="/privacy">Privacy Policy</StyledLink>
         </Copyright>
         <SocialNavbar>
           <SocialLink href="#">
@@ -52,11 +52,7 @@ const Root = styled.footer`
   border-top: 1px solid ${(props) => props.theme.color.color700};
 `;
 
-const FooterContainer = styled(Container)`
-  height: 100%;
-  width: 100%;
-  padding: 0 86px;
-`;
+const FooterContainer = styled(Container)``;
 
 const DescriptionContainer = styled.div`
   display: flex;

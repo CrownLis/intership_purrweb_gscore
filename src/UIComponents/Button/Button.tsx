@@ -1,21 +1,23 @@
 import { ButtonHTMLAttributes, FC, PropsWithChildren } from 'react';
 import styled, { css } from 'styled-components';
 
-import Loader from '@/UIComponents/Loader';
 import hex2rgba from '@/utils/hex2rgba';
 
 type ButtonVariant = 'primary' | 'secondary' | 'text';
 
+type ButtonSize = 'large' | 'small';
+
 type ButtonProps = PropsWithChildren<
   {
     variant: ButtonVariant;
+    size: ButtonSize;
     isLoading?: boolean;
   } & ButtonHTMLAttributes<HTMLButtonElement>
 >;
 
-const Button: FC<ButtonProps> = ({ children, variant, isLoading, ...props }) => (
-  <StyledButton $variant={variant} $isLoading={isLoading} {...props}>
-    {isLoading ? <Loader /> : children}
+const Button: FC<ButtonProps> = ({ children, variant, size, isLoading, disabled, ...props }) => (
+  <StyledButton $variant={variant} $isLoading={isLoading} $size={size} disabled={disabled || isLoading} {...props}>
+    {children}
   </StyledButton>
 );
 
@@ -23,10 +25,11 @@ export default Button;
 
 type ButtonType = {
   $variant: ButtonVariant;
+  $size: ButtonSize;
   $isLoading?: boolean;
 };
 
-const getStylesButton = (variant: ButtonVariant) => {
+const getVariantStylesButton = (variant: ButtonVariant) => {
   switch (variant) {
     case 'primary': {
       return css`
@@ -80,10 +83,28 @@ const getStylesButton = (variant: ButtonVariant) => {
   }
 };
 
+const getSizeStylesButton = (size: ButtonSize) => {
+  switch (size) {
+    case 'large': {
+      return css`
+        padding: 24px 38px;
+        min-width: 160px;
+      `;
+    }
+    case 'small': {
+      return css`
+        padding: 20px 24px;
+        min-width: 120px;
+      `;
+    }
+  }
+};
+
 const StyledButton = styled.button<ButtonType>`
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
   font-family: ${(props) => props.theme.font.main};
   font-style: normal;
   font-weight: 700;
@@ -93,5 +114,9 @@ const StyledButton = styled.button<ButtonType>`
   border-radius: 4px;
   padding: 20px 24px;
   cursor: ${({ $isLoading }) => ($isLoading ? 'wait' : 'pointer')};
-  ${({ $variant = 'primary' }) => getStylesButton($variant)};
+  ${({ $size = 'small' }) => getSizeStylesButton($size)};
+  ${({ $variant = 'primary' }) => getVariantStylesButton($variant)};
+  @media ${(props) => props.theme.breakpoints.md} {
+    width: max-content;
+  }
 `;

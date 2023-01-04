@@ -2,7 +2,7 @@ const mainTheme = {
   font: {
     main: 'THICCCBOI',
     subMain: 'Inter',
-    unusual: 'DM Sans',
+    unusual: 'DM-Sans',
   },
   color: {
     primary: '#FC5842',

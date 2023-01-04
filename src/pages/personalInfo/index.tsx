@@ -1,30 +1,76 @@
-import { FC } from 'react';
+import { NextPage } from 'next';
 import styled from 'styled-components';
+import { useForm } from 'react-hook-form';
 
+import { useAppDispatch } from '@/store/hooks';
+import { updatePersonalDataUser, UpdatePersonalDataAttributes } from '@/store/ducks/user/asyncAction';
+import { validateEmail } from '@/utils/validation';
 import Button from '@/UIComponents/Button';
 import Input from '@/UIComponents/Input';
 import PageNavigation from '@/components/PageNavigation';
 import Container from '@/components/Container';
 
-const PersonalInfo: FC = () => (
-  <PageContainer>
-    <StyledTitle>Settings</StyledTitle>
-    <PageNavigation
-      items={[
-        { key: 0, text: 'Personal info', reference: 'personalInfo', isActive: true },
-        { key: 1, text: 'Change password', reference: 'changePassword' },
-      ]}
-    />
-    <FormContainer>
-      <FormInfo>
-        <FormTitle>Personal Info</FormTitle>
-        <StyledInput placeholder="Username" />
-        <StyledInput placeholder="Email" />
-        <StyledButton variant="primary">Save</StyledButton>
-      </FormInfo>
-    </FormContainer>
-  </PageContainer>
-);
+const PersonalInfo: NextPage = () => {
+  const dispatch = useAppDispatch();
+
+  const { register, handleSubmit, reset, getFieldState, formState } = useForm<UpdatePersonalDataAttributes>({
+    mode: 'onChange',
+  });
+
+  const { error: userNameError, isDirty: userNameDirty } = getFieldState('username', formState);
+  const { error: emailError, isDirty: emailDirty } = getFieldState('email', formState);
+
+  const onSubmit = async (data: UpdatePersonalDataAttributes) => {
+    await dispatch(updatePersonalDataUser(data)).unwrap();
+    reset();
+  };
+
+  return (
+    <PageContainer>
+      <StyledTitle>Settings</StyledTitle>
+      <PageNavigation
+        items={[
+          { key: 0, text: 'Personal info', reference: '/personalInfo', isActive: true },
+          { key: 1, text: 'Change password', reference: '/changePassword' },
+        ]}
+      />
+      <FormContainer onSubmit={handleSubmit(onSubmit)}>
+        <FormInfo>
+          <FormTitle>Personal Info</FormTitle>
+          <StyledInput
+            placeholder="Username"
+            isError={Boolean(userNameError)}
+            isDirty={userNameDirty}
+            {...register('username', {
+              required: 'Please enter the user name',
+              minLength: {
+                value: 3,
+                message: 'User name must be more than 3 symbols',
+              },
+            })}
+          />
+          <StyledInput
+            type="email"
+            placeholder="Email"
+            isError={Boolean(emailError)}
+            isDirty={emailDirty}
+            {...register('email', {
+              required: 'Please enter the email',
+              validate: validateEmail,
+              minLength: {
+                value: 3,
+                message: 'Please enter the correct email',
+              },
+            })}
+          />
+          <StyledButton type="submit" variant="primary" size="small">
+            Save
+          </StyledButton>
+        </FormInfo>
+      </FormContainer>
+    </PageContainer>
+  );
+};
 
 export default PersonalInfo;
 
@@ -44,6 +90,7 @@ const StyledTitle = styled.h3`
 const FormContainer = styled.form`
   display: flex;
   gap: 60px;
+  max-width: 512px;
 `;
 
 const FormInfo = styled.div`
@@ -51,7 +98,6 @@ const FormInfo = styled.div`
   flex-direction: column;
   gap: 24px;
   width: 100%;
-  max-width: 512px;
 `;
 
 const FormTitle = styled.h3`
@@ -62,12 +108,8 @@ const FormTitle = styled.h3`
   line-height: 40px;
 `;
 
-const StyledInput = styled(Input)`
-  max-width: 512px;
-`;
+const StyledInput = styled(Input)``;
 
 const StyledButton = styled(Button)`
-  max-width: 160px;
-  padding: 20px 24px;
   margin-top: 24px;
 `;

@@ -1,23 +1,23 @@
+import { NextPage } from 'next';
 import Link from 'next/link';
-import { FC } from 'react';
 import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
 import { useRouter } from 'next/router';
 
-import StatusLine from '@/components/Progress';
-import Button from '@/UIComponents/Button';
-import Input from '@/UIComponents/Input';
 import { validateEmail } from '@/utils/validation';
-import { registerUser } from '@/store/ducks/user/asyncAction';
+import { registerUser, RegisterAttributes } from '@/store/ducks/user/asyncAction';
 import { useAppDispatch } from '@/store/hooks';
 import Container from '@/components/Container';
+import Progress from '@/components/Progress';
+import Button from '@/UIComponents/Button';
+import Input from '@/UIComponents/Input';
 
-const CreateAccount: FC = () => {
+const CreateAccount: NextPage = () => {
   const dispatch = useAppDispatch();
 
   const router = useRouter();
 
-  const { register, handleSubmit, reset, getFieldState, formState } = useForm({
+  const { register, handleSubmit, reset, getFieldState, formState } = useForm<RegisterAttributes>({
     mode: 'onChange',
   });
 
@@ -25,18 +25,20 @@ const CreateAccount: FC = () => {
   const { error: emailError, isDirty: emailDirty } = getFieldState('email', formState);
   const { error: passwordError, isDirty: passwordDirty } = getFieldState('password', formState);
 
-  const onSubmit = async (data: any) => {
+  const onSubmit = async (data: RegisterAttributes) => {
     await dispatch(registerUser(data)).unwrap();
     reset();
-    router.push('logIn');
+    router.push('/logIn', {
+      query: router.query,
+    });
   };
 
   return (
     <PageContainer variant="small">
       <StatusContainer>
-        <StatusLine text="Create account" isActive />
-        <StatusLine text="Log in" />
-        <StatusLine text="Checkout" />
+        <Progress text="Create account" isActive />
+        <Progress text="Log in" />
+        <Progress text="Checkout" />
       </StatusContainer>
       <FormContainer onSubmit={handleSubmit(onSubmit)}>
         <FormTitle>Create account</FormTitle>
@@ -54,10 +56,10 @@ const CreateAccount: FC = () => {
           })}
         />
         <StyledInput
+          type="email"
           placeholder="Email"
           isError={Boolean(emailError)}
           isDirty={emailDirty}
-          type="email"
           {...register('email', {
             required: 'Please enter the email',
             validate: validateEmail,
@@ -80,10 +82,20 @@ const CreateAccount: FC = () => {
             },
           })}
         />
-        <StyledButton variant="primary">Send password</StyledButton>
+        <StyledButton type="submit" variant="primary" size="small">
+          Send password
+        </StyledButton>
       </FormContainer>
       <LogInLink>
-        Have an account? <StyledLink href="logIn">Go to the next step</StyledLink>
+        Have an account?{' '}
+        <StyledLink
+          href={{
+            pathname: '/logIn',
+            query: router.query,
+          }}
+        >
+          Go to the next step
+        </StyledLink>
       </LogInLink>
     </PageContainer>
   );
@@ -130,9 +142,8 @@ const StyledInput = styled(Input)`
 `;
 
 const StyledButton = styled(Button)`
-  margin: 24px 0;
-  padding: 20px 24px;
-  max-width: 200px;
+  min-width: 200px;
+  margin-top: 24px;
 `;
 
 const LogInLink = styled.p`
@@ -142,7 +153,7 @@ const LogInLink = styled.p`
   font-size: 16px;
   line-height: 18px;
   color: ${(props) => props.theme.color.color100};
-  margin-top: 24px;
+  margin-top: 48px;
 `;
 
 const StyledLink = styled(Link)`

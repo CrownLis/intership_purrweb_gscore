@@ -1,21 +1,15 @@
-import { getMe, logOutRequest, payForProduct, signIn, signUp } from '@/api';
-import { PaymentType, UserType } from '@/types/data';
+import { getMe, logOutRequest, signIn, signUp, updatePassword, updatePersonalData } from '@/api';
+import { UserType } from '@/types/data';
+import { SignInPayload, SignUpPayload, UpdatePasswordPayload, UpdatePersonalDataPayload } from '@/types/payload';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-type RegisterAttributes = {
-  email: string;
-  username: string;
-  password: string;
-};
+export type RegisterAttributes = SignUpPayload;
 
-type PaymentAttributes = {
-  priceId: number;
-};
+export type LoginAttributes = SignInPayload;
 
-type LoginAttributes = {
-  email: string;
-  password: string;
-};
+export type UpdatePasswordAttributes = UpdatePasswordPayload;
+
+export type UpdatePersonalDataAttributes = UpdatePersonalDataPayload;
 
 export const registerUser = createAsyncThunk<void, RegisterAttributes>(
   'user/registerUser',
@@ -32,7 +26,23 @@ export const loginUser = createAsyncThunk<UserType, LoginAttributes>('user/login
   return user;
 });
 
-export const logOut = createAsyncThunk<void, void>('user/logOut', async () => {
+export const updatePasswordUser = createAsyncThunk<void, UpdatePasswordAttributes>(
+  'user/updatePassword',
+  async (values) => {
+    await updatePassword(values);
+  },
+);
+
+export const updatePersonalDataUser = createAsyncThunk<UserType, UpdatePersonalDataAttributes>(
+  'user/updatePersonalData',
+  async (values) => {
+    const response = await updatePersonalData(values);
+    const { data: user } = response;
+    return user;
+  },
+);
+
+export const logOutUser = createAsyncThunk<void, void>('user/logOut', async () => {
   await logOutRequest();
 });
 
@@ -41,14 +51,3 @@ export const authMe = createAsyncThunk<UserType, void>('user/authMe', async () =
   const { data } = response;
   return data;
 });
-
-export const buyProduct = createAsyncThunk<PaymentType, PaymentAttributes>(
-  'product/buyProduct',
-  async ({ priceId }) => {
-    const response = await payForProduct({ priceId });
-    const {
-      data: { subscribe },
-    } = response;
-    return subscribe;
-  },
-);

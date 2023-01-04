@@ -1,4 +1,4 @@
-import { PaymentType, ProductType, UserType } from './data';
+import { CodeType, SubscribeType, ProductType, UserType } from './data';
 
 export type SignUpResponse = {
   email: string;
@@ -7,7 +7,7 @@ export type SignUpResponse = {
 };
 
 export type PayForProductResponse = {
-  subscribe: PaymentType;
+  subscribe: SubscribeType;
 };
 
 export type SignInResponse = {
@@ -15,6 +15,14 @@ export type SignInResponse = {
   user: UserType;
 };
 
+export type UpdatePasswordResponse = UserType;
+
+export type UpdatePersonalDataResponse = UserType;
+
 export type GetMeResponse = UserType;
 
 export type FetchProductsResponse = ProductType[];
+
+export type FetchCodesResponse = CodeType[];
+
+export type FetchSubscribesResponse = SubscribeType[];

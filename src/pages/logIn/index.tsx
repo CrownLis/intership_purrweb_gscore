@@ -1,40 +1,45 @@
-import { FC } from 'react';
+import { NextPage } from 'next';
 import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
 import { useRouter } from 'next/router';
 
-import StatusLine from '@/components/Progress';
+import Progress from '@/components/Progress';
 import Button from '@/UIComponents/Button';
 import Input from '@/UIComponents/Input';
 import { validateEmail } from '@/utils/validation';
 import { useAppDispatch } from '@/store/hooks';
-import { loginUser } from '@/store/ducks/user/asyncAction';
+import { LoginAttributes, loginUser } from '@/store/ducks/user/asyncAction';
 import Container from '@/components/Container';
 
-const LogIn: FC = () => {
+const LogIn: NextPage = () => {
   const dispatch = useAppDispatch();
 
   const router = useRouter();
 
-  const { register, handleSubmit, reset, getFieldState, formState } = useForm({
+  const { register, handleSubmit, reset, getFieldState, formState } = useForm<LoginAttributes>({
     mode: 'onChange',
   });
 
   const { error: emailError, isDirty: emailDirty } = getFieldState('email', formState);
   const { error: passwordError, isDirty: passwordDirty } = getFieldState('password', formState);
 
-  const onSubmit = async (data: any) => {
+  const onSubmit = async (data: LoginAttributes) => {
     await dispatch(loginUser(data)).unwrap();
     reset();
-    router.push('buySubscribe');
+    const { productId } = router.query;
+    if (productId) {
+      router.push(`/checkout/${productId}`);
+    } else {
+      router.push(`/mySubscriptions`);
+    }
   };
 
   return (
     <PageContainer variant="small">
       <StatusContainer>
-        <StatusLine text="Create account" isActive />
-        <StatusLine text="Log in" isActive />
-        <StatusLine text="Checkout" />
+        <Progress text="Create account" isActive />
+        <Progress text="Log in" isActive />
+        <Progress text="Checkout" />
       </StatusContainer>
       <FormContainer onSubmit={handleSubmit(onSubmit)}>
         <FormTitle>Log in</FormTitle>
@@ -67,7 +72,9 @@ const LogIn: FC = () => {
             },
           })}
         />
-        <StyledButton variant="primary">Log in</StyledButton>
+        <StyledButton type="submit" variant="primary" size="small">
+          Log in
+        </StyledButton>
       </FormContainer>
     </PageContainer>
   );
@@ -106,7 +113,6 @@ const StyledInput = styled(Input)`
 `;
 
 const StyledButton = styled(Button)`
-  margin: 24px 0;
-  padding: 20px 24px;
-  max-width: 200px;
+  min-width: 200px;
+  margin-top: 24px;
 `;

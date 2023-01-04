@@ -3,7 +3,7 @@ import { HYDRATE } from 'next-redux-wrapper';
 
 import { AppState } from '@/store/store';
 import { ProductType } from '@/types/data';
-import { getProducts } from './asyncAction';
+import { buyProduct, getProducts } from './asyncAction';
 
 type ProductSliceType = {
   list: ProductType[] | null;
@@ -39,6 +39,17 @@ const productsSlice = createSlice({
       state.loading = false;
       state.error = null;
       state.list = action.payload;
+    });
+    builder.addCase(buyProduct.pending, (state) => {
+      state.loading = true;
+      state.error = null;
+    });
+    builder.addCase(buyProduct.rejected, (state) => {
+      state.loading = false;
+      state.error = 'error';
+    });
+    builder.addCase(buyProduct.fulfilled, (state) => {
+      state.loading = false;
     });
   },
 });

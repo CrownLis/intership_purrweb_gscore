@@ -2,57 +2,63 @@ import { FC } from 'react';
 import styled, { css } from 'styled-components';
 import { useRouter } from 'next/router';
 
+import { useAppSelector } from '@/store/hooks';
+import { selectUser } from '@/store/ducks/user/selectors';
+import { ProductType } from '@/types/data';
 import Button from '@/UIComponents/Button';
 
 import Check from '@/assets/images/Check.svg';
-import RedCheck from '@/assets/images/RedCheck.svg';
 
 type SubscribedCardProps = {
-  price: string;
-  title: string;
-  capability: number;
-  priceId: number;
-  isCenter?: boolean;
+  product: ProductType;
+  isActive?: boolean;
+  className?: string;
 };
 
-const SubscribeCard: FC<SubscribedCardProps> = ({ price, title, capability, isCenter, priceId }) => {
+const SubscribeCard: FC<SubscribedCardProps> = ({ product, isActive = false, ...props }) => {
   const router = useRouter();
 
-  const buySubscribe = async () => {
-    router.push(`checkout/${priceId}`);
+  const user = useAppSelector(selectUser);
+
+  const buySubscribe = () => {
+    if (user) {
+      router.push(`/checkout/${product.id}`);
+    } else {
+      router.push(`/createAccount?productId=${product.id}`);
+    }
   };
 
   return (
-    <Root $isCenter={isCenter}>
+    <Root $isActive={isActive} {...props}>
       <ContainerCard>
-        <TopContainerCard>
-          <CardPrice>${price}</CardPrice>
-          <CardTitle>{title} license</CardTitle>
+        <TopContainerCard $isActive={isActive}>
+          <CardPrice>${product.prices[0].price}</CardPrice>
+          <CardTitle>{product.name} license</CardTitle>
           <CardDescription>
             Get the advanced WordPress plugin that optimizes content with GSC keywords at one low annual price
           </CardDescription>
         </TopContainerCard>
         <BottomContainerCard>
           <CapabilityContainer>
-            {isCenter ? <RedCheck /> : <Check />}
+            {isActive ? <ActiveCheck /> : <Check />}
             <CardCapability>
-              {capability === 1 ? 'Single site license' : `All features for ${capability} sites`}
+              {product.sitesCount === 1 ? 'Single site license' : `All features for ${product.sitesCount} sites`}
             </CardCapability>
           </CapabilityContainer>
           <CapabilityContainer>
-            {isCenter ? <RedCheck /> : <Check />}
+            {isActive ? <ActiveCheck /> : <Check />}
             <CardCapability>Special introductory pricing</CardCapability>
           </CapabilityContainer>
           <CapabilityContainer>
-            {isCenter ? <RedCheck /> : <Check />}
+            {isActive ? <ActiveCheck /> : <Check />}
             <CardCapability>Unlimited Pages and Keywords</CardCapability>
           </CapabilityContainer>
           <CapabilityContainer>
-            {isCenter ? <RedCheck /> : <Check />}
+            {isActive ? <ActiveCheck /> : <Check />}
             <CardCapability>Billed annually</CardCapability>
           </CapabilityContainer>
         </BottomContainerCard>
-        <StyledButton $isCenter={isCenter} variant="secondary" onClick={() => buySubscribe()}>
+        <StyledButton $isActive={isActive} variant="secondary" size="large" onClick={buySubscribe}>
           Get Gscore
         </StyledButton>
       </ContainerCard>
@@ -62,21 +68,20 @@ const SubscribeCard: FC<SubscribedCardProps> = ({ price, title, capability, isCe
 
 export default SubscribeCard;
 
-const Root = styled.div<{ $isCenter?: boolean }>`
-  width: 404px;
-  height: 612px;
-  color: ${(props) => props.theme.color.color100};
+const Root = styled.div<{ $isActive?: boolean }>`
+  width: 100%;
+  height: 100%;
   border: 0;
   border-radius: 12px;
-  ${({ $isCenter }) =>
-    $isCenter
+  ${({ $isActive }) =>
+    $isActive
       ? css`
-          position: relative;
-          top: -50px;
           background-color: ${(props) => props.theme.color.primary};
+          color: ${(props) => props.theme.color.color100};
         `
       : css`
           background-color: ${(props) => props.theme.color.neutral700};
+          color: ${(props) => props.theme.color.color400};
         `}
 `;
 
@@ -86,14 +91,14 @@ const ContainerCard = styled.div`
   margin: 42px 48px;
 `;
 
-const TopContainerCard = styled.div<{ $isCenter?: boolean }>`
+const TopContainerCard = styled.div<{ $isActive?: boolean }>`
   display: flex;
   flex-direction: column;
   align-items: center;
   padding-bottom: 40px;
   border-bottom: ${(props) =>
-    props.$isCenter ? `1px solid ${props.theme.color.color100}` : `1px solid ${props.theme.color.color500}`};
-  opacity: ${(props) => (props.$isCenter ? '0,7' : '1')};
+    props.$isActive ? `1px solid ${props.theme.color.color100}` : `1px solid ${props.theme.color.color500}`};
+  opacity: ${(props) => (props.$isActive ? '0,7' : '1')};
   margin-bottom: 38px;
 `;
 
@@ -121,7 +126,6 @@ const CardDescription = styled.p`
   font-weight: 500;
   font-size: 18px;
   line-height: 30px;
-  color: ${(props) => props.theme.color.color400};
   text-align: center;
 `;
 
@@ -144,8 +148,14 @@ const CardCapability = styled.p`
   line-height: 20px;
 `;
 
-const StyledButton = styled(Button)<{ $isCenter?: boolean }>`
-  padding: 24px 106px;
+const StyledButton = styled(Button)<{ $isActive?: boolean }>`
   margin-top: 32px;
-  color: ${(props) => (props.$isCenter ? props.theme.color.primary : props.theme.color.color800)};
+  width: 100%;
+  color: ${(props) => (props.$isActive ? props.theme.color.primary : props.theme.color.color800)};
+`;
+
+const ActiveCheck = styled(Check)`
+  & path:last-child {
+    stroke: ${(props) => props.theme.color.primary};
+  }
 `;

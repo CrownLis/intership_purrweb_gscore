@@ -55,6 +55,8 @@ const Dropdown: FC<DropdownProps> = ({ children, items }) => {
 export default Dropdown;
 
 const DropdownTrigger = styled.button`
+  display: inline-flex;
+  align-items: center;
   background-color: transparent;
   border: none;
   cursor: pointer;

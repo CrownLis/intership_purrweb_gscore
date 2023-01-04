@@ -1,17 +1,18 @@
-import { FC, useMemo } from 'react';
+import { NextPage } from 'next';
+import { useMemo } from 'react';
 import styled from 'styled-components';
 import { useRouter } from 'next/router';
 
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
+import { buyProduct } from '@/store/ducks/products/asyncAction';
 import { selectProducts } from '@/store/ducks/products/selectors';
-import { buyProduct } from '@/store/ducks/user/asyncAction';
-import StatusLine from '@/components/Progress';
+import Progress from '@/components/Progress';
 import Container from '@/components/Container';
 import Button from '@/UIComponents/Button';
 
 import Cart from '@/assets/images/Cart.svg';
 
-const Checkout: FC = () => {
+const Checkout: NextPage = () => {
   const dispatch = useAppDispatch();
 
   const router = useRouter();
@@ -20,12 +21,12 @@ const Checkout: FC = () => {
   const products = useAppSelector(selectProducts);
 
   const selectedProduct = useMemo(() => {
-    return products?.find((product) => product.prices[0].id === Number(query.id));
+    return products?.find((product) => product.id === Number(query.id));
   }, [products, query.id]);
 
   const confirmPurchase = async (priceId: number) => {
-    router.push(`/start/${query.id}`);
     await dispatch(buyProduct({ priceId })).unwrap();
+    router.push(`/checkout/${query.id}/success`);
   };
 
   if (!selectedProduct) {
@@ -35,9 +36,9 @@ const Checkout: FC = () => {
   return (
     <PageContainer variant="small">
       <StatusContainer>
-        <StatusLine text="Create account" isActive />
-        <StatusLine text="Log in" isActive />
-        <StatusLine text="Checkout" isActive />
+        <Progress text="Create account" isActive />
+        <Progress text="Log in" isActive />
+        <Progress text="Checkout" isActive />
       </StatusContainer>
       <StyledTitle>Checkout</StyledTitle>
       <CartContainer>
@@ -57,7 +58,7 @@ const Checkout: FC = () => {
         <StyledPrice>Total:</StyledPrice>
         <StyledPrice>{selectedProduct.prices[0].price}$</StyledPrice>
       </PriceContainer>
-      <StyledButton variant="primary" onClick={() => confirmPurchase(selectedProduct.prices[0].id)}>
+      <StyledButton variant="primary" size="small" onClick={() => confirmPurchase(selectedProduct.prices[0].id)}>
         Purchase
       </StyledButton>
     </PageContainer>
@@ -145,7 +146,5 @@ const StyledPrice = styled.h3`
 `;
 
 const StyledButton = styled(Button)`
-  max-width: 200px;
-  text-align: center;
-  padding: 20px 0;
+  min-width: 200px;
 `;

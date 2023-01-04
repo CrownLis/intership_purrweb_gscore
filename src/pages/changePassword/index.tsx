@@ -1,30 +1,75 @@
-import { FC } from 'react';
+import { NextPage } from 'next';
 import styled from 'styled-components';
+import { useForm } from 'react-hook-form';
 
+import { useAppDispatch } from '@/store/hooks';
+import { updatePasswordUser, UpdatePasswordAttributes } from '@/store/ducks/user/asyncAction';
 import Input from '@/UIComponents/Input';
 import PageNavigation from '@/components/PageNavigation';
 import Button from '@/UIComponents/Button';
 import Container from '@/components/Container';
 
-const ChangePassword: FC = () => (
-  <PageContainer>
-    <StyledTitle>Settings</StyledTitle>
-    <PageNavigation
-      items={[
-        { key: 0, text: 'Personal info', reference: 'personalInfo' },
-        { key: 1, text: 'Change password', reference: 'changePassword', isActive: true },
-      ]}
-    />
-    <FormContainer>
-      <FormPassword>
-        <FormTitle>Change password</FormTitle>
-        <StyledInput placeholder="Current Password" />
-        <StyledInput placeholder="New Password" />
-        <StyledButton variant="primary">Save</StyledButton>
-      </FormPassword>
-    </FormContainer>
-  </PageContainer>
-);
+const ChangePassword: NextPage = () => {
+  const dispatch = useAppDispatch();
+
+  const { register, handleSubmit, reset, getFieldState, formState } = useForm<UpdatePasswordAttributes>({
+    mode: 'onChange',
+  });
+
+  const { error: currentPasswordError, isDirty: currentPasswordDirty } = getFieldState('currentPassword', formState);
+  const { error: newPasswordError, isDirty: newPasswordDirty } = getFieldState('newPassword', formState);
+
+  const onSubmit = async (data: UpdatePasswordAttributes) => {
+    await dispatch(updatePasswordUser(data)).unwrap();
+    reset();
+  };
+
+  return (
+    <PageContainer>
+      <StyledTitle>Settings</StyledTitle>
+      <PageNavigation
+        items={[
+          { key: 0, text: 'Personal info', reference: '/personalInfo' },
+          { key: 1, text: 'Change password', reference: '/changePassword', isActive: true },
+        ]}
+      />
+      <FormContainer onSubmit={handleSubmit(onSubmit)}>
+        <FormPassword>
+          <FormTitle>Change password</FormTitle>
+          <StyledInput
+            type="password"
+            placeholder="Current Password"
+            isError={Boolean(currentPasswordError)}
+            isDirty={currentPasswordDirty}
+            {...register('currentPassword', {
+              required: 'Please enter the current password',
+              minLength: {
+                value: 8,
+                message: 'Password must be more than 8 symbols',
+              },
+            })}
+          />
+          <StyledInput
+            type="password"
+            placeholder="New Password"
+            isError={Boolean(newPasswordError)}
+            isDirty={newPasswordDirty}
+            {...register('newPassword', {
+              required: 'Please enter the new password',
+              minLength: {
+                value: 8,
+                message: 'Password must be more than 8 symbols',
+              },
+            })}
+          />
+          <StyledButton type="submit" size="small" variant="primary">
+            Save
+          </StyledButton>
+        </FormPassword>
+      </FormContainer>
+    </PageContainer>
+  );
+};
 
 export default ChangePassword;
 
@@ -44,6 +89,7 @@ const StyledTitle = styled.h3`
 const FormContainer = styled.form`
   display: flex;
   gap: 60px;
+  max-width: 512px;
 `;
 
 const FormTitle = styled.h3`
@@ -54,9 +100,7 @@ const FormTitle = styled.h3`
   line-height: 40px;
 `;
 
-const StyledInput = styled(Input)`
-  max-width: 512px;
-`;
+const StyledInput = styled(Input)``;
 
 const FormPassword = styled.div`
   display: flex;
@@ -66,7 +110,5 @@ const FormPassword = styled.div`
 `;
 
 const StyledButton = styled(Button)`
-  max-width: 160px;
-  padding: 20px 24px;
   margin-top: 24px;
 `;

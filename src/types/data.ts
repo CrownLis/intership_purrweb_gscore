@@ -2,11 +2,9 @@ export type UserType = {
   id: number;
   email: string;
   username: string;
-  subscribes: PaymentType[];
-  codes: CodeType[];
 };
 
-export type PaymentType = {
+export type SubscribeType = {
   id: number;
   userId: number;
   productId: number;
