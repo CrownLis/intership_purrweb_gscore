@@ -2,8 +2,6 @@ import { FC } from 'react';
 import Link from 'next/link';
 import styled from 'styled-components';
 
-import { getProducts } from '@/store/ducks/products/asyncAction';
-import { wrapper } from '@/store/store';
 import Container from '@/components/Container';
 import SubscribeList from '@/components/SubscribeList';
 
@@ -19,14 +17,6 @@ const HomePage: FC = () => {
     </PageContainer>
   );
 };
-
-export const getServerSideProps = wrapper.getServerSideProps((store) => async () => {
-  await store.dispatch(getProducts()).unwrap();
-
-  return {
-    props: {},
-  };
-});
 
 export default HomePage;
 

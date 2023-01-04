@@ -11,6 +11,8 @@ export type SubscribeType = {
   currentPeriodStart: number;
   currentPeriodEnd: number;
   status: string;
+  product: PriceType;
+  codes: CodeType[];
 };
 
 export type CodeType = {

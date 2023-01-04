@@ -8,6 +8,7 @@ import mainTheme from '@/theme';
 import { axiosInstance } from '@/api';
 import { wrapper } from '@/store/store';
 import { authMe } from '@/store/ducks/user/asyncAction';
+import { getProducts } from '@/store/ducks/products/asyncAction';
 import MainLayout from '@/layouts/MainLayout';
 
 import '@/assets/styles/core.css';
@@ -34,23 +35,32 @@ MyApp.getInitialProps = wrapper.getInitialAppProps<AppInitialProps>((store) => a
 
   axiosInstance.defaults.headers.common.authorization = token ? `Bearer ${token}` : null;
 
-  let isError = false;
-  const { user: userState } = store.getState();
+  const { user: userState, products: productsState } = store.getState();
   const isAuth = !!token && !!userState.user;
+  let isAuthError = false;
 
   if (!isAuth) {
     try {
       await store.dispatch(authMe()).unwrap();
     } catch (e) {
-      isError = true;
+      isAuthError = true;
+      console.log((e as Error).message);
     }
   }
 
-  if (isError) {
+  if (!productsState.list) {
+    try {
+      await store.dispatch(getProducts()).unwrap();
+    } catch (e) {
+      console.log((e as Error).message);
+    }
+  }
+
+  if (isAuthError) {
     return {
       redirect: {
         permanent: false,
-        destination: '/logIn',
+        destination: '/createAccount',
       },
       pageProps: {
         ...(await App.getInitialProps(context)).pageProps,

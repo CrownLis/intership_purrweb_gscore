@@ -1,4 +1,5 @@
 import { NextPage } from 'next';
+import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import { Navigation, Pagination } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -11,64 +12,72 @@ import LicenseCard from '@/components/LicenseCard/LicenseCard';
 import Container from '@/components/Container';
 import Button from '@/UIComponents/Button';
 
-const MySubscriptions: NextPage = () => (
-  <PageContainer>
-    <TitleContainer>
-      <StyledTitle>My subscriptions</StyledTitle>
-      <Button variant="primary" size="large">
-        Upgrade
-      </Button>
-    </TitleContainer>
-    <SliderContainer>
-      <StyledSwiper
-        modules={[Navigation, Pagination]}
-        spaceBetween={29}
-        slidesPerView={2}
-        navigation={{
-          nextEl: '.swiper-button-next',
-          prevEl: '.swiper-button-prev',
-        }}
-        pagination={{
-          el: '.mySwiper-pagination',
-          type: 'fraction',
-        }}
-      >
-        <SwiperSlide>
-          <LicenseCard />
-        </SwiperSlide>
-        <SwiperSlide>
-          <LicenseCard />
-        </SwiperSlide>
-        <SwiperSlide>
-          <LicenseCard />
-        </SwiperSlide>
-        <SwiperSlide>
-          <LicenseCard />
-        </SwiperSlide>
-        <PaginationContainer>
-          <StyledPrevButton className="swiper-button-prev" />
-          <StyledPagination className="mySwiper-pagination" />
-          <StyledNextButton className="swiper-button-next" />
-        </PaginationContainer>
-      </StyledSwiper>
-    </SliderContainer>
-    <DomainsContainer>
-      <Domain isActive name="1" />
-      <Domain name="2" />
-      <Domain name="3" />
-    </DomainsContainer>
-    <ConfirmContainer>
-      <ConfirmDescription>Select the domains you want to keep</ConfirmDescription>
-      <Button variant="primary" size="large">
-        Confirm
-      </Button>
-    </ConfirmContainer>
-  </PageContainer>
-);
+const MySubscriptions: NextPage = () => {
+  const router = useRouter();
+
+  return (
+    <PageContainer>
+      <TitleContainer>
+        <StyledTitle>My subscriptions</StyledTitle>
+        <Button variant="primary" size="large" onClick={() => router.push('/')}>
+          Upgrade
+        </Button>
+      </TitleContainer>
+      <SliderContainer>
+        <StyledSwiper
+          modules={[Navigation, Pagination]}
+          spaceBetween={29}
+          slidesPerView={2}
+          navigation={{
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+          }}
+          pagination={{
+            el: '.mySwiper-pagination',
+            type: 'fraction',
+          }}
+        >
+          <SwiperSlide>
+            <LicenseCard />
+          </SwiperSlide>
+          <SwiperSlide>
+            <LicenseCard />
+          </SwiperSlide>
+          <SwiperSlide>
+            <LicenseCard />
+          </SwiperSlide>
+          <SwiperSlide>
+            <LicenseCard />
+          </SwiperSlide>
+          <PaginationContainer>
+            <StyledPrevButton className="swiper-button-prev" />
+            <StyledPagination className="mySwiper-pagination" />
+            <StyledNextButton className="swiper-button-next" />
+          </PaginationContainer>
+        </StyledSwiper>
+      </SliderContainer>
+      <DomainsContainer>
+        <Domain isActive name="1" />
+        <Domain name="2" />
+        <Domain name="3" />
+      </DomainsContainer>
+      <ConfirmContainer>
+        <ConfirmDescription>Select the domains you want to keep</ConfirmDescription>
+        <Button variant="primary" size="large">
+          Confirm
+        </Button>
+      </ConfirmContainer>
+    </PageContainer>
+  );
+};
 
 export const getServerSideProps = wrapper.getServerSideProps((store) => async (context) => {
-  await store.dispatch(getSubscribes()).unwrap();
-  await store.dispatch(getCodes()).unwrap();
+  try {
+    await store.dispatch(getSubscribes()).unwrap();
+    await store.dispatch(getCodes()).unwrap();
+  } catch (e) {
+    console.log((e as Error).message);
+  }
 
   return {
     props: {},
