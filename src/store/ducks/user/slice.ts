@@ -6,13 +6,13 @@ import { UserType } from '@/types/data';
 import { authMe, loginUser, logOutUser, registerUser, updatePasswordUser, updatePersonalDataUser } from './asyncAction';
 
 type UserSliceType = {
-  user: UserType | null;
+  data: UserType | null;
   loading: boolean;
   error: string | null;
 };
 
 const initialState: UserSliceType = {
-  user: null,
+  data: null,
   loading: false,
   error: null,
 };
@@ -48,7 +48,7 @@ const userSlice = createSlice({
       state.error = 'error';
     });
     builder.addCase(loginUser.fulfilled, (state, action) => {
-      state.user = action.payload;
+      state.data = action.payload;
       state.loading = false;
       state.error = null;
     });
@@ -61,7 +61,7 @@ const userSlice = createSlice({
       state.error = 'error';
     });
     builder.addCase(authMe.fulfilled, (state, action) => {
-      state.user = action.payload;
+      state.data = action.payload;
       state.loading = false;
       state.error = null;
     });
@@ -75,7 +75,7 @@ const userSlice = createSlice({
     });
     builder.addCase(logOutUser.fulfilled, (state) => {
       state.loading = false;
-      state.user = null;
+      state.data = null;
     });
     builder.addCase(updatePersonalDataUser.pending, (state) => {
       state.loading = true;
@@ -87,7 +87,7 @@ const userSlice = createSlice({
     });
     builder.addCase(updatePersonalDataUser.fulfilled, (state, action) => {
       state.loading = false;
-      state.user = action.payload;
+      state.data = action.payload;
     });
     builder.addCase(updatePasswordUser.pending, (state) => {
       state.loading = true;
@@ -103,4 +103,14 @@ const userSlice = createSlice({
   },
 });
 
-export const { actions, reducer } = userSlice;
+export const actions = {
+  authMe,
+  loginUser,
+  logOutUser,
+  registerUser,
+  updatePasswordUser,
+  updatePersonalDataUser,
+  ...userSlice.actions,
+};
+
+export const { reducer } = userSlice;

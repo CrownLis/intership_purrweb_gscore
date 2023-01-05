@@ -2,8 +2,9 @@ import { NextPage } from 'next';
 import styled from 'styled-components';
 import { useForm } from 'react-hook-form';
 
-import { useAppDispatch } from '@/store/hooks';
-import { updatePersonalDataUser, UpdatePersonalDataAttributes } from '@/store/ducks/user/asyncAction';
+import { useAppDispatch, useAppSelector } from '@/store/hooks';
+import { rootActions, rootSelectors } from '@/store/ducks';
+import { UpdatePersonalDataAttributes } from '@/store/ducks/user/asyncAction';
 import { validateEmail } from '@/utils/validation';
 import Button from '@/UIComponents/Button';
 import Input from '@/UIComponents/Input';
@@ -13,6 +14,8 @@ import Container from '@/components/Container';
 const PersonalInfo: NextPage = () => {
   const dispatch = useAppDispatch();
 
+  const isLoadingUser = useAppSelector(rootSelectors.user.selectIsLoadingUser);
+
   const { register, handleSubmit, reset, getFieldState, formState } = useForm<UpdatePersonalDataAttributes>({
     mode: 'onChange',
   });
@@ -21,7 +24,7 @@ const PersonalInfo: NextPage = () => {
   const { error: emailError, isDirty: emailDirty } = getFieldState('email', formState);
 
   const onSubmit = async (data: UpdatePersonalDataAttributes) => {
-    await dispatch(updatePersonalDataUser(data)).unwrap();
+    await dispatch(rootActions.user.updatePersonalDataUser(data)).unwrap();
     reset();
   };
 
@@ -63,7 +66,7 @@ const PersonalInfo: NextPage = () => {
               },
             })}
           />
-          <StyledButton type="submit" variant="primary" size="small">
+          <StyledButton type="submit" variant="primary" size="small" isLoading={isLoadingUser} disabled={isLoadingUser}>
             Save
           </StyledButton>
         </FormInfo>

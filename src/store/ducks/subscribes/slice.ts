@@ -43,4 +43,9 @@ const subscribesSlice = createSlice({
   },
 });
 
-export const { actions, reducer } = subscribesSlice;
+export const actions = {
+  getSubscribes,
+  ...subscribesSlice.actions,
+};
+
+export const { reducer } = subscribesSlice;

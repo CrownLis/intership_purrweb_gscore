@@ -2,11 +2,11 @@ import React, { FC } from 'react';
 import styled, { css } from 'styled-components';
 
 import { useAppSelector } from '@/store/hooks';
-import { selectProducts } from '@/store/ducks/products/selectors';
+import { rootSelectors } from '@/store/ducks';
 import SubscribeCard from '@/components/SubscribeCard';
 
 const SubscribeList: FC = () => {
-  const products = useAppSelector(selectProducts);
+  const products = useAppSelector(rootSelectors.products.selectProducts);
 
   const productList = products?.slice(0, 3);
 

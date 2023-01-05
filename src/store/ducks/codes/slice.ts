@@ -43,4 +43,9 @@ const codesSlice = createSlice({
   },
 });
 
-export const { actions, reducer } = codesSlice;
+export const actions = {
+  getCodes,
+  ...codesSlice.actions,
+};
+
+export const { reducer } = codesSlice;

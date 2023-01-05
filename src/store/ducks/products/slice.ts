@@ -54,4 +54,6 @@ const productsSlice = createSlice({
   },
 });
 
-export const { actions, reducer } = productsSlice;
+export const actions = { buyProduct, getProducts, ...productsSlice.actions };
+
+export const { reducer } = productsSlice;

@@ -3,9 +3,8 @@ import { useMemo } from 'react';
 import styled from 'styled-components';
 import { useRouter } from 'next/router';
 
+import { rootSelectors, rootActions } from '@/store/ducks';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
-import { buyProduct } from '@/store/ducks/products/asyncAction';
-import { selectProducts } from '@/store/ducks/products/selectors';
 import Progress from '@/components/Progress';
 import Container from '@/components/Container';
 import Button from '@/UIComponents/Button';
@@ -18,14 +17,14 @@ const Checkout: NextPage = () => {
   const router = useRouter();
   const { query } = router;
 
-  const products = useAppSelector(selectProducts);
+  const products = useAppSelector(rootSelectors.products.selectProducts);
 
   const selectedProduct = useMemo(() => {
     return products?.find((product) => product.id === Number(query.id));
   }, [products, query.id]);
 
   const confirmPurchase = async (priceId: number) => {
-    await dispatch(buyProduct({ priceId })).unwrap();
+    await dispatch(rootActions.products.buyProduct({ priceId })).unwrap();
     router.push(`/checkout/${query.id}/success`);
   };
 

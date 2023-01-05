@@ -2,8 +2,7 @@ import Link from 'next/link';
 import styled from 'styled-components';
 
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
-import { selectUser } from '@/store/ducks/user/selectors';
-import { logOutUser } from '@/store/ducks/user/asyncAction';
+import { rootSelectors, rootActions } from '@/store/ducks';
 import Dropdown from '@/UIComponents/Dropdown';
 import Container from '@/components/Container';
 
@@ -13,10 +12,10 @@ import Logout from '@/assets/images/Logout.svg';
 
 const Header = () => {
   const dispatch = useAppDispatch();
-  const user = useAppSelector(selectUser);
+  const user = useAppSelector(rootSelectors.user.selectUser);
 
   const logOut = async () => {
-    await dispatch(logOutUser()).unwrap();
+    await dispatch(rootActions.user.logOutUser()).unwrap();
   };
 
   return (

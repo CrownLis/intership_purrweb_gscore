@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 import { useRouter } from 'next/router';
 
 import { useAppSelector } from '@/store/hooks';
-import { selectUser } from '@/store/ducks/user/selectors';
+import { rootSelectors } from '@/store/ducks';
 import { ProductType } from '@/types/data';
 import Button from '@/UIComponents/Button';
 
@@ -18,7 +18,7 @@ type SubscribedCardProps = {
 const SubscribeCard: FC<SubscribedCardProps> = ({ product, isActive = false, ...props }) => {
   const router = useRouter();
 
-  const user = useAppSelector(selectUser);
+  const user = useAppSelector(rootSelectors.user.selectUser);
 
   const buySubscribe = () => {
     if (user) {

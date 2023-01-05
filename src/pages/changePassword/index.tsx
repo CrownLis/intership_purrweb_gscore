@@ -2,15 +2,18 @@ import { NextPage } from 'next';
 import styled from 'styled-components';
 import { useForm } from 'react-hook-form';
 
-import { useAppDispatch } from '@/store/hooks';
-import { updatePasswordUser, UpdatePasswordAttributes } from '@/store/ducks/user/asyncAction';
-import Input from '@/UIComponents/Input';
+import { useAppDispatch, useAppSelector } from '@/store/hooks';
+import { rootActions, rootSelectors } from '@/store/ducks';
+import { UpdatePasswordAttributes } from '@/store/ducks/user/asyncAction';
 import PageNavigation from '@/components/PageNavigation';
-import Button from '@/UIComponents/Button';
 import Container from '@/components/Container';
+import Input from '@/UIComponents/Input';
+import Button from '@/UIComponents/Button';
 
 const ChangePassword: NextPage = () => {
   const dispatch = useAppDispatch();
+
+  const isLoadingUser = useAppSelector(rootSelectors.user.selectIsLoadingUser);
 
   const { register, handleSubmit, reset, getFieldState, formState } = useForm<UpdatePasswordAttributes>({
     mode: 'onChange',
@@ -20,7 +23,7 @@ const ChangePassword: NextPage = () => {
   const { error: newPasswordError, isDirty: newPasswordDirty } = getFieldState('newPassword', formState);
 
   const onSubmit = async (data: UpdatePasswordAttributes) => {
-    await dispatch(updatePasswordUser(data)).unwrap();
+    await dispatch(rootActions.user.updatePasswordUser(data)).unwrap();
     reset();
   };
 
@@ -62,7 +65,7 @@ const ChangePassword: NextPage = () => {
               },
             })}
           />
-          <StyledButton type="submit" size="small" variant="primary">
+          <StyledButton type="submit" size="small" variant="primary" isLoading={isLoadingUser} disabled={isLoadingUser}>
             Save
           </StyledButton>
         </FormPassword>

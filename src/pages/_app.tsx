@@ -7,8 +7,7 @@ import { getCookie } from 'cookies-next';
 import mainTheme from '@/theme';
 import { axiosInstance } from '@/api';
 import { wrapper } from '@/store/store';
-import { authMe } from '@/store/ducks/user/asyncAction';
-import { getProducts } from '@/store/ducks/products/asyncAction';
+import { rootActions } from '@/store/ducks';
 import MainLayout from '@/layouts/MainLayout';
 
 import '@/assets/styles/core.css';
@@ -36,12 +35,12 @@ MyApp.getInitialProps = wrapper.getInitialAppProps<AppInitialProps>((store) => a
   axiosInstance.defaults.headers.common.authorization = token ? `Bearer ${token}` : null;
 
   const { user: userState, products: productsState } = store.getState();
-  const isAuth = !!token && !!userState.user;
+  const isAuth = !!token && !!userState.data;
   let isAuthError = false;
 
   if (!isAuth) {
     try {
-      await store.dispatch(authMe()).unwrap();
+      await store.dispatch(rootActions.user.authMe()).unwrap();
     } catch (e) {
       isAuthError = true;
       console.log((e as Error).message);
@@ -50,7 +49,7 @@ MyApp.getInitialProps = wrapper.getInitialAppProps<AppInitialProps>((store) => a
 
   if (!productsState.list) {
     try {
-      await store.dispatch(getProducts()).unwrap();
+      await store.dispatch(rootActions.products.getProducts()).unwrap();
     } catch (e) {
       console.log((e as Error).message);
     }

@@ -5,8 +5,9 @@ import styled from 'styled-components';
 import { useRouter } from 'next/router';
 
 import { validateEmail } from '@/utils/validation';
-import { registerUser, RegisterAttributes } from '@/store/ducks/user/asyncAction';
-import { useAppDispatch } from '@/store/hooks';
+import { rootActions, rootSelectors } from '@/store/ducks';
+import { RegisterAttributes } from '@/store/ducks/user/asyncAction';
+import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import Container from '@/components/Container';
 import Progress from '@/components/Progress';
 import Button from '@/UIComponents/Button';
@@ -17,6 +18,8 @@ const CreateAccount: NextPage = () => {
 
   const router = useRouter();
 
+  const isLoadingUser = useAppSelector(rootSelectors.user.selectIsLoadingUser);
+
   const { register, handleSubmit, reset, getFieldState, formState } = useForm<RegisterAttributes>({
     mode: 'onChange',
   });
@@ -26,7 +29,7 @@ const CreateAccount: NextPage = () => {
   const { error: passwordError, isDirty: passwordDirty } = getFieldState('password', formState);
 
   const onSubmit = async (data: RegisterAttributes) => {
-    await dispatch(registerUser(data)).unwrap();
+    await dispatch(rootActions.user.registerUser(data)).unwrap();
     reset();
     router.push('/logIn', {
       query: router.query,
@@ -82,7 +85,7 @@ const CreateAccount: NextPage = () => {
             },
           })}
         />
-        <StyledButton type="submit" variant="primary" size="small">
+        <StyledButton type="submit" variant="primary" size="small" isLoading={isLoadingUser} disabled={isLoadingUser}>
           Send password
         </StyledButton>
       </FormContainer>

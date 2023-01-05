@@ -3,18 +3,21 @@ import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
 import { useRouter } from 'next/router';
 
+import { useAppDispatch, useAppSelector } from '@/store/hooks';
+import { LoginAttributes } from '@/store/ducks/user/asyncAction';
+import { rootActions, rootSelectors } from '@/store/ducks';
+import { validateEmail } from '@/utils/validation';
 import Progress from '@/components/Progress';
+import Container from '@/components/Container';
 import Button from '@/UIComponents/Button';
 import Input from '@/UIComponents/Input';
-import { validateEmail } from '@/utils/validation';
-import { useAppDispatch } from '@/store/hooks';
-import { LoginAttributes, loginUser } from '@/store/ducks/user/asyncAction';
-import Container from '@/components/Container';
 
 const LogIn: NextPage = () => {
   const dispatch = useAppDispatch();
 
   const router = useRouter();
+
+  const isLoadingUser = useAppSelector(rootSelectors.user.selectIsLoadingUser);
 
   const { register, handleSubmit, reset, getFieldState, formState } = useForm<LoginAttributes>({
     mode: 'onChange',
@@ -24,7 +27,7 @@ const LogIn: NextPage = () => {
   const { error: passwordError, isDirty: passwordDirty } = getFieldState('password', formState);
 
   const onSubmit = async (data: LoginAttributes) => {
-    await dispatch(loginUser(data)).unwrap();
+    await dispatch(rootActions.user.loginUser(data)).unwrap();
     reset();
     const { productId } = router.query;
     if (productId) {
@@ -72,7 +75,7 @@ const LogIn: NextPage = () => {
             },
           })}
         />
-        <StyledButton type="submit" variant="primary" size="small">
+        <StyledButton type="submit" variant="primary" size="small" isLoading={isLoadingUser} disabled={isLoadingUser}>
           Log in
         </StyledButton>
       </FormContainer>

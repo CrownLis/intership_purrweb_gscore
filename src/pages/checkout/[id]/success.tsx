@@ -4,14 +4,14 @@ import styled from 'styled-components';
 import { useRouter } from 'next/router';
 
 import { useAppSelector } from '@/store/hooks';
-import { selectProducts } from '@/store/ducks/products/selectors';
+import { rootSelectors } from '@/store/ducks';
 import Button from '@/UIComponents/Button';
 import Container from '@/components/Container';
 
 const CheckoutSuccess: NextPage = () => {
   const router = useRouter();
   const { query } = router;
-  const products = useAppSelector(selectProducts);
+  const products = useAppSelector(rootSelectors.products.selectProducts);
 
   const selectedProduct = useMemo(() => {
     return products?.find((product) => product.id === Number(query.id));
