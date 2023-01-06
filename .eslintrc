@@ -1,0 +1,71 @@
+{
+  "extends": [
+    "airbnb",
+    "prettier",
+    "next/core-web-vitals",
+    "next"
+  ],
+  "plugins": [
+    "prettier",
+    "react"
+  ],
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [
+          ".ts",
+          ".tsx"
+        ],
+      },
+    },
+  },
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "createDefaultProgram": true,
+    "project": "./tsconfig.json",
+  },
+  "rules": {
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "js": "never",
+        "jsx": "never",
+        "ts": "never",
+        "tsx": "never"
+      }
+    ],
+    "prettier/prettier": [
+      "error"
+    ],
+    "no-use-before-define": "off",
+    "no-param-reassign": "off",
+    "no-return-await": "off",
+    "array-callback-return": "off",
+    "no-unused-expressions": "off",
+    "no-useless-escape": "off",
+    "arrow-body-style": "off",
+    "react/jsx-props-no-spreading": "off",
+    "import-extension": "off",
+    "consistent-return": "off",
+    "default-case": "off",
+    "import/prefer-default-export": "off",
+    "import/no-cycle": "off",
+    "import/no-duplicates": "off",
+    "react/require-default-props": "off",
+    "react/function-component-definition": [
+      "warn",
+      {
+        "namedComponents": "arrow-function",
+      },
+    ],
+    "react/jsx-filename-extension": [
+      "warn",
+      {
+        "extensions": [
+          ".tsx"
+        ],
+      },
+    ],
+  }
+}

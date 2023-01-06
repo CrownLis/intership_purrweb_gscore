@@ -1,5 +1,3 @@
-import theme  from './theme'
-
 declare module '*.jpg' {
   export default '' as string;
 }
