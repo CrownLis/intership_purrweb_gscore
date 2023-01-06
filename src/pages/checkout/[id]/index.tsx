@@ -1,5 +1,4 @@
 import { NextPage } from 'next';
-import { useMemo } from 'react';
 import styled from 'styled-components';
 import { useRouter } from 'next/router';
 
@@ -17,18 +16,14 @@ const Checkout: NextPage = () => {
   const router = useRouter();
   const { query } = router;
 
-  const products = useAppSelector(rootSelectors.products.selectProducts);
-
-  const selectedProduct = useMemo(() => {
-    return products?.find((product) => product.id === Number(query.id));
-  }, [products, query.id]);
+  const product = useAppSelector((state) => rootSelectors.products.selectProductById(state, Number(query.id)));
 
   const confirmPurchase = async (priceId: number) => {
     await dispatch(rootActions.products.buyProduct({ priceId })).unwrap();
     router.push(`/checkout/${query.id}/success`);
   };
 
-  if (!selectedProduct) {
+  if (!product) {
     return null;
   }
 
@@ -46,18 +41,18 @@ const Checkout: NextPage = () => {
           <CartTitle>Price</CartTitle>
         </CartTitleContainer>
         <CartProductsContainer>
-          <ProductsTitle>{selectedProduct.name} license</ProductsTitle>
+          <ProductsTitle>{product.name} license</ProductsTitle>
           <CartPriceContainer>
-            <ProductsTitle>{selectedProduct.prices[0].price}$</ProductsTitle>
+            <ProductsTitle>{product.prices[0].price}$</ProductsTitle>
             <Cart />
           </CartPriceContainer>
         </CartProductsContainer>
       </CartContainer>
       <PriceContainer>
         <StyledPrice>Total:</StyledPrice>
-        <StyledPrice>{selectedProduct.prices[0].price}$</StyledPrice>
+        <StyledPrice>{product.prices[0].price}$</StyledPrice>
       </PriceContainer>
-      <StyledButton variant="primary" size="small" onClick={() => confirmPurchase(selectedProduct.prices[0].id)}>
+      <StyledButton variant="primary" size="small" onClick={() => confirmPurchase(product.prices[0].id)}>
         Purchase
       </StyledButton>
     </PageContainer>

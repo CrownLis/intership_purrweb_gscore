@@ -33,8 +33,8 @@ const StyledContainer = styled.div<ContainerType>`
   }
 
   @media ${(props) => props.theme.breakpoints.xl} {
-    padding-left: 80px;
-    padding-right: 80px;
+    padding-left: 70px;
+    padding-right: 70px;
   }
 
   @media ${(props) => props.theme.breakpoints.lg} {

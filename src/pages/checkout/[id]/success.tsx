@@ -1,5 +1,4 @@
 import { NextPage } from 'next';
-import { useMemo } from 'react';
 import styled from 'styled-components';
 import { useRouter } from 'next/router';
 
@@ -11,13 +10,9 @@ import Container from '@/components/Container';
 const CheckoutSuccess: NextPage = () => {
   const router = useRouter();
   const { query } = router;
-  const products = useAppSelector(rootSelectors.products.selectProducts);
+  const product = useAppSelector((state) => rootSelectors.products.selectProductById(state, Number(query.id)));
 
-  const selectedProduct = useMemo(() => {
-    return products?.find((product) => product.id === Number(query.id));
-  }, [products, query.id]);
-
-  if (!selectedProduct) {
+  if (!product) {
     return null;
   }
 
@@ -33,9 +28,9 @@ const CheckoutSuccess: NextPage = () => {
           <CartTitle>Price</CartTitle>
         </CartTitleContainer>
         <CartProductsContainer>
-          <ProductsTitle>{selectedProduct.name} license</ProductsTitle>
+          <ProductsTitle>{product.name} license</ProductsTitle>
           <CartPriceContainer>
-            <ProductsTitle>${selectedProduct.prices[0].price}</ProductsTitle>
+            <ProductsTitle>${product.prices[0].price}</ProductsTitle>
           </CartPriceContainer>
         </CartProductsContainer>
       </CartContainer>

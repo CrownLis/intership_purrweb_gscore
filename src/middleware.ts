@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 
 export const config = {
-  matcher: ['/logIn', '/createAccount', '/checkout', '/mySubscriptions', '/start', '/personalInfo', '/changePassword'],
+  matcher: ['/logIn', '/createAccount', '/checkout', '/mySubscriptions', '/personalInfo', '/changePassword'],
 };
 
 export default async function middleware(req: NextRequest) {
